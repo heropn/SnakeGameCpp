@@ -8,5 +8,5 @@
 
 ###### Workflow
 1. Documentation in polish
-2. Comment every created function, so we know what it does (start comments with ///)
+2. Comment every created function, so we know what it does
 
