@@ -10,10 +10,10 @@ int main()
 
 	while (window.isOpen())
 	{
-		sf::Event event;
-		while (window.pollEvent(event))
+		sf::Event windowEvent;
+		while (window.pollEvent(windowEvent))
 		{
-			if (event.type == sf::Event::Closed)
+			if (windowEvent.type == sf::Event::Closed)
 				window.close();
 		}
 		window.clear();
