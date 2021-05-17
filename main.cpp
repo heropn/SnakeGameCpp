@@ -4,7 +4,7 @@ int main()
 {
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Snake Game", sf::Style::Close, settings);
+	sf::RenderWindow window(sf::VideoMode(1000, 800), "Snake Game", sf::Style::Close, settings);
 	window.setVerticalSyncEnabled(true);
 	window.setKeyRepeatEnabled(false);
 
