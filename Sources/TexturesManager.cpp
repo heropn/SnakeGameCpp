@@ -1,10 +1,14 @@
-#include "TexturesManager.h"
+#include "..\Headers\TexturesManager.h"
+#include <iostream>
 
-TexturesManager::TexturesManager() {}
+TexturesManager::TexturesManager() 
+{
+	LoadAllTextures();
+}
 
 void TexturesManager::LoadAllTextures()
 {
-	for (auto s : filesPaths)
+	for (const auto& s : filesPaths)
 		AddTexture(s.filePath, s.type);
 }
 
@@ -14,7 +18,7 @@ void TexturesManager::AddTexture(std::string fileName, MyTexture::Type type)
 
 	if (!texture->loadFromFile(fileName))
 	{
-		Debug("ERROR OPENING FILE: " + fileName);
+		std::cout << "Couldn't load file: " << fileName << std::endl;
 		return;
 	}
 	else
@@ -26,7 +30,7 @@ void TexturesManager::AddTexture(std::string fileName, MyTexture::Type type)
 
 const std::shared_ptr<MyTexture> TexturesManager::GetTexture(MyTexture::Type type) const
 {
-	for (auto texture : texturesPointers)
+	for (const auto& texture : texturesPointers)
 	{
 		if (texture->GetType() == type)
 			return texture;

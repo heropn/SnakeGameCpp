@@ -149,6 +149,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Sources\Background.cpp" />
+    <ClCompile Include="Sources\GameManager.cpp" />
+    <ClCompile Include="Sources\MyTexture.cpp" />
+    <ClCompile Include="Sources\PickUp.cpp" />
+    <ClCompile Include="Sources\Snake.cpp" />
+    <ClCompile Include="Sources\TexturesManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Headers\Background.h" />
+    <ClInclude Include="Headers\GameManager.h" />
+    <ClInclude Include="Headers\MyTexture.h" />
+    <ClInclude Include="Headers\PickUp.h" />
+    <ClInclude Include="Headers\Snake.h" />
+    <ClInclude Include="Headers\TexturesManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

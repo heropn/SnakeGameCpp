@@ -1,4 +1,16 @@
-#include "GameManager.h"
+#include "..\Headers\GameManager.h"
+#include <random>
+
+GameManager::GameManager()
+{
+	snake = Snake(texturesManager.GetTexture(MyTexture::Type::SnakeHead), texturesManager.GetTexture(MyTexture::Type::SnakeBody));
+
+	scores = 0;
+	isGameOver = false;
+	isPickUpCollected = true;
+	GenerateSnakePosition();
+	GeneratePickUp();
+}
 
 void GameManager::DrawPickUp(sf::RenderWindow* window)
 {
@@ -19,19 +31,8 @@ void GameManager::GeneratePickUp()
 		int x = posX(generator);
 		int y = posY(generator);
 
-		PickUp pickUp(x, y);
-		this->pickUp = pickUp;
+		pickUp = PickUp(x, y);
 	}
-}
-
-//podczas tworzenia obiektu wygeneruje pocz¹tkowe po³o¿enie snake'a
-GameManager::GameManager()
-{
-	scores = 0;
-	isGameOver = false;
-	isPickUpCollected = true;
-	GenerateSnakePosition();
-	GeneratePickUp();
 }
 
 void GameManager::DrawSnake(sf::RenderWindow* window)
@@ -39,7 +40,6 @@ void GameManager::DrawSnake(sf::RenderWindow* window)
 	snake.Draw(window);
 }
 
-// generowanie pocz¹tkowej pozycji snake'a
 void GameManager::GenerateSnakePosition()
 {
 	std::random_device device;
@@ -51,15 +51,15 @@ void GameManager::GenerateSnakePosition()
 	int x = posX(generator);
 	int y = posY(generator);
 	int index = direction(generator);
-	Snake snake(x, y,Snake::Direction(index));
-	this->snake = snake;
+
+	snake.SetDirection(Snake::Direction(index));
+	snake.SetPosition((float)x, (float)y);
 }
 
 void GameManager::MoveSnake()
 {
 	snake.Move();
 }
-
 void GameManager::SetDirection(Snake::Direction direction)
 {
 	snake.SetDirection(direction);
@@ -72,7 +72,7 @@ void GameManager::DrawBackground(sf::RenderWindow* window)
 
 void GameManager::CheckWhereIsSnake()
 {
-	if (!snake.IsInArena(&background))//||snake.IsCollision())
+	if (!snake.IsInArena(&background) || snake.IsCollision())
 	{
 		isGameOver = true;
 	}
@@ -98,12 +98,6 @@ void GameManager::CheckPickUp()
 		scores++;
 		isPickUpCollected = true;
 		snake.Grow();
-		IncreaseSnakesSize();
 		GeneratePickUp();
 	}
-}
-
-void GameManager::IncreaseSnakesSize()
-{
-
 }

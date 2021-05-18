@@ -1,48 +1,38 @@
-#include "Snake.h"
-//#include <iostream>
-Snake::Snake()
+#include "..\Headers\Snake.h"
+
+Snake::Snake() : 
+	posX(0), posY(0), size(0), speed(0), direction(Direction::Left) {}
+
+Snake::Snake(std::shared_ptr<MyTexture> headTexture, std::shared_ptr<MyTexture> bodyTexture) : headTexture(headTexture), bodyTexture(bodyTexture)
 {
 	posX = 500;
 	posY = 500;
 	speed = 1;
-	size = 0;
-	direction = Direction::Left;
-}
-//ustawia w³aœciwoœci snake'a
-void Snake::SetSnakesProperties()
-{
-	shape.setSize(sf::Vector2f(30, 30));
-	shape.setOrigin(sf::Vector2f(15, 15));
-	shape.setFillColor(sf::Color::Green);
-	shape.setPosition(sf::Vector2f(posX, posY));
-}
-
-// podczas tworzenia obiektu w konstuktorze parametrycznym zostaj¹ przypisane atrybuty 
-// odpowiadaj¹ce za pozycjê snake'a oraz ustawione zostaj¹ w³aœciwoœci snake'a
-
-Snake::Snake(float x, float y,Direction direction)
-{
-	posX = x;
-	posY = y;
-	speed = 2;
 	size = 1;
-	this->direction = direction;
-	SetSnakesProperties();
+	direction = Direction::Left;
+	SetSpriteProperties();
+	SetSpriteRotation();
 }
 
-//rysuje snake'a na ekranie
+void Snake::SetSpriteProperties()
+{
+	sprite.setTexture(*headTexture);
+	sprite.setOrigin(sf::Vector2f(headTexture->getSize().x / 2, headTexture->getSize().y / 2));
+	sprite.setPosition(sf::Vector2f(posX, posY));
+}
+
 void Snake::Draw(sf::RenderWindow* window)
 {
-	shape.setFillColor(sf::Color::Green);
-	for (int i = 1; i < size-1; i++)
+	sprite.setTexture(*bodyTexture);
+	for (int i = 1; i < size; i++)
 	{
-		shape.setPosition(positions[positions.size() - 1 - i].x, positions[positions.size() - 1 - i].y);
-		window->draw(shape);
+		sprite.setPosition(positions[positions.size() - 1 - i].x, positions[positions.size() - 1 - i].y);
+		window->draw(sprite);
 	}
 
-	shape.setPosition(positions[positions.size() - 1].x, positions[positions.size() - 1].y);
-	shape.setFillColor(sf::Color::Red);
-	window->draw(shape);
+	sprite.setPosition(positions[positions.size() - 1].x, positions[positions.size() - 1].y);
+	sprite.setTexture(*headTexture);
+	window->draw(sprite);
 
 	if (positions.size() > size)
 	{
@@ -69,7 +59,6 @@ void Snake::Move()
 		posX -= 1 * speed;
 	}
 	positions.push_back({ posX,posY });
-	//std::cout << posX << " " << posY << std::endl;
 }
 
 void Snake::SetSpeed(int speed)
@@ -77,7 +66,6 @@ void Snake::SetSpeed(int speed)
 	this->speed = speed;
 }
 
-//zmiana kierunku poruszania siê snake'a
 void Snake::SetDirection(Direction direction)
 {
 	if (!((this->direction == Direction::Bottom && direction == Direction::Top) ||
@@ -86,17 +74,17 @@ void Snake::SetDirection(Direction direction)
 		(this->direction == Direction::Right && direction == Direction::Left)))
 	{
 		this->direction = direction;
+		SetSpriteRotation();
 	}
 }
 
-//funkcja sprawdza, czy Snake znajduje siê w polu gry
 bool Snake::IsInArena(Background* background)
 {
 	sf::Vector2f position = background->GetShape().getPosition();
 	sf::Vector2f size = background->GetShape().getSize();
 
 	sf::Vector2f snakesPosition = GetPosition();
-	sf::Vector2f snakesSize = shape.getSize();
+	sf::Vector2u snakesSize = headTexture->getSize();
 
 	int topBorder = position.y - size.y / 2;
 	int rightBorder = position.x + size.x / 2;
@@ -118,9 +106,10 @@ bool Snake::IsInArena(Background* background)
 		return false;
 	}
 }
-sf::RectangleShape Snake::GetShape()
+
+const sf::Sprite& Snake::GetSprite() const
 {
-	return shape;
+	return sprite;
 }
 
 void Snake::Grow()
@@ -129,7 +118,7 @@ void Snake::Grow()
 	speed += 0.1;
 }
 
-sf::Vector2f Snake::GetPosition()
+const sf::Vector2f& Snake::GetPosition() const
 {
 	if (positions.size() > 0)
 	{
@@ -137,7 +126,7 @@ sf::Vector2f Snake::GetPosition()
 	}
 	else
 	{
-		return shape.getPosition();
+		return sprite.getPosition();
 	}
 }
 
@@ -151,4 +140,39 @@ bool Snake::IsCollision()
 		}
 	}
 	return false;
+}
+
+const sf::Vector2u& Snake::GetSize() const
+{
+	return headTexture->getSize();
+}
+
+const Snake::Direction Snake::GetDirection() const
+{
+	return direction;
+}
+
+void Snake::SetPosition(float x, float y)
+{
+	sprite.setPosition({ x, y });
+}
+
+void Snake::SetSpriteRotation()
+{
+	if (direction == Direction::Top)
+	{
+		sprite.setRotation(0);
+	}
+	else if (direction == Direction::Right)
+	{
+		sprite.setRotation(90);
+	}
+	else if (direction == Direction::Bottom)
+	{
+		sprite.setRotation(180);
+	}
+	else
+	{
+		sprite.setRotation(270);
+	}
 }

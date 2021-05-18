@@ -1,6 +1,5 @@
-#include "Background.h"
+#include "..\Headers\Background.h"
 
-// W momencie tworzenia obiektu zostaj¹ ustawione w³aœciwoœci areny
 Background::Background()
 {
 	width = 800;
@@ -8,7 +7,6 @@ Background::Background()
 	SetArenasProperties();
 }
 
-// Ustawienie w³aœciwoœci areny
 void Background::SetArenasProperties()
 {
 	sf::RectangleShape arena(sf::Vector2f(width, height));
@@ -20,7 +18,6 @@ void Background::SetArenasProperties()
 	this->arena = arena;
 }
 
-// Funkcja rysuje w oknie gry arenê
 void Background::Draw(sf::RenderWindow* window)
 {
 	window->draw(arena);

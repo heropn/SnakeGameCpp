@@ -2,7 +2,6 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include "MyTexture.h"
-#include "Debug.h"
 
 class TexturesManager
 {
@@ -16,10 +15,8 @@ private:
 	std::vector<std::shared_ptr<MyTexture>> texturesPointers;
 	std::vector<TextureInfo> filesPaths
 	{
-		{"Textures\\player.png", MyTexture::Type::Player},
-		{"Textures\\pickup.png", MyTexture::Type::PickUp},
-		{"Textures\\heart.png", MyTexture::Type::Heart},
-		{"Textures\\button.png", MyTexture::Type::Button}
+		{".\\Textures\\SnakeHead.png", MyTexture::Type::SnakeHead},
+		{".\\Textures\\SnakeBody.png", MyTexture::Type::SnakeBody}
 	};
 
 public:
