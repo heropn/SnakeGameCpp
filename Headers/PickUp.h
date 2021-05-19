@@ -10,8 +10,6 @@ private:
 	float posY;
 	sf::RectangleShape shape;
 
-	// Ustawia w³aœciwoœci PickUp'a
-	void SetPickUpProperties();
 public:
 	// Konstruktor domyœlny
 	PickUp();
@@ -24,4 +22,8 @@ public:
 
 	// Sprawdza, czy PickUp zosta³ zebrany
 	bool IsCollected(Snake* snake);
+
+private:
+	// Ustawia w³aœciwoœci PickUp'a
+	void SetPickUpProperties();
 };
