@@ -1,0 +1,46 @@
+#include "..\Headers\ScoreManager.h"
+#include <iostream>
+
+ScoreManager::ScoreManager()
+{
+	currentScore = 0;
+	LoadFontAndSetText();
+}
+
+void ScoreManager::Draw(sf::RenderWindow* window)
+{
+	window->draw(text);
+}
+
+void ScoreManager::AddScore()
+{
+	currentScore += 10;
+	text.setString(scoreStr + std::to_string(currentScore));
+}
+
+int ScoreManager::GetScore()
+{
+	return currentScore;
+}
+
+void ScoreManager::ResetScore()
+{
+	currentScore = 0;
+}
+
+void ScoreManager::LoadFontAndSetText()
+{
+	if (!font.loadFromFile(fontFilePath))
+	{
+		std::cout << "Cant load file: " << fontFilePath << std::endl;
+		return;
+	}
+
+	text.setFont(font);
+	text.setString(scoreStr + std::to_string(currentScore));
+	text.setCharacterSize(50);
+	text.setFillColor(sf::Color::White);
+	auto rect = text.getLocalBounds();
+	text.setOrigin(rect.width / 2, rect.height / 2);
+	text.setPosition(500, 150);
+}
