@@ -17,10 +17,14 @@ private:
 	// Przechowuje wszystkie tekstury do za³adowania
 	std::vector<TextureInfo> filesPaths
 	{
-		{".\\Textures\\SnakeHead.png", MyTexture::Type::SnakeHeadGreen},
-		{".\\Textures\\SnakeBody.png", MyTexture::Type::SnakeBodyGreen},
+		{".\\Textures\\SnakeHead-Green.png", MyTexture::Type::SnakeHeadGreen},
+		{".\\Textures\\SnakeBody-Green.png", MyTexture::Type::SnakeBodyGreen},
 		{".\\Textures\\SnakeBody-Pink.png", MyTexture::Type::SnakeBodyPink},
-		{".\\Textures\\SnakeHead-Pink.png", MyTexture::Type::SnakeHeadPink}
+		{".\\Textures\\SnakeHead-Pink.png", MyTexture::Type::SnakeHeadPink},
+		{".\\Textures\\SnakeBody-Blue.png", MyTexture::Type::SnakeBodyBlue},
+		{".\\Textures\\SnakeHead-Blue.png", MyTexture::Type::SnakeHeadBlue},
+		{".\\Textures\\SnakeBody-Yellow.png", MyTexture::Type::SnakeBodyYellow},
+		{".\\Textures\\SnakeHead-Yellow.png", MyTexture::Type::SnakeHeadYellow},
 	};
 
 public:

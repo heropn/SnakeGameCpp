@@ -9,7 +9,11 @@ public:
 		SnakeHeadGreen,
 		SnakeBodyGreen,
 		SnakeHeadPink,
-		SnakeBodyPink
+		SnakeBodyPink,
+		SnakeHeadBlue,
+		SnakeBodyBlue,
+		SnakeHeadYellow,
+		SnakeBodyYellow
 	};
 
 private:

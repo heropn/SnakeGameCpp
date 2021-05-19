@@ -4,7 +4,7 @@
 
 GameManager::GameManager()
 {
-	snake = Snake(texturesManager.GetTexture(MyTexture::Type::SnakeHeadGreen), texturesManager.GetTexture(MyTexture::Type::SnakeBodyGreen));
+	snake = Snake(texturesManager.GetTexture(MyTexture::Type::SnakeHeadYellow), texturesManager.GetTexture(MyTexture::Type::SnakeBodyYellow));
 	scoreManager.SetFont(fontsManager.GetFont(MyFont::Type::Arial));
 
 	drawableInGameObjects.push_back(&snake);
