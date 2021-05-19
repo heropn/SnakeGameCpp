@@ -9,6 +9,7 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(1000, 800), "Snake Game", sf::Style::Close, settings);
 	window.setVerticalSyncEnabled(true);
 	window.setKeyRepeatEnabled(false);
+	window.setFramerateLimit(60);
 
 	GameManager gameManager;
 

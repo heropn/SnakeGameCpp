@@ -14,6 +14,7 @@ private:
 	float posY;
 	float speed;
 	unsigned int size;
+	unsigned int increasingSize;
 	std::shared_ptr<MyTexture> headTexture;
 	std::shared_ptr<MyTexture> bodyTexture;
 	sf::Sprite sprite;

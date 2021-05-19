@@ -2,14 +2,15 @@
 #include <iostream>
 
 Snake::Snake() : 
-	posX(0.0f), posY(0.0f), size(0.0f), speed(0), direction(Direction::Left) {}
+	posX(0.0f), posY(0.0f), size(0.0f), speed(0), increasingSize(0), direction(Direction::Left) {}
 
 Snake::Snake(std::shared_ptr<MyTexture> headTexture, std::shared_ptr<MyTexture> bodyTexture) : headTexture(headTexture), bodyTexture(bodyTexture)
 {
 	posX = 500.0f;
 	posY = 500.0f;
-	speed = 1.0f;
+	speed = 2.0f;
 	size = 1;
+	increasingSize = 10;
 	direction = Direction::Left;
 	SetSpriteProperties();
 	SetSpriteRotation();
@@ -110,16 +111,16 @@ const sf::Sprite& Snake::GetSprite() const
 
 void Snake::Grow()
 {
-	if (positions.size() - (size + 10) >= 0)
+	if (positions.size() - (size + increasingSize) >= 0)
 	{
-		size += 100;
+		size += increasingSize;
 	}
 	else
 	{
 		size += (positions.size() - size);
 	}
 
-	speed += 0.05f;
+	speed += 0.1f;
 
 	if (positions.size() > size)
 	{
@@ -143,6 +144,9 @@ bool Snake::IsCollision()
 {
 	for (unsigned int i = 1; i < size; i++)
 	{
+		if (positions.size() - 1 - i < 0)
+			continue;
+
 		if (abs(positions[positions.size() - 1].x - positions[positions.size() - 1 - i].x) < 1 &&
 			abs(positions[positions.size() - 1].y - positions[positions.size() - 1 - i].y) < 1)
 		{
