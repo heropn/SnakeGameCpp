@@ -3,7 +3,7 @@
 
 GameManager::GameManager()
 {
-	snake = Snake(texturesManager.GetTexture(MyTexture::Type::SnakeHead), texturesManager.GetTexture(MyTexture::Type::SnakeBody));
+	snake = Snake(texturesManager.GetTexture(MyTexture::Type::SnakeHeadGreen), texturesManager.GetTexture(MyTexture::Type::SnakeBodyGreen));
 
 	scores = 0;
 	isGameOver = false;

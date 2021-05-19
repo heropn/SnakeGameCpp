@@ -3,6 +3,7 @@
 #include "PickUp.h"
 #include "Background.h"
 #include "TexturesManager.h"
+#include "FontsManager.h"
 
 class GameManager
 {
@@ -14,6 +15,7 @@ private:
 	PickUp pickUp;
 	Background background;
 	TexturesManager texturesManager;
+	FontsManager fontsManager;
 
 public:
 	// Podczas tworzenia obiektu wygeneruje pocz¹tkowe po³o¿enie snake'a

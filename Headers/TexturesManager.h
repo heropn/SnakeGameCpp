@@ -15,8 +15,10 @@ private:
 	std::vector<std::shared_ptr<MyTexture>> texturesPointers;
 	std::vector<TextureInfo> filesPaths
 	{
-		{".\\Textures\\SnakeHead.png", MyTexture::Type::SnakeHead},
-		{".\\Textures\\SnakeBody.png", MyTexture::Type::SnakeBody}
+		{".\\Textures\\SnakeHead.png", MyTexture::Type::SnakeHeadGreen},
+		{".\\Textures\\SnakeBody.png", MyTexture::Type::SnakeBodyGreen},
+		{".\\Textures\\SnakeBody-Pink.png", MyTexture::Type::SnakeBodyPink},
+		{".\\Textures\\SnakeHead-Pink.png", MyTexture::Type::SnakeHeadPink}
 	};
 
 public:

@@ -6,8 +6,10 @@ class MyTexture : public sf::Texture
 public:
 	enum class Type
 	{
-		SnakeHead,
-		SnakeBody
+		SnakeHeadGreen,
+		SnakeBodyGreen,
+		SnakeHeadPink,
+		SnakeBodyPink
 	};
 
 private:
