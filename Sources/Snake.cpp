@@ -146,13 +146,13 @@ const sf::Vector2f& Snake::GetPosition() const
 
 bool Snake::IsCollision()
 {
-	for (unsigned int i = 1; i < size; i++)
+	for (unsigned int i = 10; i < size; i++)
 	{
 		if (positions.size() - 1 - i < 0 || positions.size() - 1 - i > positions.size())
 			continue;
 
-		if (abs(positions[positions.size() - 1].x - positions[positions.size() - 1 - i].x) < 1 &&
-			abs(positions[positions.size() - 1].y - positions[positions.size() - 1 - i].y) < 1)
+		if (abs(positions[positions.size() - 1].x - positions[positions.size() - 1 - i].x) < 10 &&
+			abs(positions[positions.size() - 1].y - positions[positions.size() - 1 - i].y) < 10)
 		{
 			return true;
 		}

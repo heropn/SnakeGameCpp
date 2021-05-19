@@ -40,7 +40,6 @@ void GameManager::DrawInGameObjects(sf::RenderWindow* window)
 {
 	for (const auto obj : drawableInGameObjects)
 	{
-		printf("1\n");
 		obj->Draw(window);
 	}
 }
