@@ -17,14 +17,14 @@ Snake::Snake(std::shared_ptr<MyTexture> headTexture, std::shared_ptr<MyTexture> 
 void Snake::SetSpriteProperties()
 {
 	sprite.setTexture(*headTexture);
-	sprite.setOrigin(sf::Vector2f(headTexture->getSize().x / 2, headTexture->getSize().y / 2));
+	sprite.setOrigin(sf::Vector2f((float)headTexture->getSize().x / 2, (float)headTexture->getSize().y / 2));
 	sprite.setPosition(sf::Vector2f(posX, posY));
 }
 
 void Snake::Draw(sf::RenderWindow* window)
 {
 	sprite.setTexture(*bodyTexture);
-	for (int i = 1; i < size; i++)
+	for (unsigned int i = 1; i < size; i++)
 	{
 		sprite.setPosition(positions[positions.size() - 1 - i].x, positions[positions.size() - 1 - i].y);
 		window->draw(sprite);
@@ -61,7 +61,7 @@ void Snake::Move()
 	positions.push_back({ posX,posY });
 }
 
-void Snake::SetSpeed(int speed)
+void Snake::SetSpeed(float speed)
 {
 	this->speed = speed;
 }
@@ -86,15 +86,15 @@ bool Snake::IsInArena(Background* background)
 	sf::Vector2f snakesPosition = GetPosition();
 	sf::Vector2u snakesSize = headTexture->getSize();
 
-	int topBorder = position.y - size.y / 2;
-	int rightBorder = position.x + size.x / 2;
-	int leftBorder = position.x - size.x / 2;
-	int bottomBorder = position.y + size.y / 2;
+	float topBorder = position.y - size.y / 2;
+	float rightBorder = position.x + size.x / 2;
+	float leftBorder = position.x - size.x / 2;
+	float bottomBorder = position.y + size.y / 2;
 
-	int snakesTopBorder = snakesPosition.y - snakesSize.y / 2;
-	int snakesrightBorder = snakesPosition.x + snakesSize.x / 2;
-	int snakesleftBorder = snakesPosition.x - snakesSize.x / 2;
-	int snakesbottomBorder = snakesPosition.y + snakesSize.y / 2;
+	float snakesTopBorder = snakesPosition.y - (float)snakesSize.y / 2;
+	float snakesrightBorder = snakesPosition.x + (float)snakesSize.x / 2;
+	float snakesleftBorder = snakesPosition.x - (float)snakesSize.x / 2;
+	float snakesbottomBorder = snakesPosition.y + (float)snakesSize.y / 2;
 
 	if (snakesrightBorder <= rightBorder && snakesleftBorder >= leftBorder &&
 		snakesTopBorder >= topBorder && snakesbottomBorder <= bottomBorder)
@@ -115,7 +115,7 @@ const sf::Sprite& Snake::GetSprite() const
 void Snake::Grow()
 {
 	size++;
-	speed += 0.1;
+	speed += 0.1f;
 }
 
 const sf::Vector2f& Snake::GetPosition() const
@@ -132,7 +132,7 @@ const sf::Vector2f& Snake::GetPosition() const
 
 bool Snake::IsCollision()
 {
-	for (int i = 1; i < size; i++)
+	for (unsigned int i = 1; i < size; i++)
 	{
 		if (posX == positions[positions.size() - 1 - i].x && posY == positions[positions.size() - 1 - i].y)
 		{
@@ -142,7 +142,7 @@ bool Snake::IsCollision()
 	return false;
 }
 
-const sf::Vector2u& Snake::GetSize() const
+const sf::Vector2u Snake::GetSize() const
 {
 	return headTexture->getSize();
 }

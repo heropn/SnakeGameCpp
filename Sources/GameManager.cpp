@@ -21,15 +21,15 @@ void GameManager::GeneratePickUp()
 {
 	std::random_device device;
 	std::mt19937 generator(device());
-	std::uniform_int_distribution<int>posX(150, 850); //x e [100,900] y e [250,750]
-	std::uniform_int_distribution<int>posY(300, 700);
+	std::uniform_real_distribution<float> posX(150, 850); //x e [100,900] y e [250,750]
+	std::uniform_real_distribution<float> posY(300, 700);
 
 	if (isPickUpCollected)
 	{
 		isPickUpCollected = false;
 
-		int x = posX(generator);
-		int y = posY(generator);
+		float x = posX(generator);
+		float y = posY(generator);
 
 		pickUp = PickUp(x, y);
 	}

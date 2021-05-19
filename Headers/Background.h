@@ -5,8 +5,8 @@
 class Background
 {
 private:
-	int width;
-	int height;
+	float width;
+	float height;
 	sf::RectangleShape arena;
 public:
 	// W momencie tworzenia obiektu zostaj¹ ustawione w³aœciwoœci areny
@@ -20,5 +20,4 @@ public:
 
 	// Zwraca kszta³t areny
 	sf::RectangleShape GetShape();
-
 };

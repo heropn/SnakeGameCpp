@@ -150,7 +150,9 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Sources\Background.cpp" />
+    <ClCompile Include="Sources\FontsManager.cpp" />
     <ClCompile Include="Sources\GameManager.cpp" />
+    <ClCompile Include="Sources\MyFont.cpp" />
     <ClCompile Include="Sources\MyTexture.cpp" />
     <ClCompile Include="Sources\PickUp.cpp" />
     <ClCompile Include="Sources\Snake.cpp" />
@@ -158,7 +160,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\Background.h" />
+    <ClInclude Include="Headers\FontsManager.h" />
     <ClInclude Include="Headers\GameManager.h" />
+    <ClInclude Include="Headers\MyFont.h" />
     <ClInclude Include="Headers\MyTexture.h" />
     <ClInclude Include="Headers\PickUp.h" />
     <ClInclude Include="Headers\Snake.h" />

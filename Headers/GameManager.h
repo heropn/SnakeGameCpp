@@ -7,13 +7,14 @@
 class GameManager
 {
 private:
+	int scores;
+	bool isPickUpCollected;
+	bool isGameOver;
 	Snake snake;
 	PickUp pickUp;
 	Background background;
 	TexturesManager texturesManager;
-	bool isPickUpCollected;
-	bool isGameOver;
-	int scores;
+
 public:
 	// Podczas tworzenia obiektu wygeneruje pocz¹tkowe po³o¿enie snake'a
 	GameManager();

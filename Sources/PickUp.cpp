@@ -16,7 +16,7 @@ void PickUp::SetPickUpProperties()
 	this->shape = shape;
 }
 
-PickUp::PickUp(int x, int y)
+PickUp::PickUp(float x, float y)
 {
 	posX = x;
 	posY = y;

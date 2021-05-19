@@ -5,8 +5,8 @@
 class PickUp
 {
 private:
-	int posX;
-	int posY;
+	float posX;
+	float posY;
 	sf::RectangleShape shape;
 
 	// Ustawia w³aœciwoœci PickUp'a
@@ -16,7 +16,7 @@ public:
 	PickUp();
 
 	// Konstruktor parametryczny PickUp'a
-	PickUp(int x, int y);
+	PickUp(float x, float y);
 
 	// Rysuje PickUp'a w oknie gry
 	void Draw(sf::RenderWindow* window);

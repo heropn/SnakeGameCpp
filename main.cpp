@@ -22,7 +22,7 @@ int main()
 		}
 		window.clear();
 		
-		gameManager.CheckWhereIsSnake();
+		/*gameManager.CheckWhereIsSnake();
 
 		if (!gameManager.IsGameOver())
 		{
@@ -53,7 +53,7 @@ int main()
 		else
 		{
 			std::cout << "Koniec gry" << std::endl;
-		}
+		}*/
 
 		window.display();
 	}

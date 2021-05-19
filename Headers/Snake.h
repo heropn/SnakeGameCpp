@@ -12,10 +12,10 @@ private:
 	float posX;
 	float posY;
 	float speed;
+	unsigned int size;
 	std::shared_ptr<MyTexture> headTexture;
 	std::shared_ptr<MyTexture> bodyTexture;
 	sf::Sprite sprite;
-	int size;
 	Direction direction;
 	std::vector<sf::Vector2f>positions;
 
@@ -30,7 +30,7 @@ public:
 	void Draw(sf::RenderWindow* window);
 
 	// Ustawia prêdkoœæ snake'a
-	void SetSpeed(int speed);
+	void SetSpeed(float speed);
 
 	// Funkcja sprawdza, czy Snake znajduje siê w polu gry
 	bool IsInArena(Background* background);
@@ -48,7 +48,7 @@ public:
 	const sf::Vector2f& GetPosition() const;
 
 	// Zwraca rozmiar spritu snake'a
-	const sf::Vector2u& GetSize() const;
+	const sf::Vector2u GetSize() const;
 
 	// Zwraca kierunek snake'a
 	const Direction GetDirection() const;
