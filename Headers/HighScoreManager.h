@@ -20,6 +20,8 @@ public:
 	// Konstruktor parametryczny
 	HighScoreManager(std::shared_ptr<MyFont> fontTitleText, std::shared_ptr<MyFont> fontHighScores);
 
+	void SetFonts(std::shared_ptr<MyFont> fontTitleText, std::shared_ptr<MyFont> fontHighScores);
+
 	// Dodaje nowy HighScore do tabeli
 	void AddHighScore(int score, std::string name);
 
@@ -31,7 +33,7 @@ public:
 
 private:
 	// £aduje czionkê i ustawia wszystkie parametry tekstu
-	void LoadFontAndSetText();
+	void SetUpText();
 
 	// £aduje wszystkie wyniki z pliku
 	void LoadScoresFromFile();

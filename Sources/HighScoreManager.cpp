@@ -9,7 +9,17 @@ HighScoreManager::HighScoreManager(std::shared_ptr<MyFont> fontTitleText, std::s
 {
 	LoadScoresFromFile();
 	SortHighScores();
-	LoadFontAndSetText();
+	SetUpText();
+}
+
+void HighScoreManager::SetFonts(std::shared_ptr<MyFont> fontTitleText, std::shared_ptr<MyFont> fontHighScores)
+{
+	this->fontTitleText = fontTitleText;
+	this->fontHighScores = fontHighScores;
+
+	LoadScoresFromFile();
+	SortHighScores();
+	SetUpText();
 }
 
 void HighScoreManager::LoadScoresFromFile()
@@ -52,7 +62,7 @@ HighScoreManager::~HighScoreManager()
 	}
 }
 
-void HighScoreManager::LoadFontAndSetText()
+void HighScoreManager::SetUpText()
 {
 	titleText.setFont(*fontTitleText);
 	titleText.setString("HIGHSCORES");

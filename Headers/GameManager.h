@@ -7,6 +7,7 @@
 #include "ScoreManager.h"
 #include "LoseScreen.h"
 #include "TypeInArea.h"
+#include "HighScoreManager.h"
 
 class GameManager
 {
@@ -21,6 +22,7 @@ private:
 	LoseScreen loseScreen;
 	TypeInArea typeInArea;
 
+	HighScoreManager highScoreManager;
 	TexturesManager texturesManager;
 	FontsManager fontsManager;
 	ScoreManager scoreManager;
@@ -63,6 +65,8 @@ public:
 
 	// Zwraca obiekt klasy ScoreManager
 	const ScoreManager& GetScoreManager() const;
+
+	const HighScoreManager& GetHighScoreManager() const;
 
 	TypeInArea& GetTypeInAreaManager();
 

@@ -17,6 +17,8 @@ GameManager::GameManager()
 	drawableEndGameObjects.push_back(&loseScreen);
 	drawableEndGameObjects.push_back(&typeInArea);
 
+	highScoreManager.SetFonts(fontsManager.GetFont(MyFont::Type::Arial), fontsManager.GetFont(MyFont::Type::Arial));
+
 	isGameOver = false;
 	isPickUpCollected = true;
 	GenerateSnakePosition();
@@ -89,6 +91,7 @@ void GameManager::CheckWhereIsSnake()
 	if (!snake.IsInArena(&background) || snake.IsCollision())
 	{
 		isGameOver = true;
+		loseScreen.SetScore(scoreManager.GetScore());
 	}
 }
 
@@ -134,4 +137,9 @@ const ScoreManager& GameManager::GetScoreManager() const
 TypeInArea& GameManager::GetTypeInAreaManager()
 {
 	return typeInArea;
+}
+
+const HighScoreManager& GameManager::GetHighScoreManager() const
+{
+	return highScoreManager;
 }

@@ -18,6 +18,9 @@ void ScoreManager::AddScore()
 {
 	currentScore += 10;
 	text.setString(scoreStr + std::to_string(currentScore));
+	auto rect = text.getLocalBounds();
+	text.setOrigin(rect.width / 2, rect.height / 2);
+	text.setPosition(500, 150);
 }
 
 int ScoreManager::GetScore()
