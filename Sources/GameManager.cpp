@@ -101,3 +101,18 @@ void GameManager::CheckPickUp()
 		GeneratePickUp();
 	}
 }
+
+const TexturesManager& GameManager::GetTextureManager() const
+{
+	return texturesManager;
+}
+
+const FontsManager& GameManager::GetFontsManager() const
+{
+	return fontsManager;
+}
+
+const ScoreManager& GameManager::GetScoreManager() const
+{
+	return scoreManager;
+}

@@ -152,17 +152,22 @@
     <ClCompile Include="Sources\Background.cpp" />
     <ClCompile Include="Sources\FontsManager.cpp" />
     <ClCompile Include="Sources\GameManager.cpp" />
+    <ClCompile Include="Sources\HighScoreEntity.cpp" />
+    <ClCompile Include="Sources\HighScoreManager.cpp" />
     <ClCompile Include="Sources\MyFont.cpp" />
     <ClCompile Include="Sources\MyTexture.cpp" />
     <ClCompile Include="Sources\PickUp.cpp" />
     <ClCompile Include="Sources\ScoreManager.cpp" />
     <ClCompile Include="Sources\Snake.cpp" />
     <ClCompile Include="Sources\TexturesManager.cpp" />
+    <ClCompile Include="Sources\TypeInArea.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\Background.h" />
     <ClInclude Include="Headers\FontsManager.h" />
     <ClInclude Include="Headers\GameManager.h" />
+    <ClInclude Include="Headers\HighScoreEntity.h" />
+    <ClInclude Include="Headers\HighScoreManager.h" />
     <ClInclude Include="Headers\IDrawable.h" />
     <ClInclude Include="Headers\MyFont.h" />
     <ClInclude Include="Headers\MyTexture.h" />
@@ -170,6 +175,7 @@
     <ClInclude Include="Headers\ScoreManager.h" />
     <ClInclude Include="Headers\Snake.h" />
     <ClInclude Include="Headers\TexturesManager.h" />
+    <ClInclude Include="Headers\TypeInArea.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
