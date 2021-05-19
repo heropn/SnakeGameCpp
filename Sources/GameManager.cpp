@@ -92,6 +92,7 @@ void GameManager::CheckWhereIsSnake()
 	{
 		isGameOver = true;
 		loseScreen.SetScore(scoreManager.GetScore());
+		sf::sleep(sf::seconds(0.5f));
 	}
 }
 
