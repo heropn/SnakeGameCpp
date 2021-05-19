@@ -1,8 +1,9 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "MyFont.h"
+#include "IDrawable.h"
 
-class TypeInArea
+class TypeInArea : public IDrawable
 {
 private:
 	sf::String playerInput;
@@ -28,8 +29,10 @@ public:
 	// Rysuje ca³e pole do wpisywania
 	void Draw(sf::RenderWindow* window);
 
+	void GetPlayerInput(char c);
+
 	// Zwraca nazwe gracza
-	std::string GetPlayerName();
+	const std::string& GetPlayerName() const;
 
 private:
 	// £aduje czcionkê i ustawia wszystkie parametry obu tekstów

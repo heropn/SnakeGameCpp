@@ -11,6 +11,12 @@ GameManager::GameManager()
 	drawableInGameObjects.push_back(&background);
 	drawableInGameObjects.push_back(&scoreManager);
 
+	loseScreen = LoseScreen(fontsManager.GetFont(MyFont::Type::Arial), fontsManager.GetFont(MyFont::Type::Arial));
+	typeInArea = TypeInArea(fontsManager.GetFont(MyFont::Type::Arial), fontsManager.GetFont(MyFont::Type::Arial));
+
+	drawableEndGameObjects.push_back(&loseScreen);
+	drawableEndGameObjects.push_back(&typeInArea);
+
 	isGameOver = false;
 	isPickUpCollected = true;
 	GenerateSnakePosition();
@@ -39,6 +45,14 @@ void GameManager::GeneratePickUp()
 void GameManager::DrawInGameObjects(sf::RenderWindow* window)
 {
 	for (const auto obj : drawableInGameObjects)
+	{
+		obj->Draw(window);
+	}
+}
+
+void GameManager::DrawEndGameObjects(sf::RenderWindow* window)
+{
+	for (const auto obj : drawableEndGameObjects)
 	{
 		obj->Draw(window);
 	}
@@ -115,4 +129,9 @@ const FontsManager& GameManager::GetFontsManager() const
 const ScoreManager& GameManager::GetScoreManager() const
 {
 	return scoreManager;
+}
+
+TypeInArea& GameManager::GetTypeInAreaManager()
+{
+	return typeInArea;
 }

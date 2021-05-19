@@ -154,6 +154,7 @@
     <ClCompile Include="Sources\GameManager.cpp" />
     <ClCompile Include="Sources\HighScoreEntity.cpp" />
     <ClCompile Include="Sources\HighScoreManager.cpp" />
+    <ClCompile Include="Sources\LoseScreen.cpp" />
     <ClCompile Include="Sources\MyFont.cpp" />
     <ClCompile Include="Sources\MyTexture.cpp" />
     <ClCompile Include="Sources\PickUp.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="Headers\HighScoreEntity.h" />
     <ClInclude Include="Headers\HighScoreManager.h" />
     <ClInclude Include="Headers\IDrawable.h" />
+    <ClInclude Include="Headers\LoseScreen.h" />
     <ClInclude Include="Headers\MyFont.h" />
     <ClInclude Include="Headers\MyTexture.h" />
     <ClInclude Include="Headers\PickUp.h" />

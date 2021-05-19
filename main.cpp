@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Headers/GameManager.h"
 #include <iostream>
+#include "Headers/LoseScreen.h"
 
 int main()
 {
@@ -19,7 +20,13 @@ int main()
 		while (window.pollEvent(windowEvent))
 		{
 			if (windowEvent.type == sf::Event::Closed)
+			{
 				window.close();
+			}
+			else if (gameManager.IsGameOver() && windowEvent.type == sf::Event::TextEntered)
+			{
+				gameManager.GetTypeInAreaManager().GetPlayerInput(windowEvent.text.unicode);
+			}
 		}
 		window.clear();
 		
@@ -51,7 +58,7 @@ int main()
 		}
 		else
 		{
-			std::cout << "Koniec gry" << std::endl;
+			gameManager.DrawEndGameObjects(&window);
 		}
 
 		window.display();

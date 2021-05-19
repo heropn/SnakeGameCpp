@@ -35,9 +35,17 @@ void TypeInArea::Draw(sf::RenderWindow* window)
 	window->draw(rectangle);
 }
 
-std::string TypeInArea::GetPlayerName()
+const std::string& TypeInArea::GetPlayerName() const
 {
 	return playerInput;
+}
+
+void TypeInArea::GetPlayerInput(char c)
+{
+	if (c == '\b')
+		EreseLastCharacter();
+	else
+		UpdateText(c);
 }
 
 void TypeInArea::SetUpTextes()

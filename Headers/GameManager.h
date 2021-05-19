@@ -5,6 +5,8 @@
 #include "TexturesManager.h"
 #include "FontsManager.h"
 #include "ScoreManager.h"
+#include "LoseScreen.h"
+#include "TypeInArea.h"
 
 class GameManager
 {
@@ -15,11 +17,16 @@ private:
 	Snake snake;
 	PickUp pickUp;
 	Background background;
+
+	LoseScreen loseScreen;
+	TypeInArea typeInArea;
+
 	TexturesManager texturesManager;
 	FontsManager fontsManager;
 	ScoreManager scoreManager;
 
 	std::vector<IDrawable*> drawableInGameObjects;
+	std::vector<IDrawable*> drawableEndGameObjects;
 
 public:
 	// Podczas tworzenia obiektu ustawia wszystkie parametry swoich atrybutów
@@ -28,6 +35,8 @@ public:
 	// Rysuje wszystkie rysowalne obiekty, które znajduj¹ siê w oknie podczas trwania gry
 	// ¯eby narysowaæ obiekt, musi byæ zawarty w wektorze "drawableInGameObjects"
 	void DrawInGameObjects(sf::RenderWindow* window);
+
+	void DrawEndGameObjects(sf::RenderWindow* window);
 
 	// Porusza Snake'iem
 	void MoveSnake();
@@ -54,6 +63,8 @@ public:
 
 	// Zwraca obiekt klasy ScoreManager
 	const ScoreManager& GetScoreManager() const;
+
+	TypeInArea& GetTypeInAreaManager();
 
 private:
 	// Generuje PickUp'a 

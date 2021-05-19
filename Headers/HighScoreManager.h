@@ -2,8 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include "HighScoreEntity.h"
 #include "MyFont.h"
+#include "IDrawable.h"
 
-class HighScoreManager
+class HighScoreManager : public IDrawable
 {
 private:
 	const std::string pathToFile = "highscores.txt";

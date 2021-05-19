@@ -1,8 +1,9 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "MyFont.h"
+#include "IDrawable.h"
 
-class HighScoreEntity
+class HighScoreEntity : public IDrawable
 {
 public:
 	int score;
