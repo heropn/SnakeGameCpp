@@ -2,8 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include "Background.h"
 #include "MyTexture.h"
+#include "IDrawable.h"
 
-class Snake
+class Snake : public IDrawable
 {
 public:
 	enum class Direction{Top,Right,Bottom,Left};
@@ -32,9 +33,6 @@ public:
 	// Ustawia prêdkoœæ snake'a
 	void SetSpeed(float speed);
 
-	// Funkcja sprawdza, czy Snake znajduje siê w polu gry
-	bool IsInArena(Background* background);
-
 	// Zmiana kierunku poruszania siê snake'a
 	void SetDirection(Direction direction);
 
@@ -43,6 +41,12 @@ public:
 
 	// Ustawia pozycje snake'a
 	void SetPosition(float x, float y);
+
+	// Zmienia pozycje snake'a 
+	void Move();
+
+	// Zwiêksza wielkoœæ snake'a i jego prêdkoœæ
+	void Grow();
 
 	// Zwraca pozycje g³owy snake'a
 	const sf::Vector2f& GetPosition() const;
@@ -56,17 +60,13 @@ public:
 	// Zwraca sprite'a snake'a
 	const sf::Sprite& GetSprite() const;
 
+	// Funkcja sprawdza, czy Snake znajduje siê w polu gry
+	bool IsInArena(Background* background);
+
 	// Sprawdza, czy dosz³o do kolizji snake'a (czy zjad³ siebie)
 	bool IsCollision();
 
-	// Zmienia pozycje snake'a 
-	void Move();
-
-	// Zwiêksza wielkoœæ snake'a i jego prêdkoœæ
-	void Grow();
-
 private:
-
 	// Ustawia w³aœciwoœci snake'a
 	void SetSpriteProperties();
 };

@@ -1,8 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <vector>
+#include "IDrawable.h"
 
-class Background
+class Background : public IDrawable
 {
 private:
 	float width;
@@ -19,5 +19,5 @@ public:
 	void Draw(sf::RenderWindow* window);
 
 	// Zwraca kszta³t areny
-	sf::RectangleShape GetShape();
+	const sf::RectangleShape& GetShape() const;
 };

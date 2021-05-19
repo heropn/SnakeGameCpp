@@ -22,7 +22,7 @@ int main()
 		}
 		window.clear();
 		
-		/*gameManager.CheckWhereIsSnake();
+		gameManager.CheckWhereIsSnake();
 
 		if (!gameManager.IsGameOver())
 		{
@@ -30,30 +30,28 @@ int main()
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 			{
-				gameManager.SetDirection(Snake::Direction::Top);
+				gameManager.SetSnakeDirection(Snake::Direction::Top);
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 			{
-				gameManager.SetDirection(Snake::Direction::Left);
+				gameManager.SetSnakeDirection(Snake::Direction::Left);
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 			{
-				gameManager.SetDirection(Snake::Direction::Bottom);
+				gameManager.SetSnakeDirection(Snake::Direction::Bottom);
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 			{
-				gameManager.SetDirection(Snake::Direction::Right);
+				gameManager.SetSnakeDirection(Snake::Direction::Right);
 			}
 
-			gameManager.DrawBackground(&window);
 			gameManager.MoveSnake();
-			gameManager.DrawSnake(&window);
-			gameManager.DrawPickUp(&window);
+			gameManager.DrawInGameObjects(&window);
 		}
 		else
 		{
 			std::cout << "Koniec gry" << std::endl;
-		}*/
+		}
 
 		window.display();
 	}

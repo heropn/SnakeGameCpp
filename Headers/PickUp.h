@@ -1,8 +1,9 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Snake.h"
+#include "IDrawable.h"
 
-class PickUp
+class PickUp : public IDrawable
 {
 private:
 	float posX;

@@ -13,6 +13,8 @@ private:
 	};
 
 	std::vector<std::shared_ptr<MyTexture>> texturesPointers;
+
+	// Przechowuje wszystkie tekstury do za³adowania
 	std::vector<TextureInfo> filesPaths
 	{
 		{".\\Textures\\SnakeHead.png", MyTexture::Type::SnakeHeadGreen},
@@ -22,12 +24,16 @@ private:
 	};
 
 public:
+	// Konstruktor domyœlny
 	TexturesManager();
 	
+	// £aduje wszystkie podane tekstury
 	void LoadAllTextures();
 
+	// Zwraca dan¹ teksturê
 	const std::shared_ptr<MyTexture> GetTexture(MyTexture::Type type) const;
 
 private:
+	// Dodaje podan¹ teksturê
 	void AddTexture(std::string fileName, MyTexture::Type type);
 };

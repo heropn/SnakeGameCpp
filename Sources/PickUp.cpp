@@ -2,15 +2,15 @@
 
 PickUp::PickUp()
 {
-	posX = 500;
-	posY = 500;
+	posX = 500.0f;
+	posY = 500.0f;
 	SetPickUpProperties();
 }
 
 void PickUp::SetPickUpProperties()
 {
-	sf::RectangleShape shape(sf::Vector2f(20, 20));
-	shape.setOrigin(sf::Vector2f(10, 10));
+	sf::RectangleShape shape(sf::Vector2f(20.0f, 20.0f));
+	shape.setOrigin(sf::Vector2f(10.0f, 10.0f));
 	shape.setFillColor(sf::Color::Yellow);
 	shape.setPosition(sf::Vector2f(posX, posY));
 	this->shape = shape;

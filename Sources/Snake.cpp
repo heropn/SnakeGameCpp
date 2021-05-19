@@ -1,13 +1,13 @@
 #include "..\Headers\Snake.h"
 
 Snake::Snake() : 
-	posX(0), posY(0), size(0), speed(0), direction(Direction::Left) {}
+	posX(0.0f), posY(0.0f), size(0.0f), speed(0), direction(Direction::Left) {}
 
 Snake::Snake(std::shared_ptr<MyTexture> headTexture, std::shared_ptr<MyTexture> bodyTexture) : headTexture(headTexture), bodyTexture(bodyTexture)
 {
-	posX = 500;
-	posY = 500;
-	speed = 1;
+	posX = 500.0f;
+	posY = 500.0f;
+	speed = 1.0f;
 	size = 1;
 	direction = Direction::Left;
 	SetSpriteProperties();
@@ -33,11 +33,6 @@ void Snake::Draw(sf::RenderWindow* window)
 	sprite.setPosition(positions[positions.size() - 1].x, positions[positions.size() - 1].y);
 	sprite.setTexture(*headTexture);
 	window->draw(sprite);
-
-	if (positions.size() > size)
-	{
-		positions.erase(positions.begin(), positions.end() - size);
-	}
 }
 
 void Snake::Move()
@@ -114,8 +109,21 @@ const sf::Sprite& Snake::GetSprite() const
 
 void Snake::Grow()
 {
-	size++;
-	speed += 0.1f;
+	if (positions.size() - (size + 10) >= 0)
+	{
+		size += 10;
+	}
+	else
+	{
+		size += (positions.size() - size);
+	}
+
+	speed += 0.05f;
+
+	if (positions.size() > size)
+	{
+		positions.erase(positions.begin(), positions.end() - size);
+	}
 }
 
 const sf::Vector2f& Snake::GetPosition() const
@@ -134,7 +142,8 @@ bool Snake::IsCollision()
 {
 	for (unsigned int i = 1; i < size; i++)
 	{
-		if (posX == positions[positions.size() - 1 - i].x && posY == positions[positions.size() - 1 - i].y)
+		if (abs(positions[positions.size() - 1].x - positions[positions.size() - 1 - i].x) < 1 &&
+			abs(positions[positions.size() - 1].y - positions[positions.size() - 1 - i].y) < 1)
 		{
 			return true;
 		}

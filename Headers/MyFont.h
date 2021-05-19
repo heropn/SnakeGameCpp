@@ -13,7 +13,9 @@ private:
 	Type type;
 
 public:
+	// Konstruktor domyœlny
 	MyFont(Type type);
 
+	// Zwraca typ czcionki
 	const Type GetType() const;
 };

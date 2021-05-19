@@ -162,6 +162,7 @@
     <ClInclude Include="Headers\Background.h" />
     <ClInclude Include="Headers\FontsManager.h" />
     <ClInclude Include="Headers\GameManager.h" />
+    <ClInclude Include="Headers\IDrawable.h" />
     <ClInclude Include="Headers\MyFont.h" />
     <ClInclude Include="Headers\MyTexture.h" />
     <ClInclude Include="Headers\PickUp.h" />

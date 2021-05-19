@@ -16,7 +16,9 @@ private:
 	Type type;
 
 public:
+	// Konstruktor domyœlny
 	MyTexture(Type type);
 
+	// Zwraca typ tekstury
 	const Type GetType() const;
 };

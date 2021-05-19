@@ -1,28 +1,25 @@
 #include "..\Headers\GameManager.h"
 #include <random>
+#include <algorithm>
 
 GameManager::GameManager()
 {
 	snake = Snake(texturesManager.GetTexture(MyTexture::Type::SnakeHeadGreen), texturesManager.GetTexture(MyTexture::Type::SnakeBodyGreen));
+	drawableInGameObjects.push_back(&snake);
+	drawableInGameObjects.push_back(&background);
 
-	scores = 0;
 	isGameOver = false;
 	isPickUpCollected = true;
 	GenerateSnakePosition();
 	GeneratePickUp();
 }
 
-void GameManager::DrawPickUp(sf::RenderWindow* window)
-{
-	pickUp.Draw(window);
-}
-
 void GameManager::GeneratePickUp()
 {
 	std::random_device device;
 	std::mt19937 generator(device());
-	std::uniform_real_distribution<float> posX(150, 850); //x e [100,900] y e [250,750]
-	std::uniform_real_distribution<float> posY(300, 700);
+	std::uniform_real_distribution<float> posX(150.0f, 850.0f); //x e [100,900] y e [250,750]
+	std::uniform_real_distribution<float> posY(300.0f, 700.0f);
 
 	if (isPickUpCollected)
 	{
@@ -32,42 +29,42 @@ void GameManager::GeneratePickUp()
 		float y = posY(generator);
 
 		pickUp = PickUp(x, y);
+		drawableInGameObjects.push_back(&pickUp);
 	}
 }
 
-void GameManager::DrawSnake(sf::RenderWindow* window)
+void GameManager::DrawInGameObjects(sf::RenderWindow* window)
 {
-	snake.Draw(window);
+	for (const auto obj : drawableInGameObjects)
+	{
+		obj->Draw(window);
+	}
 }
 
 void GameManager::GenerateSnakePosition()
 {
 	std::random_device device;
 	std::mt19937 generator(device());
-	std::uniform_int_distribution<int>posX(150, 850); //x e [100,900] y e [250,750]
-	std::uniform_int_distribution<int>posY(300, 700);
+	std::uniform_real_distribution<float> posX(150.0f, 850.0f); //x e [100,900] y e [250,750]
+	std::uniform_real_distribution<float> posY(300.0f, 700.0f);
 	std::uniform_int_distribution<int>direction(0,3); // kierunek
 
-	int x = posX(generator);
-	int y = posY(generator);
+	float x = posX(generator);
+	float y = posY(generator);
 	int index = direction(generator);
 
 	snake.SetDirection(Snake::Direction(index));
-	snake.SetPosition((float)x, (float)y);
+	snake.SetPosition(x, y);
 }
 
 void GameManager::MoveSnake()
 {
 	snake.Move();
 }
-void GameManager::SetDirection(Snake::Direction direction)
+
+void GameManager::SetSnakeDirection(Snake::Direction direction)
 {
 	snake.SetDirection(direction);
-}
-
-void GameManager::DrawBackground(sf::RenderWindow* window)
-{
-	background.Draw(window);
 }
 
 void GameManager::CheckWhereIsSnake()
@@ -76,7 +73,6 @@ void GameManager::CheckWhereIsSnake()
 	{
 		isGameOver = true;
 	}
-	
 }
 
 bool GameManager::IsGameOver()
@@ -98,6 +94,7 @@ void GameManager::CheckPickUp()
 		scores++;
 		isPickUpCollected = true;
 		snake.Grow();
+		drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(), drawableInGameObjects.end(), &pickUp), drawableInGameObjects.end());
 		GeneratePickUp();
 	}
 }
