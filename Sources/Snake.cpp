@@ -1,4 +1,5 @@
 #include "..\Headers\Snake.h"
+#include <iostream>
 
 Snake::Snake() : 
 	posX(0.0f), posY(0.0f), size(0.0f), speed(0), direction(Direction::Left) {}
@@ -111,7 +112,7 @@ void Snake::Grow()
 {
 	if (positions.size() - (size + 10) >= 0)
 	{
-		size += 10;
+		size += 100;
 	}
 	else
 	{

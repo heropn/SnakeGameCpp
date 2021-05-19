@@ -155,6 +155,7 @@
     <ClCompile Include="Sources\MyFont.cpp" />
     <ClCompile Include="Sources\MyTexture.cpp" />
     <ClCompile Include="Sources\PickUp.cpp" />
+    <ClCompile Include="Sources\ScoreManager.cpp" />
     <ClCompile Include="Sources\Snake.cpp" />
     <ClCompile Include="Sources\TexturesManager.cpp" />
   </ItemGroup>
@@ -166,6 +167,7 @@
     <ClInclude Include="Headers\MyFont.h" />
     <ClInclude Include="Headers\MyTexture.h" />
     <ClInclude Include="Headers\PickUp.h" />
+    <ClInclude Include="Headers\ScoreManager.h" />
     <ClInclude Include="Headers\Snake.h" />
     <ClInclude Include="Headers\TexturesManager.h" />
   </ItemGroup>

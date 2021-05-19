@@ -4,12 +4,11 @@
 #include "Background.h"
 #include "TexturesManager.h"
 #include "FontsManager.h"
+#include "ScoreManager.h"
 
 class GameManager
 {
 private:
-	int scores;
-
 	bool isPickUpCollected;
 	bool isGameOver;
 
@@ -18,11 +17,12 @@ private:
 	Background background;
 	TexturesManager texturesManager;
 	FontsManager fontsManager;
+	ScoreManager scoreManager;
 
 	std::vector<IDrawable*> drawableInGameObjects;
 
 public:
-	// Podczas tworzenia obiektu wygeneruje pocz¹tkowe po³o¿enie snake'a
+	// Podczas tworzenia obiektu ustawia wszystkie parametry swoich atrybutów
 	GameManager();
 
 	// Generowanie pocz¹tkowej pozycji snake'a

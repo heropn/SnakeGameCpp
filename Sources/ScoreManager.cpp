@@ -1,10 +1,12 @@
 #include "..\Headers\ScoreManager.h"
 #include <iostream>
 
-ScoreManager::ScoreManager()
+ScoreManager::ScoreManager() : currentScore(0) {}
+
+void ScoreManager::SetFont(std::shared_ptr<MyFont> fontPtr)
 {
-	currentScore = 0;
-	LoadFontAndSetText();
+	this->fontPtr = fontPtr;
+	SetUpText();
 }
 
 void ScoreManager::Draw(sf::RenderWindow* window)
@@ -28,15 +30,9 @@ void ScoreManager::ResetScore()
 	currentScore = 0;
 }
 
-void ScoreManager::LoadFontAndSetText()
+void ScoreManager::SetUpText()
 {
-	if (!font.loadFromFile(fontFilePath))
-	{
-		std::cout << "Cant load file: " << fontFilePath << std::endl;
-		return;
-	}
-
-	text.setFont(font);
+	text.setFont(*fontPtr);
 	text.setString(scoreStr + std::to_string(currentScore));
 	text.setCharacterSize(50);
 	text.setFillColor(sf::Color::White);

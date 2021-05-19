@@ -5,8 +5,11 @@
 GameManager::GameManager()
 {
 	snake = Snake(texturesManager.GetTexture(MyTexture::Type::SnakeHeadGreen), texturesManager.GetTexture(MyTexture::Type::SnakeBodyGreen));
+	scoreManager.SetFont(fontsManager.GetFont(MyFont::Type::Arial));
+
 	drawableInGameObjects.push_back(&snake);
 	drawableInGameObjects.push_back(&background);
+	drawableInGameObjects.push_back(&scoreManager);
 
 	isGameOver = false;
 	isPickUpCollected = true;
@@ -91,7 +94,7 @@ void GameManager::CheckPickUp()
 {
 	if (pickUp.IsCollected(&snake))
 	{
-		scores++;
+		scoreManager.AddScore();
 		isPickUpCollected = true;
 		snake.Grow();
 		drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(), drawableInGameObjects.end(), &pickUp), drawableInGameObjects.end());
