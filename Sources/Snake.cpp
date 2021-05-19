@@ -2,7 +2,7 @@
 #include <iostream>
 
 Snake::Snake() : 
-	posX(0.0f), posY(0.0f), size(0.0f), speed(0), increasingSize(0), direction(Direction::Left) {}
+	posX(0.0f), posY(0.0f), size(0), speed(0.0f), increasingSize(0), direction(Direction::Left) {}
 
 Snake::Snake(std::shared_ptr<MyTexture> headTexture, std::shared_ptr<MyTexture> bodyTexture) : headTexture(headTexture), bodyTexture(bodyTexture)
 {
@@ -28,11 +28,15 @@ void Snake::Draw(sf::RenderWindow* window)
 	sprite.setTexture(*bodyTexture);
 	for (unsigned int i = 1; i < size; i++)
 	{
+		if (positions.size() - 1 - i < 0 || positions.size() - 1 - i > positions.size())
+			continue;
+
 		sprite.setPosition(positions[positions.size() - 1 - i].x, positions[positions.size() - 1 - i].y);
 		window->draw(sprite);
 	}
 
-	sprite.setPosition(positions[positions.size() - 1].x, positions[positions.size() - 1].y);
+	sprite.setPosition(posX, posY);
+
 	sprite.setTexture(*headTexture);
 	window->draw(sprite);
 }
@@ -120,7 +124,7 @@ void Snake::Grow()
 		size += (positions.size() - size);
 	}
 
-	speed += 0.1f;
+	speed += 0.2f;
 
 	if (positions.size() > size)
 	{
@@ -144,7 +148,7 @@ bool Snake::IsCollision()
 {
 	for (unsigned int i = 1; i < size; i++)
 	{
-		if (positions.size() - 1 - i < 0)
+		if (positions.size() - 1 - i < 0 || positions.size() - 1 - i > positions.size())
 			continue;
 
 		if (abs(positions[positions.size() - 1].x - positions[positions.size() - 1 - i].x) < 1 &&
@@ -153,6 +157,7 @@ bool Snake::IsCollision()
 			return true;
 		}
 	}
+
 	return false;
 }
 
