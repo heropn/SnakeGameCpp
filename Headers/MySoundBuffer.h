@@ -6,7 +6,8 @@ class MySoundBuffer : public sf::SoundBuffer
 public:
 	enum class Type
 	{
-		Coin
+		Coin,
+		Defeat
 	};
 
 private:

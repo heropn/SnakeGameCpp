@@ -23,5 +23,5 @@ private:
 public:
 	AudioManager();
 
-	void PlaySound(MySoundBuffer::Type type);
+	const void PlaySound(MySoundBuffer::Type type);
 };

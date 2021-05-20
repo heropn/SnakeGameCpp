@@ -23,7 +23,7 @@ AudioManager::AudioManager()
 	}
 }
 
-void AudioManager::PlaySound(MySoundBuffer::Type type)
+const void AudioManager::PlaySound(MySoundBuffer::Type type)
 {
 	for (auto& sound : sounds)
 	{

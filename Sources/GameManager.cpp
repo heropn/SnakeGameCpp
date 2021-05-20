@@ -100,7 +100,8 @@ void GameManager::CheckWhereIsSnake()
 		isGameOver = true;
 		loseScreen.SetScore(scoreManager.GetScore());
 		scoreManager.ResetScore();
-		sf::sleep(sf::seconds(0.5f));
+		audioManager.PlaySound(MySoundBuffer::Type::Defeat);
+		sf::sleep(sf::seconds(1.0f));
 	}
 }
 
@@ -120,6 +121,7 @@ void GameManager::CheckPickUp()
 {
 	if (pickUp.IsCollected(&snake))
 	{
+		audioManager.PlaySound(MySoundBuffer::Type::Coin);
 		scoreManager.AddScore();
 		isPickUpCollected = true;
 		snake.Grow();
@@ -151,4 +153,9 @@ TypeInArea& GameManager::GetTypeInAreaManager()
 const HighScoreManager& GameManager::GetHighScoreManager() const
 {
 	return highScoreManager;
+}
+
+const AudioManager& GameManager::GetAudioManager() const
+{
+	return audioManager;
 }

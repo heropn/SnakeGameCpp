@@ -15,7 +15,8 @@ private:
 	// Przechowuje wszystkie tekstury do za³adowania
 	std::vector<SoundBufferInfo> filesPaths
 	{
-		{"coin.wav", MySoundBuffer::Type::Coin}
+		{".\\Sounds\\coin.wav", MySoundBuffer::Type::Coin},
+		{".\\Sounds\\defeat.wav", MySoundBuffer::Type::Defeat}
 	};
 
 public:

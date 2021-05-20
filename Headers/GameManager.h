@@ -9,6 +9,7 @@
 #include "TypeInArea.h"
 #include "HighScoreManager.h"
 #include "Title.h"
+#include "AudioManager.h"
 
 class GameManager
 {
@@ -26,6 +27,7 @@ private:
 
 	HighScoreManager highScoreManager;
 	TexturesManager texturesManager;
+	AudioManager audioManager;
 	FontsManager fontsManager;
 	ScoreManager scoreManager;
 
@@ -70,6 +72,9 @@ public:
 
 	// Zwraca obiekt klasy HighScoreManager
 	const HighScoreManager& GetHighScoreManager() const;
+	
+	// Zwraca obiekt klasy AudiManager
+	const AudioManager& GetAudioManager() const;
 
 	// Zwraca obiekt kalsy TypeInAreaManager
 	TypeInArea& GetTypeInAreaManager();

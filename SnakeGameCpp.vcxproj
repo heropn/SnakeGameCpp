@@ -149,6 +149,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Sources\AudioManager.cpp" />
     <ClCompile Include="Sources\Background.cpp" />
     <ClCompile Include="Sources\FontsManager.cpp" />
     <ClCompile Include="Sources\GameManager.cpp" />
@@ -156,16 +157,19 @@
     <ClCompile Include="Sources\HighScoreManager.cpp" />
     <ClCompile Include="Sources\LoseScreen.cpp" />
     <ClCompile Include="Sources\MyFont.cpp" />
+    <ClCompile Include="Sources\MySoundBuffer.cpp" />
     <ClCompile Include="Sources\MyTexture.cpp" />
     <ClCompile Include="Sources\PickUp.cpp" />
     <ClCompile Include="Sources\ScoreManager.cpp" />
     <ClCompile Include="Sources\Snake.cpp" />
     <ClCompile Include="Sources\SnakeSelectMenu.cpp" />
+    <ClCompile Include="Sources\SoundBufferManager.cpp" />
     <ClCompile Include="Sources\TexturesManager.cpp" />
     <ClCompile Include="Sources\Title.cpp" />
     <ClCompile Include="Sources\TypeInArea.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Headers\AudioManager.h" />
     <ClInclude Include="Headers\Background.h" />
     <ClInclude Include="Headers\FontsManager.h" />
     <ClInclude Include="Headers\GameManager.h" />
@@ -174,11 +178,13 @@
     <ClInclude Include="Headers\IDrawable.h" />
     <ClInclude Include="Headers\LoseScreen.h" />
     <ClInclude Include="Headers\MyFont.h" />
+    <ClInclude Include="Headers\MySoundBuffer.h" />
     <ClInclude Include="Headers\MyTexture.h" />
     <ClInclude Include="Headers\PickUp.h" />
     <ClInclude Include="Headers\ScoreManager.h" />
     <ClInclude Include="Headers\Snake.h" />
     <ClInclude Include="Headers\SnakeSelectMenu.h" />
+    <ClInclude Include="Headers\SoundBufferManager.h" />
     <ClInclude Include="Headers\TexturesManager.h" />
     <ClInclude Include="Headers\Title.h" />
     <ClInclude Include="Headers\TypeInArea.h" />
