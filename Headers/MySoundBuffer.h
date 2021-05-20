@@ -4,6 +4,7 @@
 class MySoundBuffer : public sf::SoundBuffer
 {
 public:
+	// Typy SoundBuffer'ów
 	enum class Type
 	{
 		Coin,
@@ -14,7 +15,9 @@ private:
 	Type type;
 
 public:
+	// Konstruktor domyœlny
 	MySoundBuffer(Type type);
 
+	// Zwraca typ SoundBuffera
 	const Type GetType() const;
 };

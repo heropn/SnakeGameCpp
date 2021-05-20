@@ -4,6 +4,7 @@
 class SoundBufferManager
 {
 private:
+	// Struktura wspomagaj¹ca ³adowanie danych z plików
 	struct SoundBufferInfo
 	{
 		std::string filePath;
@@ -12,7 +13,7 @@ private:
 
 	std::vector<std::shared_ptr<MySoundBuffer>> soundBuffersPointers;
 
-	// Przechowuje wszystkie tekstury do za³adowania
+	// Przechowuje wszystkie SoundBuffery do za³adowania
 	std::vector<SoundBufferInfo> filesPaths
 	{
 		{".\\Sounds\\coin.wav", MySoundBuffer::Type::Coin},
@@ -23,15 +24,16 @@ public:
 	// Konstruktor domyœlny
 	SoundBufferManager();
 
-	// £aduje wszystkie podane tekstury
+	// £aduje wszystkie podane SoundBuffer'y
 	void LoadAllSoundBuffers();
 
-	// Zwraca dan¹ teksturê
+	// Zwraca dany SoundBuffer
 	const std::shared_ptr<MySoundBuffer> GetSoundBuffer(MySoundBuffer::Type type) const;
 
+	// Zwraca wektor wszystkich SoundBuffer'ów
 	const std::vector<std::shared_ptr<MySoundBuffer>>& GetVector() const;
 
 private:
-	// Dodaje podan¹ teksturê
+	// Dodaje nowy podany SoundBuffer
 	void AddSoundBuffer(std::string fileName, MySoundBuffer::Type type);
 };
