@@ -13,14 +13,20 @@ private:
 	std::shared_ptr<MyFont> fontScore;
 
 public:
+	// Konstruktor domyúlny
 	LoseScreen();
 
+	// Konstruktor parametryczny
+	// ustawia wskaüniki do czcionek, podane w parametrach
 	LoseScreen(std::shared_ptr<MyFont> fontTitle, std::shared_ptr<MyFont> fontScore);
 
+	// Rysuje teksty
 	void Draw(sf::RenderWindow* window);
 
+	// Ustawia score do wyúwietlenia
 	void SetScore(int score);
 
 private:
+	// Ustawia wszystkie parametry tekstu
 	void SetUpTextes();
 };

@@ -4,6 +4,7 @@
 class FontsManager
 {
 private:
+	// Struktura do ³adowania czcionek
 	struct FontInfo
 	{
 		std::string filePath;

@@ -68,8 +68,10 @@ public:
 	// Zwraca obiekt klasy ScoreManager
 	const ScoreManager& GetScoreManager() const;
 
+	// Zwraca obiekt klasy HighScoreManager
 	const HighScoreManager& GetHighScoreManager() const;
 
+	// Zwraca obiekt kalsy TypeInAreaManager
 	TypeInArea& GetTypeInAreaManager();
 
 private:

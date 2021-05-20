@@ -1,5 +1,4 @@
 #include "..\Headers\ScoreManager.h"
-#include <iostream>
 
 ScoreManager::ScoreManager() : currentScore(0), posX(500.0f), posY(190.0f) {}
 

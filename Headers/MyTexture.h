@@ -4,6 +4,7 @@
 class MyTexture : public sf::Texture
 {
 public:
+	// Typy tekstur za³adowanych w pamiêæ programu
 	enum class Type
 	{
 		SnakeHeadGreen,

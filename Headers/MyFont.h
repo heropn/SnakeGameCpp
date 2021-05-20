@@ -4,6 +4,7 @@
 class MyFont : public sf::Font
 {
 public:
+	// Typy czcionek za³adowanych w pamiêæ programu
 	enum class Type
 	{
 		Arial,
