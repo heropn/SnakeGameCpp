@@ -1,3 +1,4 @@
+ 110
 Pawel2 80
 Imie 60
 Name 10
