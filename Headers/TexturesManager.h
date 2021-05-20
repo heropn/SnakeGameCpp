@@ -29,7 +29,8 @@ private:
 		{".\\Textures\\SnakeBody-Yellow.png", MyTexture::Type::SnakeBodyYellow},
 		{".\\Textures\\SnakeHead-Yellow.png", MyTexture::Type::SnakeHeadYellow},
 		{".\\Textures\\SnakeBig-Yellow.png", MyTexture::Type::SnakeBigYellow},
-		{".\\Textures\\Apple.png", MyTexture::Type::Apple}
+		{".\\Textures\\Apple.png", MyTexture::Type::Apple},
+		{".\\Textures\\Arena.png", MyTexture::Type::Arena}
 	};
 
 public:
