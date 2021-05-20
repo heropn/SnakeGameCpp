@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Headers/GameManager.h"
 #include <iostream>
-#include "Headers/LoseScreen.h"
+#include "Headers/SnakeSelectMenu.h"
 
 int main()
 {
@@ -13,6 +13,12 @@ int main()
 	window.setFramerateLimit(60);
 
 	GameManager gameManager;
+	
+	SnakeSelectMenu sSM(gameManager.GetFontsManager().GetFont(MyFont::Type::Snake));
+	sSM.AddTexture(gameManager.GetTextureManager().GetTexture(MyTexture::Type::SnakeBigGreen));
+	sSM.AddTexture(gameManager.GetTextureManager().GetTexture(MyTexture::Type::SnakeBigPink));
+	sSM.AddTexture(gameManager.GetTextureManager().GetTexture(MyTexture::Type::SnakeBigYellow));
+	sSM.AddTexture(gameManager.GetTextureManager().GetTexture(MyTexture::Type::SnakeBigBlue));
 
 	while (window.isOpen())
 	{
@@ -27,9 +33,15 @@ int main()
 			{
 				gameManager.GetTypeInAreaManager().GetPlayerInput(windowEvent.text.unicode);
 			}
+			else if (windowEvent.type == sf::Event::MouseButtonReleased)
+			{
+				sSM.GetClickedSnake(sf::Mouse::getPosition(window));
+			}
 		}
 
 		window.clear();
+
+		//sSM.Draw(&window);
 
 		if (!gameManager.IsGameOver())
 		{

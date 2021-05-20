@@ -8,12 +8,16 @@ public:
 	{
 		SnakeHeadGreen,
 		SnakeBodyGreen,
+		SnakeBigGreen,
 		SnakeHeadPink,
 		SnakeBodyPink,
+		SnakeBigPink,
 		SnakeHeadBlue,
 		SnakeBodyBlue,
+		SnakeBigBlue,
 		SnakeHeadYellow,
 		SnakeBodyYellow,
+		SnakeBigYellow,
 		Apple,
 		None
 	};

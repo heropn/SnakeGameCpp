@@ -19,12 +19,16 @@ private:
 	{
 		{".\\Textures\\SnakeHead-Green.png", MyTexture::Type::SnakeHeadGreen},
 		{".\\Textures\\SnakeBody-Green.png", MyTexture::Type::SnakeBodyGreen},
+		{".\\Textures\\SnakeBig-Green.png", MyTexture::Type::SnakeBigGreen},
 		{".\\Textures\\SnakeBody-Pink.png", MyTexture::Type::SnakeBodyPink},
 		{".\\Textures\\SnakeHead-Pink.png", MyTexture::Type::SnakeHeadPink},
+		{".\\Textures\\SnakeBig-Pink.png", MyTexture::Type::SnakeBigPink},
 		{".\\Textures\\SnakeBody-Blue.png", MyTexture::Type::SnakeBodyBlue},
 		{".\\Textures\\SnakeHead-Blue.png", MyTexture::Type::SnakeHeadBlue},
+		{".\\Textures\\SnakeBig-Blue.png", MyTexture::Type::SnakeBigBlue},
 		{".\\Textures\\SnakeBody-Yellow.png", MyTexture::Type::SnakeBodyYellow},
 		{".\\Textures\\SnakeHead-Yellow.png", MyTexture::Type::SnakeHeadYellow},
+		{".\\Textures\\SnakeBig-Yellow.png", MyTexture::Type::SnakeBigYellow},
 		{".\\Textures\\Apple.png", MyTexture::Type::Apple}
 	};
 

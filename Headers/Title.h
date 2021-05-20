@@ -2,7 +2,7 @@
 #include "IDrawable.h"
 #include "MyFont.h"
 
-class Title: public IDrawable
+class Title : public IDrawable
 {
 private:
 	sf::Text text;

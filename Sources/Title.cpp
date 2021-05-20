@@ -1,9 +1,6 @@
 #include "..\Headers\Title.h"
 
-Title::Title()
-{
-	
-}
+Title::Title() {}
 
 void Title::Draw(sf::RenderWindow* window)
 {
