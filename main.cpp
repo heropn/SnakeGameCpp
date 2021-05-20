@@ -39,7 +39,7 @@ int main()
 			}
 		}
 
-		window.clear(sf::Color::Color(196,235,190));
+		window.clear(sf::Color::Color(216,253,176));
 
 		//sSM.Draw(&window);
 
