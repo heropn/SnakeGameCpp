@@ -132,7 +132,7 @@ void GameManager::CheckPickUp()
 
 void GameManager::UpdateHighScores()
 {
-	highScoreManager.AddHighScore(scoreManager.GetScore(), typeInArea.GetPlayerName());
+	//highScoreManager.AddHighScore(scoreManager.GetScore(), typeInArea.GetPlayerName());
 }
 
 const TexturesManager& GameManager::GetTextureManager() const

@@ -76,6 +76,3 @@ ipch/
 *.cachefile
 *.VC.db
 *.VC.VC.opendb
-
-# Custom Stuff
-highscores.txt
