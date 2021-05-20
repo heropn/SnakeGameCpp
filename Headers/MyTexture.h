@@ -13,7 +13,8 @@ public:
 		SnakeHeadBlue,
 		SnakeBodyBlue,
 		SnakeHeadYellow,
-		SnakeBodyYellow
+		SnakeBodyYellow,
+		Apple
 	};
 
 private:

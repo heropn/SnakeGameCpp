@@ -59,6 +59,7 @@ void Snake::Move()
 	{
 		posX -= 1 * speed;
 	}
+
 	positions.push_back({ posX,posY });
 }
 

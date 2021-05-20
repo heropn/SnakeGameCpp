@@ -1,7 +1,7 @@
 #include "..\Headers\ScoreManager.h"
 #include <iostream>
 
-ScoreManager::ScoreManager() : currentScore(0) {}
+ScoreManager::ScoreManager() : currentScore(0), posX(500.0f), posY(190.0f) {}
 
 void ScoreManager::SetFont(std::shared_ptr<MyFont> fontPtr)
 {
@@ -20,7 +20,7 @@ void ScoreManager::AddScore()
 	text.setString(scoreStr + std::to_string(currentScore));
 	auto rect = text.getLocalBounds();
 	text.setOrigin(rect.width / 2, rect.height / 2);
-	text.setPosition(500, 150);
+	text.setPosition(posX, posY);
 }
 
 int ScoreManager::GetScore()
@@ -31,6 +31,10 @@ int ScoreManager::GetScore()
 void ScoreManager::ResetScore()
 {
 	currentScore = 0;
+	text.setString(scoreStr + std::to_string(currentScore));
+	auto rect = text.getLocalBounds();
+	text.setOrigin(rect.width / 2, rect.height / 2);
+	text.setPosition(posX, posY);
 }
 
 void ScoreManager::SetUpText()
@@ -41,5 +45,5 @@ void ScoreManager::SetUpText()
 	text.setFillColor(sf::Color::White);
 	auto rect = text.getLocalBounds();
 	text.setOrigin(rect.width / 2, rect.height / 2);
-	text.setPosition(500, 150);
+	text.setPosition(posX, posY);
 }

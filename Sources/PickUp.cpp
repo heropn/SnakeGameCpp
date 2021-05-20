@@ -1,44 +1,38 @@
 #include "..\Headers\PickUp.h"
 
-PickUp::PickUp()
+PickUp::PickUp() : posX(500.0f), posY(500.0f) {}
+
+void PickUp::SetSpriteProperties()
 {
-	posX = 500.0f;
-	posY = 500.0f;
-	SetPickUpProperties();
+	sprite.setTexture(*texturePtr);
+	sprite.setOrigin({(float)texturePtr->getSize().x / 2, (float)texturePtr->getSize().y / 2 });
+	sprite.setPosition(sf::Vector2f(posX, posY));
 }
 
-void PickUp::SetPickUpProperties()
+PickUp::PickUp(float x, float y, std::shared_ptr<MyTexture> texturePtr)
 {
-	sf::RectangleShape shape(sf::Vector2f(20.0f, 20.0f));
-	shape.setOrigin(sf::Vector2f(10.0f, 10.0f));
-	shape.setFillColor(sf::Color::Yellow);
-	shape.setPosition(sf::Vector2f(posX, posY));
-	this->shape = shape;
-}
-
-PickUp::PickUp(float x, float y)
-{
+	this->texturePtr = texturePtr;
 	posX = x;
 	posY = y;
-	SetPickUpProperties();
+	SetSpriteProperties();
 }
 
 void PickUp::Draw(sf::RenderWindow* window)
 {
-	window->draw(shape);
+	window->draw(sprite);
 }
 
 bool PickUp::IsCollected(Snake* snake)
 {
-	sf::Vector2f position = shape.getPosition();
-	sf::Vector2f size = shape.getSize();
+	sf::Vector2f position = sprite.getPosition();
+	sf::Vector2u size = texturePtr->getSize();
 	sf::Vector2f snakesPosition = snake->GetPosition();
 	sf::Vector2u snakesSize = snake->GetSize();
 	
-	float topBorder = position.y - size.y / 2;
-	float rightBorder = position.x + size.x / 2;
-	float leftBorder = position.x - size.x / 2;
-	float bottomBorder = position.y + size.y / 2;
+	float topBorder = position.y - (float)size.y / 2;
+	float rightBorder = position.x + (float)size.x / 2;
+	float leftBorder = position.x - (float)size.x / 2;
+	float bottomBorder = position.y + (float)size.y / 2;
 
 	float snakesTopBorder = snakesPosition.y - (float)snakesSize.y / 2;
 	float snakesrightBorder = snakesPosition.x + (float)snakesSize.x / 2;

@@ -11,6 +11,8 @@ private:
 	const std::string scoreStr = "Score: ";
 	const std::string fontFilePath = "Fonts\\arial.ttf";
 	int currentScore;
+	float posX;
+	float posY;
 public:
 	// Konstruktor domyœlny
 	ScoreManager();

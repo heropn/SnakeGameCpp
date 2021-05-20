@@ -4,20 +4,24 @@
 
 GameManager::GameManager()
 {
-	snake = Snake(texturesManager.GetTexture(MyTexture::Type::SnakeHeadYellow), texturesManager.GetTexture(MyTexture::Type::SnakeBodyYellow));
+	snake = Snake(texturesManager.GetTexture(MyTexture::Type::SnakeHeadYellow),
+		texturesManager.GetTexture(MyTexture::Type::SnakeBodyYellow));
 	scoreManager.SetFont(fontsManager.GetFont(MyFont::Type::Arial));
 
-	drawableInGameObjects.push_back(&snake);
 	drawableInGameObjects.push_back(&background);
+	drawableInGameObjects.push_back(&snake);
 	drawableInGameObjects.push_back(&scoreManager);
 
-	loseScreen = LoseScreen(fontsManager.GetFont(MyFont::Type::Arial), fontsManager.GetFont(MyFont::Type::Arial));
-	typeInArea = TypeInArea(fontsManager.GetFont(MyFont::Type::Arial), fontsManager.GetFont(MyFont::Type::Arial));
+	loseScreen = LoseScreen(fontsManager.GetFont(MyFont::Type::Arial),
+		fontsManager.GetFont(MyFont::Type::Arial));
+	typeInArea = TypeInArea(fontsManager.GetFont(MyFont::Type::Arial),
+		fontsManager.GetFont(MyFont::Type::Arial));
 
 	drawableEndGameObjects.push_back(&loseScreen);
 	drawableEndGameObjects.push_back(&typeInArea);
 
-	highScoreManager.SetFonts(fontsManager.GetFont(MyFont::Type::Arial), fontsManager.GetFont(MyFont::Type::Arial));
+	highScoreManager.SetFonts(fontsManager.GetFont(MyFont::Type::Arial),
+		fontsManager.GetFont(MyFont::Type::Arial));
 
 	isGameOver = false;
 	isPickUpCollected = true;
@@ -39,7 +43,7 @@ void GameManager::GeneratePickUp()
 		float x = posX(generator);
 		float y = posY(generator);
 
-		pickUp = PickUp(x, y);
+		pickUp = PickUp(x, y, texturesManager.GetTexture(MyTexture::Type::Apple));
 		drawableInGameObjects.push_back(&pickUp);
 	}
 }
@@ -92,6 +96,7 @@ void GameManager::CheckWhereIsSnake()
 	{
 		isGameOver = true;
 		loseScreen.SetScore(scoreManager.GetScore());
+		scoreManager.ResetScore();
 		sf::sleep(sf::seconds(0.5f));
 	}
 }
