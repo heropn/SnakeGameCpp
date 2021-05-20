@@ -14,7 +14,8 @@ public:
 		SnakeBodyBlue,
 		SnakeHeadYellow,
 		SnakeBodyYellow,
-		Apple
+		Apple,
+		None
 	};
 
 private:
