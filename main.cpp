@@ -29,12 +29,11 @@ int main()
 			}
 		}
 		window.clear();
-		
-		gameManager.CheckWhereIsSnake();
 
 		if (!gameManager.IsGameOver())
 		{
 			gameManager.CheckPickUp();
+			gameManager.CheckWhereIsSnake();
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 			{
