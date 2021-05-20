@@ -35,7 +35,7 @@ void TypeInArea::Draw(sf::RenderWindow* window)
 	window->draw(rectangle);
 }
 
-const std::string& TypeInArea::GetPlayerName() const
+const std::string TypeInArea::GetPlayerName() const
 {
 	return playerInput;
 }

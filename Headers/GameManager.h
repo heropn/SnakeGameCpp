@@ -58,6 +58,8 @@ public:
 	// do score'a, zwiêksza wê¿a, generuje kolejny PickUp
 	void CheckPickUp();
 
+	void UpdateHighScores();
+
 	// Sprawdza czy gra siê skoñczy³a
 	bool IsGameOver();
 

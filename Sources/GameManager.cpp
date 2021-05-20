@@ -97,11 +97,10 @@ void GameManager::CheckWhereIsSnake()
 {
 	if (!snake.IsInArena(&background) || snake.IsCollision())
 	{
-		isGameOver = true;
 		loseScreen.SetScore(scoreManager.GetScore());
-		scoreManager.ResetScore();
 		audioManager.PlaySound(MySoundBuffer::Type::Defeat);
 		sf::sleep(sf::seconds(1.0f));
+		isGameOver = true;
 	}
 }
 
@@ -128,6 +127,11 @@ void GameManager::CheckPickUp()
 		drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(), drawableInGameObjects.end(), &pickUp), drawableInGameObjects.end());
 		GeneratePickUp();
 	}
+}
+
+void GameManager::UpdateHighScores()
+{
+	highScoreManager.AddHighScore(scoreManager.GetScore(), typeInArea.GetPlayerName());
 }
 
 const TexturesManager& GameManager::GetTextureManager() const

@@ -73,7 +73,8 @@ int main()
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 			{
-				std::cout << "Enter Clicked" << std::endl;
+				gameManager.UpdateHighScores();
+				break;
 			}
 		}
 

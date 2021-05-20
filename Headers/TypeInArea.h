@@ -32,7 +32,7 @@ public:
 	void GetPlayerInput(char c);
 
 	// Zwraca nazwe gracza
-	const std::string& GetPlayerName() const;
+	const std::string GetPlayerName() const;
 
 private:
 	// £aduje czcionkê i ustawia wszystkie parametry obu tekstów
