@@ -20,6 +20,7 @@ public:
 		SnakeBodyYellow,
 		SnakeBigYellow,
 		Apple,
+		Arena,
 		None
 	};
 
