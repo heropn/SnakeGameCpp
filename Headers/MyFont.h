@@ -7,6 +7,8 @@ public:
 	enum class Type
 	{
 		Arial,
+		Snake,
+		LostIsland
 	};
 
 private:

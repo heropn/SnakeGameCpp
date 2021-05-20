@@ -8,6 +8,7 @@
 #include "LoseScreen.h"
 #include "TypeInArea.h"
 #include "HighScoreManager.h"
+#include "Title.h"
 
 class GameManager
 {
@@ -18,6 +19,7 @@ private:
 	Snake snake;
 	PickUp pickUp;
 	Background background;
+	Title title;
 
 	LoseScreen loseScreen;
 	TypeInArea typeInArea;

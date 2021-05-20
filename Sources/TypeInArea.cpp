@@ -52,11 +52,11 @@ void TypeInArea::SetUpTextes()
 {
 	displayText.setFont(*fontDisplayText);
 	displayText.setCharacterSize(100);
-	displayText.setFillColor(sf::Color::White);
+	displayText.setFillColor(sf::Color::Color(25, 255, 142));
 
 	topText.setFont(*fontTopText);
 	topText.setCharacterSize(50);
-	topText.setFillColor(sf::Color::White);
+	topText.setFillColor(sf::Color::Color(62,179,39));
 	topText.setString("Enter your name:");
 
 	topText.setPosition(300, 300);
@@ -68,5 +68,6 @@ void TypeInArea::SetUpRectangle()
 	rectangle.setSize({ 600, 110 });
 	rectangle.setFillColor(sf::Color::Transparent);
 	rectangle.setOutlineThickness(5.0f);
+	rectangle.setOutlineColor(sf::Color::Color(0, 102, 14));
 	rectangle.setPosition(190, 370);
 }

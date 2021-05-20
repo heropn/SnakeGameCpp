@@ -161,6 +161,7 @@
     <ClCompile Include="Sources\ScoreManager.cpp" />
     <ClCompile Include="Sources\Snake.cpp" />
     <ClCompile Include="Sources\TexturesManager.cpp" />
+    <ClCompile Include="Sources\Title.cpp" />
     <ClCompile Include="Sources\TypeInArea.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +178,7 @@
     <ClInclude Include="Headers\ScoreManager.h" />
     <ClInclude Include="Headers\Snake.h" />
     <ClInclude Include="Headers\TexturesManager.h" />
+    <ClInclude Include="Headers\Title.h" />
     <ClInclude Include="Headers\TypeInArea.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

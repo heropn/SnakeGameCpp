@@ -13,7 +13,7 @@ void Background::SetArenasProperties()
 	arena.setOrigin(sf::Vector2f(400.0f, 250.0f));
 	arena.setFillColor(sf::Color::Transparent);
 	arena.setOutlineThickness(10.0f);
-	arena.setOutlineColor(sf::Color::White);
+	arena.setOutlineColor(sf::Color::Color(0, 102, 14));
 	arena.setPosition(sf::Vector2f(500.0f, 500.0f));
 	this->arena = arena;
 }

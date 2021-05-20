@@ -25,18 +25,18 @@ void LoseScreen::SetScore(int score)
 void LoseScreen::SetUpTextes()
 {
 	titleText.setFont(*fontTitle);
-	titleText.setString("YOU LOST!");
-	titleText.setCharacterSize(100);
-	titleText.setFillColor(sf::Color::Red);
+	titleText.setString("YOU LOST !");
+	titleText.setCharacterSize(150);
+	titleText.setFillColor(sf::Color::Color(0,179,11));
 	auto rect = titleText.getLocalBounds();
 	titleText.setOrigin(rect.width / 2, rect.height / 2);
-	titleText.setPosition(500, 50);
+	titleText.setPosition(500, 60);
 
 	scoreText.setFont(*fontScore);
 	scoreText.setString("Your score: 0");
 	scoreText.setCharacterSize(70);
-	scoreText.setFillColor(sf::Color::Red);
+	scoreText.setFillColor(sf::Color::Color(25,255,142));
 	rect = scoreText.getLocalBounds();
 	scoreText.setOrigin(rect.width / 2, rect.height / 2);
-	scoreText.setPosition(500, 200);
+	scoreText.setPosition(500, 210);
 }
