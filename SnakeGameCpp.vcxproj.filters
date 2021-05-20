@@ -57,7 +57,7 @@
     <ClCompile Include="Sources\LoseScreen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Title.cpp">
+    <ClCompile Include="Sources\SnakeSelectMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -104,7 +104,7 @@
     <ClInclude Include="Headers\LoseScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\Title.h">
+    <ClInclude Include="Headers\SnakeSelectMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
