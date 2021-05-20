@@ -16,6 +16,8 @@ private:
 	std::vector<FontInfo> filesPaths
 	{
 		{".\\Fonts\\arial.ttf", MyFont::Type::Arial},
+		{".\\Fonts\\snake.ttf", MyFont::Type::Snake},
+		{".\\Fonts\\lostIsland.ttf", MyFont::Type::LostIsland}
 	};
 
 public:

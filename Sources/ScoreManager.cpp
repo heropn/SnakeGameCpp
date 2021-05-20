@@ -42,7 +42,7 @@ void ScoreManager::SetUpText()
 	text.setFont(*fontPtr);
 	text.setString(scoreStr + std::to_string(currentScore));
 	text.setCharacterSize(50);
-	text.setFillColor(sf::Color::White);
+	text.setFillColor(sf::Color::Color(144, 238, 93));
 	auto rect = text.getLocalBounds();
 	text.setOrigin(rect.width / 2, rect.height / 2);
 	text.setPosition(posX, posY);

@@ -4,18 +4,21 @@
 
 GameManager::GameManager()
 {
-	snake = Snake(texturesManager.GetTexture(MyTexture::Type::SnakeHeadYellow),
-		texturesManager.GetTexture(MyTexture::Type::SnakeBodyYellow));
-	scoreManager.SetFont(fontsManager.GetFont(MyFont::Type::Arial));
+	snake = Snake(texturesManager.GetTexture(MyTexture::Type::SnakeHeadGreen),
+		texturesManager.GetTexture(MyTexture::Type::SnakeBodyGreen));
+	scoreManager.SetFont(fontsManager.GetFont(MyFont::Type::Snake));
+	title.SetFont(fontsManager.GetFont(MyFont::Type::Snake));
 
 	drawableInGameObjects.push_back(&background);
 	drawableInGameObjects.push_back(&snake);
 	drawableInGameObjects.push_back(&scoreManager);
+	drawableInGameObjects.push_back(&title);
 
-	loseScreen = LoseScreen(fontsManager.GetFont(MyFont::Type::Arial),
-		fontsManager.GetFont(MyFont::Type::Arial));
-	typeInArea = TypeInArea(fontsManager.GetFont(MyFont::Type::Arial),
-		fontsManager.GetFont(MyFont::Type::Arial));
+	
+	loseScreen = LoseScreen(fontsManager.GetFont(MyFont::Type::LostIsland),
+		fontsManager.GetFont(MyFont::Type::LostIsland));
+	typeInArea = TypeInArea(fontsManager.GetFont(MyFont::Type::LostIsland),
+		fontsManager.GetFont(MyFont::Type::LostIsland));
 
 	drawableEndGameObjects.push_back(&loseScreen);
 	drawableEndGameObjects.push_back(&typeInArea);
