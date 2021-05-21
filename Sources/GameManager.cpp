@@ -130,9 +130,28 @@ void GameManager::CheckPickUp()
 	}
 }
 
+void GameManager::ResetGame()
+{
+	scoreManager.ResetScore();
+	typeInArea.Reset();
+
+	drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(), drawableInGameObjects.end(), &snake), drawableInGameObjects.end());
+	drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(), drawableInGameObjects.end(), &pickUp), drawableInGameObjects.end());
+
+	snake = Snake(texturesManager.GetTexture(MyTexture::Type::SnakeHeadBlue),
+		texturesManager.GetTexture(MyTexture::Type::SnakeBodyBlue));
+
+	drawableInGameObjects.push_back(&snake);
+
+	isPickUpCollected = true;
+	GeneratePickUp();
+
+	isGameOver = false;
+}
+
 void GameManager::UpdateHighScores()
 {
-	//highScoreManager.AddHighScore(scoreManager.GetScore(), typeInArea.GetPlayerName());
+	highScoreManager.AddHighScore(scoreManager.GetScore(), typeInArea.GetPlayerName());
 }
 
 const TexturesManager& GameManager::GetTextureManager() const

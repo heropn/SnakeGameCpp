@@ -48,6 +48,13 @@ void TypeInArea::GetPlayerInput(char c)
 		UpdateText(c);
 }
 
+void TypeInArea::Reset()
+{
+
+	playerInput = "";
+	displayText.setString(playerInput);
+}
+
 void TypeInArea::SetUpTextes()
 {
 	displayText.setFont(*fontDisplayText);

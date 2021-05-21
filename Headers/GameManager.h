@@ -60,6 +60,8 @@ public:
 
 	void UpdateHighScores();
 
+	void ResetGame();
+
 	// Sprawdza czy gra siê skoñczy³a
 	bool IsGameOver();
 

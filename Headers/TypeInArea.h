@@ -34,6 +34,8 @@ public:
 	// Zwraca nazwe gracza
 	const std::string GetPlayerName() const;
 
+	void Reset();
+
 private:
 	// £aduje czcionkê i ustawia wszystkie parametry obu tekstów
 	void SetUpTextes();

@@ -73,8 +73,8 @@ int main()
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 			{
-				gameManager.UpdateHighScores();
-				break;
+				//gameManager.UpdateHighScores();
+				gameManager.ResetGame();
 			}
 		}
 
