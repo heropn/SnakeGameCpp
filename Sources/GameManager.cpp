@@ -4,8 +4,6 @@
 
 GameManager::GameManager()
 {
-	snake = Snake(texturesManager.GetTexture(MyTexture::Type::SnakeHeadBlue),
-		texturesManager.GetTexture(MyTexture::Type::SnakeBodyBlue));
 	loseScreen = LoseScreen(fontsManager.GetFont(MyFont::Type::LostIsland),
 		fontsManager.GetFont(MyFont::Type::LostIsland));
 	typeInArea = TypeInArea(fontsManager.GetFont(MyFont::Type::LostIsland),
@@ -17,6 +15,12 @@ GameManager::GameManager()
 	highScoreManager.SetFonts(fontsManager.GetFont(MyFont::Type::Arial),
 		fontsManager.GetFont(MyFont::Type::Arial));
 
+	snakeSelectMenu = SnakeSelectMenu(GetFontsManager().GetFont(MyFont::Type::Snake));
+	snakeSelectMenu.AddTexture(GetTextureManager().GetTexture(MyTexture::Type::SnakeBigGreen));
+	snakeSelectMenu.AddTexture(GetTextureManager().GetTexture(MyTexture::Type::SnakeBigPink));
+	snakeSelectMenu.AddTexture(GetTextureManager().GetTexture(MyTexture::Type::SnakeBigYellow));
+	snakeSelectMenu.AddTexture(GetTextureManager().GetTexture(MyTexture::Type::SnakeBigBlue));
+
 	drawableInGameObjects.push_back(&background);
 	drawableInGameObjects.push_back(&snake);
 	drawableInGameObjects.push_back(&scoreManager);
@@ -26,6 +30,7 @@ GameManager::GameManager()
 	drawableEndGameObjects.push_back(&typeInArea);
 
 	isGameOver = false;
+	isInSnakeSelect = true;
 	isPickUpCollected = true;
 	GenerateSnakePosition();
 	GeneratePickUp();
@@ -64,6 +69,11 @@ void GameManager::DrawEndGameObjects(sf::RenderWindow* window)
 	{
 		obj->Draw(window);
 	}
+}
+
+void GameManager::DrawSnakeSelectMenu(sf::RenderWindow* window)
+{
+	snakeSelectMenu.Draw(window);
 }
 
 void GameManager::GenerateSnakePosition()
@@ -115,7 +125,12 @@ bool GameManager::IsGameOver()
 	}
 }
 
-void GameManager::CheckPickUp()
+bool GameManager::IsInSnakeSelectMenu()
+{
+	return isInSnakeSelect;
+}
+
+void GameManager::CheckIfPickupIsCollected()
 {
 	if (pickUp.IsCollected(&snake))
 	{
@@ -128,24 +143,57 @@ void GameManager::CheckPickUp()
 	}
 }
 
+void GameManager::CheckIfSnakeWasSelected(sf::Vector2i position)
+{
+	switch (snakeSelectMenu.GetClickedSnake(position))
+	{
+		case MyTexture::Type::SnakeBigGreen:
+		{
+			snake.SetTextures(texturesManager.GetTexture(MyTexture::Type::SnakeHeadGreen),
+				texturesManager.GetTexture(MyTexture::Type::SnakeBodyGreen));
+		}
+		break;
+		case MyTexture::Type::SnakeBigBlue:
+		{
+			snake.SetTextures(texturesManager.GetTexture(MyTexture::Type::SnakeHeadBlue),
+				texturesManager.GetTexture(MyTexture::Type::SnakeBodyBlue));
+		}
+		break;
+		case MyTexture::Type::SnakeBigYellow:
+		{
+			snake.SetTextures(texturesManager.GetTexture(MyTexture::Type::SnakeHeadYellow),
+				texturesManager.GetTexture(MyTexture::Type::SnakeBodyYellow));
+		}
+		break;
+		case MyTexture::Type::SnakeBigPink:
+		{
+			snake.SetTextures(texturesManager.GetTexture(MyTexture::Type::SnakeHeadPink),
+				texturesManager.GetTexture(MyTexture::Type::SnakeBodyPink));
+		}
+		break;
+		default:
+			return;
+			break;
+	}
+
+	isInSnakeSelect = false;
+}
+
 void GameManager::ResetGame()
 {
 	scoreManager.ResetScore();
 	typeInArea.Reset();
 
-	drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(), drawableInGameObjects.end(), &snake), drawableInGameObjects.end());
 	drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(), drawableInGameObjects.end(), &pickUp), drawableInGameObjects.end());
 
-	snake = Snake(texturesManager.GetTexture(MyTexture::Type::SnakeHeadBlue),
-		texturesManager.GetTexture(MyTexture::Type::SnakeBodyBlue));
-
-	drawableInGameObjects.push_back(&snake);
+	snake.Reset();
 
 	isPickUpCollected = true;
 	GeneratePickUp();
 	GenerateSnakePosition();
 
 	isGameOver = false;
+	isInSnakeSelect = true;
 }
 
 void GameManager::UpdateHighScores()

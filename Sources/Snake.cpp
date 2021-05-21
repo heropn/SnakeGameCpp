@@ -2,25 +2,22 @@
 #include <iostream>
 
 Snake::Snake() : 
-	posX(0.0f), posY(0.0f), size(0), speed(0.0f), increasingSize(0), direction(Direction::Left) {}
-
-Snake::Snake(std::shared_ptr<MyTexture> headTexture, std::shared_ptr<MyTexture> bodyTexture) : headTexture(headTexture), bodyTexture(bodyTexture)
-{
-	posX = 500.0f;
-	posY = 500.0f;
-	speed = 2.0f;
-	size = 1;
-	increasingSize = 10;
-	direction = Direction::Left;
-	SetSpriteProperties();
-	SetSpriteRotation();
-}
+	posX(500.0f), posY(500.0f), size(1), speed(2.0f), increasingSize(10), direction(Direction::Left) {}
 
 void Snake::SetSpriteProperties()
 {
 	sprite.setTexture(*headTexture);
 	sprite.setOrigin(sf::Vector2f((float)headTexture->getSize().x / 2, (float)headTexture->getSize().y / 2));
 	sprite.setPosition(sf::Vector2f(posX, posY));
+}
+
+void Snake::SetTextures(std::shared_ptr<MyTexture> headTexture, std::shared_ptr<MyTexture> bodyTexture)
+{
+	this->headTexture = headTexture;
+	this->bodyTexture = bodyTexture;
+
+	SetSpriteProperties();
+	SetSpriteRotation();
 }
 
 void Snake::Draw(sf::RenderWindow* window)
@@ -162,9 +159,19 @@ bool Snake::IsCollision()
 	return false;
 }
 
+void Snake::Reset()
+{
+	size = 1;
+	speed = 2.0f;
+	positions.clear();
+}
+
 const sf::Vector2u Snake::GetSize() const
 {
-	return headTexture->getSize();
+	if (headTexture != nullptr)
+		return headTexture->getSize();
+	else
+		return {0, 0};
 }
 
 const Snake::Direction Snake::GetDirection() const

@@ -25,8 +25,7 @@ public:
 	// Konstruktor domyœlny
 	Snake();
 
-	// Konstruktor parametryczny
-	Snake(std::shared_ptr<MyTexture> headTexture, std::shared_ptr<MyTexture> bodyTexture);
+	void SetTextures(std::shared_ptr<MyTexture> headTexture, std::shared_ptr<MyTexture> bodyTexture);
 	
 	// Rysuje snake'a na ekranie
 	void Draw(sf::RenderWindow* window);
@@ -48,6 +47,8 @@ public:
 
 	// Zwiêksza wielkoœæ snake'a i jego prêdkoœæ
 	void Grow();
+
+	void Reset();
 
 	// Zwraca pozycje g³owy snake'a
 	const sf::Vector2f& GetPosition() const;

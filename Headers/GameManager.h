@@ -10,12 +10,14 @@
 #include "HighScoreManager.h"
 #include "Title.h"
 #include "AudioManager.h"
+#include "SnakeSelectMenu.h"
 
 class GameManager
 {
 private:
 	bool isPickUpCollected;
 	bool isGameOver;
+	bool isInSnakeSelect;
 
 	Snake snake;
 	PickUp pickUp;
@@ -24,6 +26,8 @@ private:
 
 	LoseScreen loseScreen;
 	TypeInArea typeInArea;
+
+	SnakeSelectMenu snakeSelectMenu;
 
 	HighScoreManager highScoreManager;
 	TexturesManager texturesManager;
@@ -44,6 +48,8 @@ public:
 
 	void DrawEndGameObjects(sf::RenderWindow* window);
 
+	void DrawSnakeSelectMenu(sf::RenderWindow* window);
+
 	// Porusza Snake'iem
 	void MoveSnake();
 
@@ -56,7 +62,7 @@ public:
 
 	// Sprawdza, czy PickUp zosta³ zebrany, jeœli tak: dodaje punkt
 	// do score'a, zwiêksza wê¿a, generuje kolejny PickUp
-	void CheckPickUp();
+	void CheckIfPickupIsCollected();
 
 	void UpdateHighScores();
 
@@ -64,6 +70,10 @@ public:
 
 	// Sprawdza czy gra siê skoñczy³a
 	bool IsGameOver();
+
+	bool IsInSnakeSelectMenu();
+
+	void CheckIfSnakeWasSelected(sf::Vector2i position);
 
 	// Zwraca obiekt klasy TextureManager
 	const TexturesManager& GetTextureManager() const;

@@ -1,6 +1,5 @@
 #include <SFML/Graphics.hpp>
 #include "Headers/GameManager.h"
-#include <iostream>
 #include "Headers/SnakeSelectMenu.h"
 
 int main()
@@ -13,12 +12,6 @@ int main()
 	window.setFramerateLimit(60);
 
 	GameManager gameManager;
-	
-	SnakeSelectMenu sSM(gameManager.GetFontsManager().GetFont(MyFont::Type::Snake));
-	sSM.AddTexture(gameManager.GetTextureManager().GetTexture(MyTexture::Type::SnakeBigGreen));
-	sSM.AddTexture(gameManager.GetTextureManager().GetTexture(MyTexture::Type::SnakeBigPink));
-	sSM.AddTexture(gameManager.GetTextureManager().GetTexture(MyTexture::Type::SnakeBigYellow));
-	sSM.AddTexture(gameManager.GetTextureManager().GetTexture(MyTexture::Type::SnakeBigBlue));
 
 	while (window.isOpen())
 	{
@@ -33,15 +26,13 @@ int main()
 			{
 				gameManager.GetTypeInAreaManager().GetPlayerInput(windowEvent.text.unicode);
 			}
-			else if (windowEvent.type == sf::Event::MouseButtonReleased)
+			else if (windowEvent.type == sf::Event::MouseButtonReleased && gameManager.IsInSnakeSelectMenu())
 			{
-				//sSM.GetClickedSnake(sf::Mouse::getPosition(window));
+				gameManager.CheckIfSnakeWasSelected(sf::Mouse::getPosition(window));
 			}
 		}
 
 		window.clear(sf::Color::Color(216,253,176));
-
-		//sSM.Draw(&window);
 
 		if (!gameManager.IsGameOver())
 		{
@@ -62,10 +53,17 @@ int main()
 				gameManager.SetSnakeDirection(Snake::Direction::Right);
 			}
 
-			gameManager.CheckPickUp();
-			gameManager.CheckWhereIsSnake();
-			gameManager.MoveSnake();
-			gameManager.DrawInGameObjects(&window);
+			if (gameManager.IsInSnakeSelectMenu())
+			{
+				gameManager.DrawSnakeSelectMenu(&window);
+			}
+			else
+			{
+				gameManager.CheckIfPickupIsCollected();
+				gameManager.CheckWhereIsSnake();
+				gameManager.MoveSnake();
+				gameManager.DrawInGameObjects(&window);
+			}
 		}
 		else
 		{
