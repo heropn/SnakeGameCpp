@@ -35,7 +35,7 @@ int main()
 			}
 			else if (windowEvent.type == sf::Event::MouseButtonReleased)
 			{
-				sSM.GetClickedSnake(sf::Mouse::getPosition(window));
+				//sSM.GetClickedSnake(sf::Mouse::getPosition(window));
 			}
 		}
 

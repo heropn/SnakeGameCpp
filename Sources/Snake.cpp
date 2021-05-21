@@ -174,7 +174,8 @@ const Snake::Direction Snake::GetDirection() const
 
 void Snake::SetPosition(float x, float y)
 {
-	sprite.setPosition({ x, y });
+	posX = x;
+	posY = y;
 }
 
 void Snake::SetSpriteRotation()

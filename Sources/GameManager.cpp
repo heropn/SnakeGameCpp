@@ -6,26 +6,24 @@ GameManager::GameManager()
 {
 	snake = Snake(texturesManager.GetTexture(MyTexture::Type::SnakeHeadBlue),
 		texturesManager.GetTexture(MyTexture::Type::SnakeBodyBlue));
+	loseScreen = LoseScreen(fontsManager.GetFont(MyFont::Type::LostIsland),
+		fontsManager.GetFont(MyFont::Type::LostIsland));
+	typeInArea = TypeInArea(fontsManager.GetFont(MyFont::Type::LostIsland),
+		fontsManager.GetFont(MyFont::Type::LostIsland));
+
 	scoreManager.SetFont(fontsManager.GetFont(MyFont::Type::Snake));
 	title.SetFont(fontsManager.GetFont(MyFont::Type::Snake));
 	background.SetTextureAndSprite(texturesManager.GetTexture(MyTexture::Type::Arena));
+	highScoreManager.SetFonts(fontsManager.GetFont(MyFont::Type::Arial),
+		fontsManager.GetFont(MyFont::Type::Arial));
 
 	drawableInGameObjects.push_back(&background);
 	drawableInGameObjects.push_back(&snake);
 	drawableInGameObjects.push_back(&scoreManager);
 	drawableInGameObjects.push_back(&title);
 
-	
-	loseScreen = LoseScreen(fontsManager.GetFont(MyFont::Type::LostIsland),
-		fontsManager.GetFont(MyFont::Type::LostIsland));
-	typeInArea = TypeInArea(fontsManager.GetFont(MyFont::Type::LostIsland),
-		fontsManager.GetFont(MyFont::Type::LostIsland));
-
 	drawableEndGameObjects.push_back(&loseScreen);
 	drawableEndGameObjects.push_back(&typeInArea);
-
-	highScoreManager.SetFonts(fontsManager.GetFont(MyFont::Type::Arial),
-		fontsManager.GetFont(MyFont::Type::Arial));
 
 	isGameOver = false;
 	isPickUpCollected = true;
@@ -72,8 +70,8 @@ void GameManager::GenerateSnakePosition()
 {
 	std::random_device device;
 	std::mt19937 generator(device());
-	std::uniform_real_distribution<float> posX(150.0f, 850.0f); //x e [100,900] y e [250,750]
-	std::uniform_real_distribution<float> posY(300.0f, 700.0f);
+	std::uniform_real_distribution<float> posX(300.0f, 700.0f); //x e [300, 700] y e [400,600]
+	std::uniform_real_distribution<float> posY(400.0f, 600.0f);
 	std::uniform_int_distribution<int>direction(0,3); // kierunek
 
 	float x = posX(generator);
@@ -145,6 +143,7 @@ void GameManager::ResetGame()
 
 	isPickUpCollected = true;
 	GeneratePickUp();
+	GenerateSnakePosition();
 
 	isGameOver = false;
 }
