@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Headers/GameManager.h"
-#include "Headers/SnakeSelectMenu.h"
+#include "Headers/MainMenu.h"
 
 int main()
 {
@@ -12,6 +12,9 @@ int main()
 	window.setFramerateLimit(60);
 
 	GameManager gameManager;
+	MainMenu mainMenu(window, 
+		gameManager.GetFontsManager().GetFont(MyFont::Type::Snake),
+		gameManager.GetFontsManager().GetFont(MyFont::Type::LostIsland));
 
 	while (window.isOpen())
 	{
@@ -26,15 +29,23 @@ int main()
 			{
 				gameManager.GetTypeInAreaManager().GetPlayerInput(windowEvent.text.unicode);
 			}
-			else if (windowEvent.type == sf::Event::MouseButtonReleased && gameManager.IsInSnakeSelectMenu())
+			else if (windowEvent.type == sf::Event::MouseButtonReleased)
 			{
-				gameManager.CheckIfSnakeWasSelected(sf::Mouse::getPosition(window));
+				if (mainMenu.IsInMainMenu())
+					mainMenu.CheckIfButtonWasClicked(sf::Mouse::getPosition(window));
+				else if (gameManager.IsInSnakeSelectMenu())
+					gameManager.CheckIfSnakeWasSelected(sf::Mouse::getPosition(window));
 			}
 		}
 
 		window.clear(sf::Color::Color(216,253,176));
 
-		if (!gameManager.IsGameOver())
+		
+		if (mainMenu.IsInMainMenu())
+		{
+			mainMenu.DrawButtonsAndTitle();
+		}
+		else if (!gameManager.IsGameOver())
 		{
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 			{
@@ -73,6 +84,7 @@ int main()
 			{
 				//gameManager.UpdateHighScores();
 				gameManager.ResetGame();
+				mainMenu.SetIsInMainMenu(true);
 			}
 		}
 

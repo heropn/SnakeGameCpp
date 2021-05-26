@@ -151,11 +151,13 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Sources\AudioManager.cpp" />
     <ClCompile Include="Sources\Background.cpp" />
+    <ClCompile Include="Sources\Button.cpp" />
     <ClCompile Include="Sources\FontsManager.cpp" />
     <ClCompile Include="Sources\GameManager.cpp" />
     <ClCompile Include="Sources\HighScoreEntity.cpp" />
     <ClCompile Include="Sources\HighScoreManager.cpp" />
     <ClCompile Include="Sources\LoseScreen.cpp" />
+    <ClCompile Include="Sources\MainMenu.cpp" />
     <ClCompile Include="Sources\MyFont.cpp" />
     <ClCompile Include="Sources\MySoundBuffer.cpp" />
     <ClCompile Include="Sources\MyTexture.cpp" />
@@ -171,12 +173,14 @@
   <ItemGroup>
     <ClInclude Include="Headers\AudioManager.h" />
     <ClInclude Include="Headers\Background.h" />
+    <ClInclude Include="Headers\Button.h" />
     <ClInclude Include="Headers\FontsManager.h" />
     <ClInclude Include="Headers\GameManager.h" />
     <ClInclude Include="Headers\HighScoreEntity.h" />
     <ClInclude Include="Headers\HighScoreManager.h" />
     <ClInclude Include="Headers\IDrawable.h" />
     <ClInclude Include="Headers\LoseScreen.h" />
+    <ClInclude Include="Headers\MainMenu.h" />
     <ClInclude Include="Headers\MyFont.h" />
     <ClInclude Include="Headers\MySoundBuffer.h" />
     <ClInclude Include="Headers\MyTexture.h" />
