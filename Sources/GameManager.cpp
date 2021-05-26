@@ -203,8 +203,8 @@ void GameManager::ResetGame()
 	snake.Reset();
 
 	isPickUpCollected = true;
-	GeneratePickUp();
 	GenerateSnakePosition();
+	GeneratePickUp();
 
 	isGameOver = false;
 	isInSnakeSelect = true;
