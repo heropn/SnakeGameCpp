@@ -25,6 +25,12 @@ public:
 	// Sprawdza, czy PickUp zosta≥ zebrany
 	bool IsCollected(Snake* snake);
 
+	// Zwraca rozmiar sprite'a
+	const sf::Vector2u GetSize() const;
+	
+	// Zwraca wskaünik do tekstury 
+	const std::shared_ptr<MyTexture> GetTexture() const;
+
 private:
 	// Ustawia w≥aúciwoúci PickUp'a
 	void SetSpriteProperties();

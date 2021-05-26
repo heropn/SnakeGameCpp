@@ -50,3 +50,13 @@ bool PickUp::IsCollected(Snake* snake)
 	else 
 		return false;
 }
+
+const sf::Vector2u PickUp::GetSize() const
+{
+	return texturePtr->getSize();
+}
+
+const std::shared_ptr<MyTexture> PickUp::GetTexture() const
+{
+	return texturePtr;
+}

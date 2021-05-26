@@ -46,9 +46,23 @@ void GameManager::GeneratePickUp()
 	if (isPickUpCollected)
 	{
 		isPickUpCollected = false;
-
+		bool isAvailable = false;
 		float x = posX(generator);
 		float y = posY(generator);
+
+		if (pickUp.GetTexture())
+		{
+			while (!isAvailable)
+			{
+				x = posX(generator);
+				y = posY(generator);
+
+				if (!snake.IsPickUpOnSnake(x, y, pickUp.GetSize()))
+				{
+					isAvailable = true;
+				}
+			}
+		}
 
 		pickUp = PickUp(x, y, texturesManager.GetTexture(MyTexture::Type::Apple));
 		drawableInGameObjects.push_back(&pickUp);
