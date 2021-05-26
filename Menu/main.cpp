@@ -1,4 +1,4 @@
-#include "menu.h"
+#include "MainMenu.h"
 
 int main()
 {
@@ -11,15 +11,7 @@ int main()
     window.setKeyRepeatEnabled(false);
     window.setFramerateLimit(60);
 
-  
-    float x_offset = 550, y_offset_start = 250, y_offset = 100; //y_offset_start - startowe odsuniêcie od góry, y_offset - odstêp pomiêdzy kolejnymi przyciskami
-    Button start("PLAY", x_offset, y_offset_start);
-    Button highscore("Highscores", x_offset, y_offset+y_offset_start);
-    Button help("Help", x_offset, 2*y_offset+y_offset_start);
-    Button credits("Credits", x_offset, 3*y_offset+y_offset_start);
-    Button quit("Exit", x_offset, 4 * y_offset+y_offset_start);
-    Header snake("Snejk");
-    
+    MainMenu* menu = new MainMenu(window);
 
     while (window.isOpen())
     {
@@ -29,44 +21,14 @@ int main()
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
-            //warunki sprawdzaj¹ce, czy kursor jest w obrêbie przycisku, a jeœli tak, to czy zosta³ naciœniêty
-            else if (start.rectangle.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)) {
-                    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                        cout << "Graj" << endl;
-                    }
-            }
-            else if (highscore.rectangle.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)) {
-                if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                    cout << "Najlepsze wyniki" << endl;
-                }
-            }
-            else if (help.rectangle.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)) {
-                if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                    cout << "Pomoc" << endl;
-                }
-            }
-            else if (credits.rectangle.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)) {
-                if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                    cout << "Creditsy" << endl;
-                }
-            }
-            else if (quit.rectangle.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)) {
-                if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                    cout << "Exit" << endl;
-                    window.close();
-                }
+            else {
+                menu->checkIfButtonWasClicked(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
             }
         }
         window.clear(sf::Color::Black);
 
        //rysowanie wszystkich elementów
-        snake.Draw(&window);
-        start.Draw(&window);
-        highscore.Draw(&window);
-        help.Draw(&window);
-        credits.Draw(&window);
-        quit.Draw(&window);
-
+        menu->drawButtonsAndTitle();
         window.display();
     }
 
