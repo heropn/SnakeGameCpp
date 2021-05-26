@@ -1,6 +1,6 @@
-#include "menu.h"
+#include "Title.h"
 
-Header::Header(string content) {
+Title::Title(string content) {
     font.loadFromFile("arial.ttf");
     text.setString(content);
     text.setFont(font);
@@ -12,6 +12,6 @@ Header::Header(string content) {
     text.setPosition(xPos, yPos);
 }
 
-void Header::Draw(sf::RenderWindow* window) {
+void Title::Draw(sf::RenderWindow* window) {
     window->draw(text);
 }

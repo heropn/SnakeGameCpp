@@ -1,4 +1,4 @@
-#include "menu.h"
+#include "Button.h"
 
 Button::Button(string content, float position_x, float position_y) {
     rectangle.setFillColor(sf::Color::Green);
