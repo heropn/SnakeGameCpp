@@ -67,7 +67,7 @@ void HighScoreManager::SetUpText()
 	titleText.setFont(*fontTitleText);
 	titleText.setString("HIGHSCORES");
 	titleText.setCharacterSize(100);
-	titleText.setFillColor(sf::Color::Red);
+	titleText.setFillColor(sf::Color::Color(0, 179, 11));
 	auto rect = titleText.getLocalBounds();
 	titleText.setOrigin(rect.width / 2, rect.height / 2);
 	titleText.setPosition(500, 50);
