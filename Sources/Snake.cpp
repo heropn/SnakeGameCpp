@@ -204,3 +204,36 @@ void Snake::SetSpriteRotation()
 		sprite.setRotation(270);
 	}
 }
+
+bool Snake::IsPickUpOnSnake(float posX, float posY, sf::Vector2u pickUpSize)
+{
+	sf::Vector2u snakesSize = GetSize();
+	
+	float topBorder = 0; 
+	float rightBorder = 0; 
+	float leftBorder = 0; 
+	float bottomBorder = 0; 
+
+	float pickUpTopBorder = posY - pickUpSize.y / 2;
+	float  pickUpRightBorder = posX + pickUpSize.x / 2;
+	float  pickUpLeftBorder = posX - pickUpSize.x / 2;
+	float  pickUpBottomBorder = posY + pickUpSize.y / 2;
+
+	for (unsigned int i = 0; i < size; i++)
+	{
+		if (positions.size() - 1 < i)break;
+		topBorder = positions[i].y - (float)snakesSize.y ;
+		rightBorder = positions[i].x + (float)snakesSize.x ;
+		leftBorder = positions[i].x - (float)snakesSize.x ;
+		bottomBorder = positions[i].y + (float)snakesSize.y;
+
+		if (pickUpTopBorder  > bottomBorder &&
+			pickUpBottomBorder < topBorder &&
+			pickUpLeftBorder  < rightBorder &&
+			pickUpRightBorder > leftBorder)
+		{
+			return true;
+		}
+	}
+	return false;
+}
