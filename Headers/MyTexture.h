@@ -21,6 +21,7 @@ public:
 		SnakeBigYellow,
 		Apple,
 		Arena,
+		Menu,
 		None
 	};
 

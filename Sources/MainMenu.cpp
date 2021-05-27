@@ -1,8 +1,8 @@
 #include "../Headers/MainMenu.h"
 #include <iostream>
 
-MainMenu::MainMenu(sf::RenderWindow& win, std::shared_ptr<MyFont> fontPtrTitle, std::shared_ptr<MyFont> fontPtrButtons)
-	: window(&win), fontPtrTitle(fontPtrTitle), fontPtrButtons(fontPtrButtons), isInMainMenu(true), currentMode(Mode::Default)
+MainMenu::MainMenu(sf::RenderWindow& win, std::shared_ptr<MyFont> fontPtrTitle, std::shared_ptr<MyFont> fontPtrButtons, std::shared_ptr<MyTexture> menuTexture)
+	: window(&win), fontPtrTitle(fontPtrTitle), fontPtrButtons(fontPtrButtons), isInMainMenu(true), currentMode(Mode::Default), texture(menuTexture)
 {
 	float x_offset = 550, y_offset_start = 250, y_offset = 100; //y_offset_start - startowe odsuniêcie od góry, y_offset - odstêp pomiêdzy kolejnymi przyciskami
 	start = Button("PLAY", x_offset, y_offset_start, fontPtrButtons);
@@ -13,12 +13,19 @@ MainMenu::MainMenu(sf::RenderWindow& win, std::shared_ptr<MyFont> fontPtrTitle, 
 
 	snake.SetFont(fontPtrTitle);
 	highScoreManager.SetFonts(fontPtrTitle, fontPtrButtons);
+	SetSprite();
+}
+
+void MainMenu::SetSprite()
+{
+	sprite.setTexture(*texture);
 }
 
 void MainMenu::DrawButtonsAndTitle() 
 {
 	if (currentMode == Mode::Default)
 	{
+		window->draw(sprite);
 		snake.Draw(window);
 		start.Draw(window);
 		highscore.Draw(window);
@@ -76,14 +83,4 @@ bool MainMenu::IsInMainMenu()
 void MainMenu::SetIsInMainMenu(bool value)
 {
 	isInMainMenu = value;
-}
-
-MainMenu::~MainMenu()
-{
-	/*delete start;
-	delete highscore;
-	delete help;
-	delete credits;
-	delete quit;
-	delete snake;*/
 }

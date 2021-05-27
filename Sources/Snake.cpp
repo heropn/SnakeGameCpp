@@ -225,14 +225,14 @@ bool Snake::IsPickUpOnSnake(float posX, float posY, sf::Vector2u pickUpSize)
 		{
 			break;
 		}
-		topBorder = positions[i].y - (float)snakesSize.y ;
-		rightBorder = positions[i].x + (float)snakesSize.x ;
-		leftBorder = positions[i].x - (float)snakesSize.x ;
+		topBorder = positions[i].y - (float)snakesSize.y;
+		rightBorder = positions[i].x + (float)snakesSize.x;
+		leftBorder = positions[i].x - (float)snakesSize.x;
 		bottomBorder = positions[i].y + (float)snakesSize.y;
 
-		if (pickUpTopBorder  > bottomBorder &&
-			pickUpBottomBorder < topBorder &&
-			pickUpLeftBorder  < rightBorder &&
+		if (pickUpTopBorder < bottomBorder &&
+			pickUpBottomBorder > topBorder &&
+			pickUpLeftBorder < rightBorder &&
 			pickUpRightBorder > leftBorder)
 		{
 			return true;

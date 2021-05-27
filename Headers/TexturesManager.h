@@ -30,7 +30,8 @@ private:
 		{".\\Textures\\SnakeHead-Yellow.png", MyTexture::Type::SnakeHeadYellow},
 		{".\\Textures\\SnakeBig-Yellow.png", MyTexture::Type::SnakeBigYellow},
 		{".\\Textures\\Apple.png", MyTexture::Type::Apple},
-		{".\\Textures\\Arena.png", MyTexture::Type::Arena}
+		{".\\Textures\\Arena.png", MyTexture::Type::Arena},
+		{".\\Textures\\Menu.png", MyTexture::Type::Menu}
 	};
 
 public:

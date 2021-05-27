@@ -14,7 +14,8 @@ int main()
 	GameManager gameManager;
 	MainMenu mainMenu(window, 
 		gameManager.GetFontsManager().GetFont(MyFont::Type::Snake),
-		gameManager.GetFontsManager().GetFont(MyFont::Type::LostIsland));
+		gameManager.GetFontsManager().GetFont(MyFont::Type::LostIsland),
+		gameManager.GetTextureManager().GetTexture(MyTexture::Type::Menu));
 
 	while (window.isOpen())
 	{

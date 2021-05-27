@@ -4,6 +4,7 @@
 #include "IDrawable.h"
 #include "Title.h"
 #include "HighScoreManager.h"
+#include "MyTexture.h"
 
 class MainMenu 
 {
@@ -26,14 +27,19 @@ private:
 	std::shared_ptr<MyFont> fontPtrTitle;
 	std::shared_ptr<MyFont> fontPtrButtons;
 
+	std::shared_ptr<MyTexture> texture;
+	sf::Sprite sprite;
+
 	bool isInMainMenu;
 
 	Mode currentMode;
 public:
-	MainMenu(sf::RenderWindow& win, std::shared_ptr<MyFont> fontPtrTitle, std::shared_ptr<MyFont> fontPtrButtons);
+	MainMenu(sf::RenderWindow& win, std::shared_ptr<MyFont> fontPtrTitle, std::shared_ptr<MyFont> fontPtrButtons, std::shared_ptr<MyTexture> menuTexture);
 	void DrawButtonsAndTitle();
 	void CheckIfButtonWasClicked(sf::Vector2i vec);
-	virtual ~MainMenu();
 	bool IsInMainMenu();
 	void SetIsInMainMenu(bool value);
+
+private:
+	void SetSprite();
 };
