@@ -72,6 +72,7 @@ void MainMenu::CheckIfButtonWasClicked(sf::Vector2i vec)
 	else if (quit.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
 	{
 		std::cout << "Exit" << std::endl;
+		window->close();
 	}
 };
 
