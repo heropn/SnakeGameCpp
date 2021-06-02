@@ -70,7 +70,7 @@ int main()
 			}
 			else
 			{
-				gameManager.CheckIfPickupIsCollected();
+				gameManager.CheckIfPickupOrPowerUpIsCollected();
 				gameManager.CheckWhereIsSnake();
 				gameManager.MoveSnake();
 				gameManager.DrawInGameObjects(&window);

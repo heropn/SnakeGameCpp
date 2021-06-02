@@ -161,7 +161,9 @@
     <ClCompile Include="Sources\MyFont.cpp" />
     <ClCompile Include="Sources\MySoundBuffer.cpp" />
     <ClCompile Include="Sources\MyTexture.cpp" />
+    <ClCompile Include="Sources\PickableItem.cpp" />
     <ClCompile Include="Sources\PickUp.cpp" />
+    <ClCompile Include="Sources\PowerUp.cpp" />
     <ClCompile Include="Sources\ScoreManager.cpp" />
     <ClCompile Include="Sources\Snake.cpp" />
     <ClCompile Include="Sources\SnakeSelectMenu.cpp" />
@@ -184,7 +186,9 @@
     <ClInclude Include="Headers\MyFont.h" />
     <ClInclude Include="Headers\MySoundBuffer.h" />
     <ClInclude Include="Headers\MyTexture.h" />
+    <ClInclude Include="Headers\PickableItem.h" />
     <ClInclude Include="Headers\PickUp.h" />
+    <ClInclude Include="Headers\PowerUp.h" />
     <ClInclude Include="Headers\ScoreManager.h" />
     <ClInclude Include="Headers\Snake.h" />
     <ClInclude Include="Headers\SnakeSelectMenu.h" />

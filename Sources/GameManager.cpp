@@ -32,19 +32,22 @@ GameManager::GameManager()
 	isGameOver = false;
 	isInSnakeSelect = true;
 	isPickUpCollected = true;
+	isPowerUpCollected = true;
+	timeBetweenPowerUps = -1.0f;
 	GenerateSnakePosition();
 	GeneratePickUp();
+	GeneratePowerUp();
 }
 
 void GameManager::GeneratePickUp()
 {
-	std::random_device device;
-	std::mt19937 generator(device());
-	std::uniform_real_distribution<float> posX(150.0f, 850.0f); //x e [100,900] y e [250,750]
-	std::uniform_real_distribution<float> posY(300.0f, 700.0f);
-
 	if (isPickUpCollected)
 	{
+		std::random_device device;
+		std::mt19937 generator(device());
+		std::uniform_real_distribution<float> posX(150.0f, 850.0f); //x e [100,900] y e [250,750]
+		std::uniform_real_distribution<float> posY(300.0f, 700.0f);
+
 		isPickUpCollected = false;
 		bool isAvailable = false;
 		float x = posX(generator);
@@ -66,6 +69,47 @@ void GameManager::GeneratePickUp()
 
 		pickUp = PickUp(x, y, texturesManager.GetTexture(MyTexture::Type::Apple));
 		drawableInGameObjects.push_back(&pickUp);
+	}
+}
+
+void GameManager::GeneratePowerUp()
+{
+	if (isPowerUpCollected &&
+		(clock.getElapsedTime().asSeconds() > timeBetweenPowerUps || timeBetweenPowerUps < 0))
+	{
+		std::random_device device;
+		std::mt19937 generator(device());
+		std::uniform_real_distribution<float> posX(150.0f, 850.0f); //x e [100,900] y e [250,750]
+		std::uniform_real_distribution<float> posY(300.0f, 700.0f);
+
+		timeBetweenPowerUps = 10.0f;
+		isPowerUpCollected = false;
+		bool isAvailable = false;
+		float x = posX(generator);
+		float y = posY(generator);
+
+		if (powerUp.GetTexture())
+		{
+			while (!isAvailable)
+			{
+				x = posX(generator);
+				y = posY(generator);
+
+				if (!snake.IsPickUpOnSnake(x, y, powerUp.GetSize()))
+				{
+					isAvailable = true;
+				}
+			}
+		}
+
+		std::uniform_int_distribution<int> powerUpIndex(1, 3);
+
+		int upgradeTypeIndex = powerUpIndex(generator);
+
+		powerUp = PowerUp(x, y, texturesManager.GetTexture(MyTexture::Type::Apple),
+			static_cast<PowerUp::UpgradeType>(upgradeTypeIndex));
+
+		drawableInGameObjects.push_back(&powerUp);
 	}
 }
 
@@ -96,7 +140,7 @@ void GameManager::GenerateSnakePosition()
 	std::mt19937 generator(device());
 	std::uniform_real_distribution<float> posX(300.0f, 700.0f); //x e [300, 700] y e [400,600]
 	std::uniform_real_distribution<float> posY(400.0f, 600.0f);
-	std::uniform_int_distribution<int>direction(0,3); // kierunek
+	std::uniform_int_distribution<int>direction(0, 3); // kierunek
 
 	float x = posX(generator);
 	float y = posY(generator);
@@ -144,7 +188,7 @@ bool GameManager::IsInSnakeSelectMenu()
 	return isInSnakeSelect;
 }
 
-void GameManager::CheckIfPickupIsCollected()
+void GameManager::CheckIfPickupOrPowerUpIsCollected()
 {
 	if (pickUp.IsCollected(&snake))
 	{
@@ -155,6 +199,18 @@ void GameManager::CheckIfPickupIsCollected()
 		drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(), drawableInGameObjects.end(), &pickUp), drawableInGameObjects.end());
 		GeneratePickUp();
 	}
+
+	if (powerUp.IsCollected(&snake)
+		&& powerUp.GetUpgradeType() != PowerUp::UpgradeType::None)
+	{
+		audioManager.PlaySound(MySoundBuffer::Type::Coin);
+		clock.restart();
+		isPowerUpCollected = true;
+		drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(), drawableInGameObjects.end(), &powerUp), drawableInGameObjects.end());
+		powerUp.SetNone();
+	}
+
+	GeneratePowerUp();
 }
 
 void GameManager::CheckIfSnakeWasSelected(sf::Vector2i position)
@@ -191,6 +247,30 @@ void GameManager::CheckIfSnakeWasSelected(sf::Vector2i position)
 	}
 
 	isInSnakeSelect = false;
+}
+
+void GameManager::GiveSnakePower(PowerUp::UpgradeType upgradeType)
+{
+	switch (upgradeType)
+	{
+	case PowerUp::UpgradeType::Speed:
+		{
+
+		}
+		break;
+	case PowerUp::UpgradeType::Slow:
+		{
+
+		}
+		break;
+	case PowerUp::UpgradeType::Immunity:
+		{
+
+		}
+		break;
+	default:
+		break;
+	}
 }
 
 void GameManager::ResetGame()

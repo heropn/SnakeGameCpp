@@ -34,6 +34,7 @@ public:
 	// Zwraca nazwe gracza
 	const std::string GetPlayerName() const;
 
+	//Resetuje parametry TypeInArea'i
 	void Reset();
 
 private:

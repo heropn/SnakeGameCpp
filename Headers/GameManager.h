@@ -11,6 +11,7 @@
 #include "Title.h"
 #include "AudioManager.h"
 #include "SnakeSelectMenu.h"
+#include "PowerUp.h"
 
 class GameManager
 {
@@ -18,9 +19,15 @@ private:
 	bool isPickUpCollected;
 	bool isGameOver;
 	bool isInSnakeSelect;
+	bool isPowerUpCollected;
+
+	float timeBetweenPowerUps;
+	sf::Clock clock;
 
 	Snake snake;
 	PickUp pickUp;
+	PowerUp powerUp;
+
 	Background background;
 	Title title;
 
@@ -46,8 +53,11 @@ public:
 	// ¯eby narysowaæ obiekt, musi byæ zawarty w wektorze "drawableInGameObjects"
 	void DrawInGameObjects(sf::RenderWindow* window);
 
+	// Rysuje obiekty znajduj¹cie siê na obrazie, który jest widoczny
+	// podczas skoñczenia gry
 	void DrawEndGameObjects(sf::RenderWindow* window);
 
+	// Rysuje menu wyboru snake'a
 	void DrawSnakeSelectMenu(sf::RenderWindow* window);
 
 	// Porusza Snake'iem
@@ -60,19 +70,28 @@ public:
 	// czy znajduje siê w arenie lub czy dosz³o do kolizji (czy zjad³ siebie)
 	void CheckWhereIsSnake();
 
-	// Sprawdza, czy PickUp zosta³ zebrany, jeœli tak: dodaje punkt
+	// Sprawdza, czy PickUp lub PowerUp zosta³ zebrany, jeœli tak (PickUp): dodaje punkt
 	// do score'a, zwiêksza wê¿a, generuje kolejny PickUp
-	void CheckIfPickupIsCollected();
+	// Je¿eli PowerUp jest zebrany i min¹³ okreœlony czas to generuje kolejny PowerUp
+	void CheckIfPickupOrPowerUpIsCollected();
 
+	// Daje Snake'owi okreœlonyPowerUp
+	void GiveSnakePower(PowerUp::UpgradeType upgradeType);
+
+	// Odœwie¿a Highscora
 	void UpdateHighScores();
 
+	// Resetuje wszystkie parametry gry, aby mo¿na by³o j¹ zacz¹æ od nowa
 	void ResetGame();
 
 	// Sprawdza czy gra siê skoñczy³a
 	bool IsGameOver();
 
+	// Zwraca wartoœæ logiczn¹, czy gracz dalej znajduje siê w menu wyboru snejka
 	bool IsInSnakeSelectMenu();
 
+	// Sprawdza czy snejk zosta³ wybrany przez gracza, jeœli tak
+	// to ustawia go na domyœlnego w aktualnej grze
 	void CheckIfSnakeWasSelected(sf::Vector2i position);
 
 	// Zwraca obiekt klasy TextureManager
@@ -96,6 +115,9 @@ public:
 private:
 	// Generuje PickUp'a 
 	void GeneratePickUp();
+
+	// Generuje Powerup'a jeœli up³yn¹³ odpowiedni czas
+	void GeneratePowerUp();
 
 	// Generowanie pocz¹tkowej pozycji snake'a
 	void GenerateSnakePosition();
