@@ -22,6 +22,7 @@ public:
 		Apple,
 		Arena,
 		Menu,
+		PowerUpSpeed,
 		None
 	};
 

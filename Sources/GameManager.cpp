@@ -106,7 +106,7 @@ void GameManager::GeneratePowerUp()
 
 		int upgradeTypeIndex = powerUpIndex(generator);
 
-		powerUp = PowerUp(x, y, texturesManager.GetTexture(MyTexture::Type::Apple),
+		powerUp = PowerUp(x, y, texturesManager.GetTexture(MyTexture::Type::PowerUpSpeed),
 			static_cast<PowerUp::UpgradeType>(upgradeTypeIndex));
 
 		drawableInGameObjects.push_back(&powerUp);
