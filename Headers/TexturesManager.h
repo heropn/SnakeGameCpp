@@ -32,7 +32,11 @@ private:
 		{".\\Textures\\Apple.png", MyTexture::Type::Apple},
 		{".\\Textures\\Arena.png", MyTexture::Type::Arena},
 		{".\\Textures\\Menu.png", MyTexture::Type::Menu},
-		{".\\Textures\\PowerUp.png", MyTexture::Type::PowerUpSpeed}
+		{".\\Textures\\SpeedPowerUp.png", MyTexture::Type::PowerUpSpeed},
+		{".\\Textures\\ReversePowerUp.png", MyTexture::Type::PowerUpReverseSides},
+		{".\\Textures\\EatablePowerUp.png", MyTexture::Type::PowerUpEatableSnake},
+		{".\\Textures\\ImmunityPowerUp.png", MyTexture::Type::PowerUpImmunity},
+		{".\\Textures\\SlowPowerUp.png", MyTexture::Type::PowerUpSlow}
 	};
 
 public:

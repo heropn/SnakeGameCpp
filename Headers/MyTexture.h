@@ -23,6 +23,10 @@ public:
 		Arena,
 		Menu,
 		PowerUpSpeed,
+		PowerUpImmunity,
+		PowerUpEatableSnake,
+		PowerUpReverseSides,
+		PowerUpSlow,
 		None
 	};
 

@@ -9,7 +9,9 @@ public:
 		None,
 		Speed,
 		Slow,
-		Immunity
+		Immunity,
+		Reversed,
+		Eatable
 	};
 
 private:

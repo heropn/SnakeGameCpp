@@ -82,7 +82,7 @@ void GameManager::GeneratePowerUp()
 		std::uniform_real_distribution<float> posX(150.0f, 850.0f); //x e [100,900] y e [250,750]
 		std::uniform_real_distribution<float> posY(300.0f, 700.0f);
 
-		timeBetweenPowerUps = 10.0f;
+		timeBetweenPowerUps = 5.0f;
 		isPowerUpCollected = false;
 		bool isAvailable = false;
 		float x = posX(generator);
@@ -102,11 +102,41 @@ void GameManager::GeneratePowerUp()
 			}
 		}
 
-		std::uniform_int_distribution<int> powerUpIndex(1, 3);
+		std::uniform_int_distribution<int> powerUpIndex(1, 5);
 
 		int upgradeTypeIndex = powerUpIndex(generator);
 
-		powerUp = PowerUp(x, y, texturesManager.GetTexture(MyTexture::Type::PowerUpSpeed),
+		switch (PowerUp::UpgradeType(upgradeTypeIndex))
+		{
+		case PowerUp::UpgradeType::Slow:
+			{
+				powerUpTexture = texturesManager.GetTexture(MyTexture::Type::PowerUpSlow);
+			}
+		break;
+
+		case PowerUp::UpgradeType::Speed:
+			{
+				powerUpTexture = texturesManager.GetTexture(MyTexture::Type::PowerUpSpeed);
+			}
+		break;
+		case PowerUp::UpgradeType::Eatable:
+			{
+				powerUpTexture = texturesManager.GetTexture(MyTexture::Type::PowerUpEatableSnake);
+			}
+		break;
+		case PowerUp::UpgradeType::Immunity:
+			{
+				powerUpTexture = texturesManager.GetTexture(MyTexture::Type::PowerUpImmunity);
+			}
+		break;
+		case PowerUp::UpgradeType::Reversed:
+			{
+				powerUpTexture = texturesManager.GetTexture(MyTexture::Type::PowerUpReverseSides);
+			}
+		break;
+		}
+
+		powerUp = PowerUp(x, y, powerUpTexture,
 			static_cast<PowerUp::UpgradeType>(upgradeTypeIndex));
 
 		drawableInGameObjects.push_back(&powerUp);
@@ -268,6 +298,16 @@ void GameManager::GiveSnakePower(PowerUp::UpgradeType upgradeType)
 
 		}
 		break;
+	case PowerUp::UpgradeType::Reversed:
+		{
+
+		}
+		break;
+	case PowerUp::UpgradeType::Eatable:
+		{
+
+		}
+		break;	
 	default:
 		break;
 	}
