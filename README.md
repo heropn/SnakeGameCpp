@@ -1,5 +1,5 @@
 # SnakeGameCpp
-
+![1](https://user-images.githubusercontent.com/71827160/120656931-507c9080-c484-11eb-94e5-21fe97c357e9.PNG)
 ###### Setup
 1. Make sure that compiler is set to x86 architecture
 2. Run compiler in debug and release mode (ignore errors)
