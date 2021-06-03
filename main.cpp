@@ -49,19 +49,48 @@ int main()
 		{
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 			{
-				gameManager.SetSnakeDirection(Snake::Direction::Top);
+				if (gameManager.IsReversed())
+				{
+					gameManager.SetSnakeDirection(Snake::Direction::Bottom);
+				}
+				else
+				{
+					gameManager.SetSnakeDirection(Snake::Direction::Top);
+				}
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 			{
-				gameManager.SetSnakeDirection(Snake::Direction::Left);
+				if (gameManager.IsReversed())
+				{
+					gameManager.SetSnakeDirection(Snake::Direction::Right);
+				}
+				else
+				{
+					gameManager.SetSnakeDirection(Snake::Direction::Left);
+				}
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 			{
-				gameManager.SetSnakeDirection(Snake::Direction::Bottom);
+				if (gameManager.IsReversed())
+				{
+					gameManager.SetSnakeDirection(Snake::Direction::Top);
+				}
+				else
+				{
+					gameManager.SetSnakeDirection(Snake::Direction::Bottom);
+				}
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 			{
-				gameManager.SetSnakeDirection(Snake::Direction::Right);
+				if (gameManager.IsReversed())
+				{
+					gameManager.SetSnakeDirection(Snake::Direction::Left);
+				}
+				else
+				{
+					gameManager.SetSnakeDirection(Snake::Direction::Right);
+				}
+				
 			}
 
 			if (gameManager.IsInSnakeSelectMenu())
@@ -70,7 +99,9 @@ int main()
 			}
 			else
 			{
+				
 				gameManager.CheckIfPickupOrPowerUpIsCollected();
+				gameManager.CheckPowerUpDuration();
 				gameManager.CheckWhereIsSnake();
 				gameManager.MoveSnake();
 				gameManager.DrawInGameObjects(&window);

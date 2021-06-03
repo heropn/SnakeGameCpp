@@ -20,6 +20,9 @@ private:
 	sf::Sprite sprite;
 	Direction direction;
 	std::vector<sf::Vector2f>positions;
+	bool immunited;
+	bool isEatable;
+	int numberOfDecresedParts;
 
 public:
 	// Konstruktor domyœlny
@@ -42,6 +45,18 @@ public:
 	// Ustawia pozycje snake'a
 	void SetPosition(float x, float y);
 
+	void SetImmunization();
+
+	void SetEatablility();
+
+	void TurnOffEatability();
+
+	void TurnOffImmunization();
+
+	bool const IsImmunited() const;
+	
+	bool const IsEatable() const;
+
 	// Zmienia pozycje snake'a 
 	void Move();
 
@@ -55,12 +70,16 @@ public:
 
 	// Zwraca rozmiar spritu snake'a
 	const sf::Vector2u GetSize() const;
+	
+	const int GetNumberOfDecreasedParts() const;
 
 	// Zwraca kierunek snake'a
 	const Direction GetDirection() const;
 
 	// Zwraca sprite'a snake'a
 	const sf::Sprite& GetSprite() const;
+
+	const float GetSpeed() const;
 
 	// Funkcja sprawdza, czy Snake znajduje siê w polu gry
 	bool IsInArena(Background* background);

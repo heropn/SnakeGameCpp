@@ -26,6 +26,8 @@ public:
 	// Dodaje punkty do aktualnego wyniku
 	void AddScore();
 
+	void SubtractScore(int howMuchSubtractScore);
+
 	// Resetuje aktualny wynik
 	void ResetScore();
 

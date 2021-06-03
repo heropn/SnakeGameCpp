@@ -16,6 +16,7 @@ public:
 
 private:
 	UpgradeType type;
+	UpgradeType previousType;
 
 public:
 	// Konstruktor domyœlny
@@ -27,6 +28,10 @@ public:
 	// Zwraca typ Pickupa
 	const UpgradeType GetUpgradeType() const;
 
+	const UpgradeType GetPreviousType() const;
+
 	// Ustawia typ pickupa na UpgradeType::None
 	void SetNone();
+
+	void SetPreviousType(UpgradeType type);
 };

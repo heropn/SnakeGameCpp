@@ -46,3 +46,22 @@ void ScoreManager::SetUpText()
 	text.setOrigin(rect.width / 2, rect.height / 2);
 	text.setPosition(posX, posY);
 }
+
+void ScoreManager::SubtractScore(int howMuchSubtractScore)
+{
+	if (!howMuchSubtractScore == 0)
+	{
+		if (currentScore - howMuchSubtractScore * 10 < 0)
+		{
+			currentScore = 0;
+		}
+		else
+		{
+			currentScore -= howMuchSubtractScore * 10;
+		}
+	}
+	text.setString(scoreStr + std::to_string(currentScore));
+	auto rect = text.getLocalBounds();
+	text.setOrigin(rect.width / 2, rect.height / 2);
+	text.setPosition(posX, posY);
+}

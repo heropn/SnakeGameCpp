@@ -2,7 +2,7 @@
 #include <iostream>
 
 Snake::Snake() : 
-	posX(500.0f), posY(500.0f), size(1), speed(2.0f), increasingSize(10), direction(Direction::Left) {}
+	posX(500.0f), posY(500.0f), size(1), speed(2.0f), increasingSize(10), direction(Direction::Left),immunited(false),isEatable(false),numberOfDecresedParts(0) {}
 
 void Snake::SetSpriteProperties()
 {
@@ -102,6 +102,28 @@ bool Snake::IsInArena(Background* background)
 	}
 	else
 	{
+		if (immunited)
+		{
+			if (snakesrightBorder >= rightBorder)
+			{
+				SetPosition(snakesPosition.x - size.x + 10 ,snakesPosition.y);
+			}
+
+			if (snakesleftBorder <= leftBorder)
+			{
+				SetPosition(snakesPosition.x + size.x - 10, snakesPosition.y);
+			}
+
+			if (snakesTopBorder <= topBorder)
+			{
+				SetPosition(snakesPosition.x , snakesPosition.y + size.y - 10);
+			}
+
+			if (snakesbottomBorder >= bottomBorder)
+			{
+				SetPosition(snakesPosition.x, snakesPosition.y - size.y + 10);
+			}
+		}
 		return false;
 	}
 }
@@ -152,7 +174,17 @@ bool Snake::IsCollision()
 		if (abs(positions[positions.size() - 1].x - positions[positions.size() - 1 - i].x) < 10 &&
 			abs(positions[positions.size() - 1].y - positions[positions.size() - 1 - i].y) < 10)
 		{
-			return true;
+			if (isEatable)
+			{
+				positions.erase(positions.begin() + i, positions.end());
+				size -= size - i ;
+				numberOfDecresedParts = positions.size() - i;
+				break;
+			}
+			else
+			{
+				return true;
+			}
 		}
 	}
 
@@ -239,4 +271,58 @@ bool Snake::IsPickUpOnSnake(float posX, float posY, sf::Vector2u pickUpSize)
 		}
 	}
 	return false;
+}
+
+const float Snake::GetSpeed() const
+{
+	return speed;
+}
+
+void Snake::SetImmunization()
+{
+	immunited = true;
+}
+
+void Snake::TurnOffImmunization()
+{
+	immunited = false;
+}
+
+bool const Snake::IsImmunited() const
+{
+	if (immunited)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void Snake::SetEatablility()
+{
+	isEatable = true;
+}
+
+void Snake::TurnOffEatability()
+{
+	isEatable = false;
+}
+
+const int Snake::GetNumberOfDecreasedParts() const
+{
+	return numberOfDecresedParts;
+}
+
+const bool Snake::IsEatable() const
+{
+	if (isEatable)
+	{
+		return true;
+	}
+	else 
+	{
+		return false;
+	}
 }

@@ -20,9 +20,12 @@ private:
 	bool isGameOver;
 	bool isInSnakeSelect;
 	bool isPowerUpCollected;
+	bool isReversed;
 
 	float timeBetweenPowerUps;
+	float powerUpDuration;
 	sf::Clock clock;
+	sf::Clock durationTime;
 
 	Snake snake;
 	PickUp pickUp;
@@ -76,7 +79,14 @@ public:
 	// Je¿eli PowerUp jest zebrany i min¹³ okreœlony czas to generuje kolejny PowerUp
 	void CheckIfPickupOrPowerUpIsCollected();
 
-	// Daje Snake'owi okreœlonyPowerUp
+	void CheckPowerUpDuration();
+
+	bool const IsReversed() const;
+
+	void SetReversion();
+	void TurnOffReversion();
+
+	// Daje Snake'owi okreœlony PowerUp
 	void GiveSnakePower(PowerUp::UpgradeType upgradeType);
 
 	// Odœwie¿a Highscora
