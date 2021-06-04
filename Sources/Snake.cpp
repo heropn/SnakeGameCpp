@@ -176,7 +176,7 @@ bool Snake::IsCollision()
 		{
 			if (isEatable)
 			{
-				positions.erase(positions.begin() + i, positions.end());
+				//positions.erase(positions.begin() + i, positions.end());
 				size -= size - i ;
 				numberOfDecresedParts = positions.size() - i;
 				break;
@@ -290,14 +290,7 @@ void Snake::TurnOffImmunization()
 
 bool const Snake::IsImmunited() const
 {
-	if (immunited)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return immunited;
 }
 
 void Snake::SetEatablility()
@@ -317,12 +310,5 @@ const int Snake::GetNumberOfDecreasedParts() const
 
 const bool Snake::IsEatable() const
 {
-	if (isEatable)
-	{
-		return true;
-	}
-	else 
-	{
-		return false;
-	}
+	return isEatable;
 }

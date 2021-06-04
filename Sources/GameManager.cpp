@@ -106,7 +106,9 @@ void GameManager::GeneratePowerUp()
 
 		std::uniform_int_distribution<int> powerUpIndex(1, 5);
 
-		int upgradeTypeIndex = powerUpIndex(generator);
+		int upgradeTypeIndex = 2;//powerUpIndex(generator);
+
+		std::shared_ptr<MyTexture> powerUpTexture;
 
 		switch (PowerUp::UpgradeType(upgradeTypeIndex))
 		{
@@ -212,14 +214,7 @@ void GameManager::CheckWhereIsSnake()
 
 bool GameManager::IsGameOver()
 {
-	if (isGameOver)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return isGameOver;
 }
 
 bool GameManager::IsInSnakeSelectMenu()
@@ -298,12 +293,12 @@ void GameManager::GiveSnakePower(PowerUp::UpgradeType upgradeType)
 	{
 	case PowerUp::UpgradeType::Speed:
 		{
-			snake.SetSpeed(snake.GetSpeed() + 2.0f);
+			snake.SetSpeed(snake.GetSpeed() * 2.0f);
 		}
 		break;
 	case PowerUp::UpgradeType::Slow:
 		{
-			snake.SetSpeed(snake.GetSpeed() - 2.0f);
+			snake.SetSpeed(snake.GetSpeed() / 2.0f);
 		}
 		break;
 	case PowerUp::UpgradeType::Immunity:
@@ -318,7 +313,7 @@ void GameManager::GiveSnakePower(PowerUp::UpgradeType upgradeType)
 		break;
 	case PowerUp::UpgradeType::Eatable:
 		{
-		snake.SetEatablility();
+			snake.SetEatablility();
 		}
 		break;	
 	default:
@@ -384,11 +379,11 @@ void GameManager::CheckPowerUpDuration()
 	{
 		if (powerUp.GetPreviousType() == PowerUp::UpgradeType::Speed)
 		{
-			snake.SetSpeed(snake.GetSpeed() - 2.0f);
+			snake.SetSpeed(snake.GetSpeed() / 2.0f);
 		}
 		else if (powerUp.GetPreviousType() == PowerUp::UpgradeType::Slow)
 		{
-			snake.SetSpeed(snake.GetSpeed() + 2.0f);
+			snake.SetSpeed(snake.GetSpeed() * 2.0f);
 		}
 		else if (powerUp.GetPreviousType() == PowerUp::UpgradeType::Immunity)
 		{
@@ -408,14 +403,7 @@ void GameManager::CheckPowerUpDuration()
 
 bool const GameManager::IsReversed() const
 {
-	if (isReversed)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return isReversed;
 }
 
 void GameManager::SetReversion()

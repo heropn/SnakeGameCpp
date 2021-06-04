@@ -30,7 +30,7 @@ private:
 	Snake snake;
 	PickUp pickUp;
 	PowerUp powerUp;
-	std::shared_ptr<MyTexture> powerUpTexture = nullptr;
+	
 
 	Background background;
 	Title title;
