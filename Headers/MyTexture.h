@@ -29,6 +29,7 @@ public:
 		PowerUpEatableSnake,
 		PowerUpReverseSides,
 		PowerUpSlow,
+		Block,
 		None
 	};
 

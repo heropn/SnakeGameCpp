@@ -38,7 +38,8 @@ private:
 		{".\\Textures\\ReversePowerUp.png", MyTexture::Type::PowerUpReverseSides},
 		{".\\Textures\\EatablePowerUp.png", MyTexture::Type::PowerUpEatableSnake},
 		{".\\Textures\\ImmunityPowerUp.png", MyTexture::Type::PowerUpImmunity},
-		{".\\Textures\\SlowPowerUp.png", MyTexture::Type::PowerUpSlow}
+		{".\\Textures\\SlowPowerUp.png", MyTexture::Type::PowerUpSlow},
+		{".\\Textures\\Block.png", MyTexture::Type::Block}
 	};
 
 public:

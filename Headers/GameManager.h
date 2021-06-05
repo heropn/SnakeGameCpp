@@ -13,6 +13,8 @@
 #include "SnakeSelectMenu.h"
 #include "PowerUp.h"
 #include "PowerUpDisplayer.h"
+#include "Block.h"
+
 
 class GameManager
 {
@@ -33,6 +35,7 @@ private:
 	Snake snake;
 	PickUp pickUp;
 	PowerUp powerUp;
+	Block block;
 
 	Background background;
 	Title title;
@@ -129,12 +132,16 @@ public:
 	// Zwraca obiekt kalsy TypeInAreaManager
 	TypeInArea& GetTypeInAreaManager();
 
+	bool IsPickUpOnBlock(float posX, float posY, sf::Vector2u pickUpSize);
+
 private:
 	// Generuje PickUp'a 
 	void GeneratePickUp();
 
 	// Generuje Powerup'a jeœli up³yn¹³ odpowiedni czas
 	void GeneratePowerUp();
+
+	void GenerateBlock();
 
 	// Generowanie pocz¹tkowej pozycji snake'a
 	void GenerateSnakePosition();

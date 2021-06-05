@@ -151,6 +151,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Sources\AudioManager.cpp" />
     <ClCompile Include="Sources\Background.cpp" />
+    <ClCompile Include="Sources\Block.cpp" />
     <ClCompile Include="Sources\Button.cpp" />
     <ClCompile Include="Sources\Credits.cpp" />
     <ClCompile Include="Sources\FontsManager.cpp" />
@@ -178,6 +179,7 @@
   <ItemGroup>
     <ClInclude Include="Headers\AudioManager.h" />
     <ClInclude Include="Headers\Background.h" />
+    <ClInclude Include="Headers\Block.h" />
     <ClInclude Include="Headers\Button.h" />
     <ClInclude Include="Headers\Credits.h" />
     <ClInclude Include="Headers\FontsManager.h" />
