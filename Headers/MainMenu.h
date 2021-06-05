@@ -5,22 +5,15 @@
 #include "Title.h"
 #include "HighScoreManager.h"
 #include "MyTexture.h"
+#include "Help.h"
+#include "Credits.h"
 
 class MainMenu 
 {
 private:
-	enum class Mode
-	{
-		Default,
-		HighScores,
-		Credits,
-		Help
-	};
 
 	Button start, highscore, help, credits, quit;
 	Title snake;
-
-	HighScoreManager highScoreManager;
 
 	sf::RenderWindow* window;
 
@@ -32,8 +25,18 @@ private:
 
 	bool isInMainMenu;
 
-	Mode currentMode;
 public:
+	HighScoreManager highScoreManager;
+	Help helpScreen;
+	Credits creditsScreen;
+	enum class Mode
+	{
+		Default,
+		HighScores,
+		Credits,
+		Help
+	};
+	Mode currentMode;
 	MainMenu(sf::RenderWindow& win, std::shared_ptr<MyFont> fontPtrTitle, std::shared_ptr<MyFont> fontPtrButtons, std::shared_ptr<MyTexture> menuTexture);
 	void DrawButtonsAndTitle();
 	void CheckIfButtonWasClicked(sf::Vector2i vec);
