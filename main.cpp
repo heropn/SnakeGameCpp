@@ -36,6 +36,14 @@ int main()
 			{
 				if (mainMenu.IsInMainMenu())
 					mainMenu.CheckIfButtonWasClicked(sf::Mouse::getPosition(window));
+				else if (mainMenu.currentMode != MainMenu::Mode::Default) {
+					if (mainMenu.highScoreManager.CheckIfButtonWasClicked(sf::Mouse::getPosition(window)) ||
+						mainMenu.helpScreen.CheckIfButtonWasClicked(sf::Mouse::getPosition(window)) ||
+						mainMenu.creditsScreen.CheckIfButtonWasClicked(sf::Mouse::getPosition(window))) {
+						mainMenu.SetIsInMainMenu(true);
+						mainMenu.currentMode = MainMenu::Mode::Default;
+					}
+				}
 				else if (gameManager.IsInSnakeSelectMenu())
 					gameManager.CheckIfSnakeWasSelected(sf::Mouse::getPosition(window));
 			}
@@ -43,7 +51,7 @@ int main()
 
 		window.clear(sf::Color::Color(216,253,176));
 
-		if (mainMenu.IsInMainMenu())
+		if (mainMenu.IsInMainMenu() || mainMenu.currentMode != MainMenu::Mode::Default)
 		{
 			mainMenu.DrawButtonsAndTitle();
 		}

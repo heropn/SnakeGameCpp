@@ -13,6 +13,8 @@ MainMenu::MainMenu(sf::RenderWindow& win, std::shared_ptr<MyFont> fontPtrTitle, 
 
 	snake.SetFont(fontPtrTitle);
 	highScoreManager.SetFonts(fontPtrTitle, fontPtrButtons);
+	helpScreen.setFont(fontPtrTitle);
+	creditsScreen.setFont(fontPtrTitle);
 	SetSprite();
 }
 
@@ -39,11 +41,11 @@ void MainMenu::DrawButtonsAndTitle()
 	}
 	else if (currentMode == Mode::Credits)
 	{
-
+		creditsScreen.Draw(window);
 	}
 	else if (currentMode == Mode::Help)
 	{
-
+		helpScreen.Draw(window);
 	}
 }
 
@@ -60,14 +62,19 @@ void MainMenu::CheckIfButtonWasClicked(sf::Vector2i vec)
 	{
 		std::cout << "Najlepsze wyniki" << std::endl;
 		currentMode = Mode::HighScores;
+		isInMainMenu = false;
 	}
 	else if (help.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
 	{
 		std::cout << "Pomoc" << std::endl;
+		currentMode = Mode::Help;
+		isInMainMenu = false;
 	}
 	else if (credits.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
 	{
 		std::cout << "Creditsy" << std::endl;
+		currentMode = Mode::Credits;
+		isInMainMenu = false;
 	}
 	else if (quit.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
 	{

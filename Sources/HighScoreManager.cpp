@@ -20,6 +20,7 @@ void HighScoreManager::SetFonts(std::shared_ptr<MyFont> fontTitleText, std::shar
 	LoadScoresFromFile();
 	SortHighScores();
 	SetUpText();
+	back = Button("RETURN", 600.0, 700.0, fontTitleText);
 }
 
 void HighScoreManager::LoadScoresFromFile()
@@ -50,6 +51,7 @@ void HighScoreManager::Draw(sf::RenderWindow* window)
 	}
 
 	window->draw(titleText);
+	back.Draw(window);
 }
 
 HighScoreManager::~HighScoreManager()
@@ -99,3 +101,11 @@ void HighScoreManager::SetToMaxFiveHighScores()
 	if (highScoreEntities.size() > 5)
 		highScoreEntities.erase(highScoreEntities.begin() + 5);
 }
+
+bool HighScoreManager::CheckIfButtonWasClicked(sf::Vector2i vec)
+{
+	sf::Vector2f vecF = { (float)vec.x, (float)vec.y };
+
+	return (back.rectangle.getGlobalBounds().contains(vecF.x, vecF.y));
+
+};

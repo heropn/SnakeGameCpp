@@ -3,6 +3,7 @@
 #include "HighScoreEntity.h"
 #include "MyFont.h"
 #include "IDrawable.h"
+#include "Button.h"
 
 class HighScoreManager : public IDrawable
 {
@@ -12,6 +13,7 @@ private:
 	std::shared_ptr<MyFont> fontHighScores;
 	sf::Text titleText;
 	std::vector<std::unique_ptr<HighScoreEntity>> highScoreEntities;
+	Button back;
 
 public:
 	// Konstruktor domyœlny
@@ -31,6 +33,7 @@ public:
 	// Destruktor klay, zapisuje do pliku 5 najlepszych wyników
 	virtual ~HighScoreManager();
 
+	bool CheckIfButtonWasClicked(sf::Vector2i vec);
 private:
 	// £aduje czionkê i ustawia wszystkie parametry tekstu
 	void SetUpText();
