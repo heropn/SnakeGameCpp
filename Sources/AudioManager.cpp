@@ -21,6 +21,8 @@ AudioManager::AudioManager()
 	{
 		sounds.push_back(sb);
 	}
+
+	SetVolumes();
 }
 
 const void AudioManager::PlaySound(MySoundBuffer::Type type)
@@ -54,6 +56,12 @@ void AudioManager::SetVolumes()
 			case MySoundBuffer::Type::Defeat:
 			{
 				mySound.sound.setVolume(100.0f);
+			}
+			break;
+			case MySoundBuffer::Type::Music:
+			{
+				mySound.sound.setVolume(30.0f);
+				mySound.sound.setLoop(true);
 			}
 			break;
 			default:

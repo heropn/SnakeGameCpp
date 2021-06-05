@@ -382,7 +382,7 @@ const HighScoreManager& GameManager::GetHighScoreManager() const
 	return highScoreManager;
 }
 
-const AudioManager& GameManager::GetAudioManager() const
+AudioManager& GameManager::GetAudioManager()
 {
 	return audioManager;
 }

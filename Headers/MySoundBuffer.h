@@ -9,7 +9,8 @@ public:
 	{
 		Coin,
 		PowerUp,
-		Defeat
+		Defeat,
+		Music
 	};
 
 private:

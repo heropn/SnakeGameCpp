@@ -125,7 +125,7 @@ public:
 	const HighScoreManager& GetHighScoreManager() const;
 	
 	// Zwraca obiekt klasy AudiManager
-	const AudioManager& GetAudioManager() const;
+	AudioManager& GetAudioManager();
 
 	// Zwraca obiekt kalsy TypeInAreaManager
 	TypeInArea& GetTypeInAreaManager();

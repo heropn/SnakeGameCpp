@@ -17,6 +17,8 @@ int main()
 		gameManager.GetFontsManager().GetFont(MyFont::Type::LostIsland),
 		gameManager.GetTextureManager().GetTexture(MyTexture::Type::Menu));
 
+	gameManager.GetAudioManager().PlaySound(MySoundBuffer::Type::Music);
+
 	while (window.isOpen())
 	{
 		sf::Event windowEvent;
