@@ -6,13 +6,13 @@ class AudioManager
 {
 private:
 	// Struktura przechowuj¹ca dŸwiêk i jego buffer
-	struct Sound
+	struct MySound
 	{
 		sf::Sound sound;
 		std::shared_ptr<MySoundBuffer> soundBuffer;
 
 		// konstruktor parametryczny dodaj¹cy SoundBuffer do Sound'a
-		Sound(std::shared_ptr<MySoundBuffer> soundBuffer);
+		MySound(std::shared_ptr<MySoundBuffer> soundBuffer);
 
 		// Gra dŸwiêk, który zawiera
 		void Play();
@@ -22,7 +22,7 @@ private:
 	};
 
 	SoundBufferManager soundBufferManager;
-	std::vector<Sound> sounds;
+	std::vector<MySound> sounds;
 
 public:
 	// Konstruktor domyœlny
@@ -30,4 +30,8 @@ public:
 
 	// Gra podany typ dŸwieku
 	const void PlaySound(MySoundBuffer::Type type);
+
+private:
+	// Ustawia odpowiednie g³oœnoœci wszystkim dŸwiêkom
+	void SetVolumes();
 };

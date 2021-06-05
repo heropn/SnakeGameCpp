@@ -8,6 +8,7 @@ public:
 	enum class Type
 	{
 		Coin,
+		PowerUp,
 		Defeat
 	};
 

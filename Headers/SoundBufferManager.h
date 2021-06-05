@@ -16,8 +16,9 @@ private:
 	// Przechowuje wszystkie SoundBuffery do za³adowania
 	std::vector<SoundBufferInfo> filesPaths
 	{
-		{".\\Sounds\\coin.wav", MySoundBuffer::Type::Coin},
-		{".\\Sounds\\defeat.wav", MySoundBuffer::Type::Defeat}
+		{".\\Sounds\\Coin.wav", MySoundBuffer::Type::Coin},
+		{".\\Sounds\\Defeat.wav", MySoundBuffer::Type::Defeat},
+		{".\\Sounds\\PowerUp.wav", MySoundBuffer::Type::PowerUp}
 	};
 
 public:

@@ -238,7 +238,7 @@ void GameManager::CheckIfPickupOrPowerUpIsCollected()
 	if (powerUp.IsCollected(&snake)
 		&& powerUp.GetUpgradeType() != PowerUp::UpgradeType::None)
 	{
-		audioManager.PlaySound(MySoundBuffer::Type::Coin);
+		audioManager.PlaySound(MySoundBuffer::Type::PowerUp);
 		clock.restart();
 		isPowerUpCollected = true;
 		drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(), drawableInGameObjects.end(), &powerUp), drawableInGameObjects.end());
@@ -280,7 +280,6 @@ void GameManager::CheckIfSnakeWasSelected(sf::Vector2i position)
 		}
 		break;
 		default:
-			return;
 			break;
 	}
 
