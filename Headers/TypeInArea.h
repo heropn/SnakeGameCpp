@@ -12,7 +12,7 @@ private:
 	std::shared_ptr<MyFont> fontDisplayText;
 	std::shared_ptr<MyFont> fontTopText;
 	sf::RectangleShape rectangle;
-	int maxLetters;
+	unsigned int maxLetters;
 
 public:
 	// Konstruktor domyœlny
@@ -30,6 +30,7 @@ public:
 	// Rysuje ca³e pole do wpisywania
 	void Draw(sf::RenderWindow* window);
 
+	// Pobiera znak wprowadzony od gracza
 	void GetPlayerInput(char c);
 
 	// Zwraca nazwe gracza

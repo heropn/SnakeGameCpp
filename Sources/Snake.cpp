@@ -42,19 +42,19 @@ void Snake::Move()
 {
 	if (direction == Direction::Top)
 	{
-		posY -= 1 * speed;
+		posY -= speed;
 	}
 	else if (direction == Direction::Right)
 	{
-		posX += 1 * speed;
+		posX += speed;
 	}
 	else if (direction == Direction::Bottom)
 	{
-		posY += 1 * speed;
+		posY += speed;
 	}
 	else if (direction == Direction::Left)
 	{
-		posX -= 1 * speed;
+		posX -= speed;
 	}
 
 	positions.push_back({ posX,posY });
@@ -277,14 +277,9 @@ const float Snake::GetSpeed() const
 	return speed;
 }
 
-void Snake::SetImmunization()
+void Snake::SetImmunization(bool val)
 {
-	immunited = true;
-}
-
-void Snake::TurnOffImmunization()
-{
-	immunited = false;
+	immunited = val;
 }
 
 bool const Snake::IsImmunited() const
@@ -292,14 +287,9 @@ bool const Snake::IsImmunited() const
 	return immunited;
 }
 
-void Snake::SetEatablility()
+void Snake::SetEatablility(bool val)
 {
-	isEatable = true;
-}
-
-void Snake::TurnOffEatability()
-{
-	isEatable = false;
+	isEatable = val;
 }
 
 const int Snake::GetNumberOfDecreasedParts() const

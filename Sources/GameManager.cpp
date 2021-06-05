@@ -10,6 +10,7 @@ GameManager::GameManager() : isGameOver(false), isInSnakeSelect(true),
 		fontsManager.GetFont(MyFont::Type::LostIsland));
 	typeInArea = TypeInArea(fontsManager.GetFont(MyFont::Type::LostIsland),
 		fontsManager.GetFont(MyFont::Type::LostIsland));
+	powerUpDisplayer = PowerUpDisplayer(fontsManager.GetFont(MyFont::Type::LostIsland));
 
 	scoreManager.SetFont(fontsManager.GetFont(MyFont::Type::Snake));
 	title.SetFont(fontsManager.GetFont(MyFont::Type::Snake));
@@ -27,6 +28,7 @@ GameManager::GameManager() : isGameOver(false), isInSnakeSelect(true),
 	drawableInGameObjects.push_back(&snake);
 	drawableInGameObjects.push_back(&scoreManager);
 	drawableInGameObjects.push_back(&title);
+	drawableInGameObjects.push_back(&powerUpDisplayer);
 
 	drawableEndGameObjects.push_back(&loseScreen);
 	drawableEndGameObjects.push_back(&typeInArea);
@@ -243,6 +245,7 @@ void GameManager::CheckIfPickupOrPowerUpIsCollected()
 		isPowerUpCollected = true;
 		drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(), drawableInGameObjects.end(), &powerUp), drawableInGameObjects.end());
 		GiveSnakePower(powerUp.GetUpgradeType());
+		powerUpDisplayer.SetTextureAndStartDrawing(powerUp.GetTexture());
 		durationTime.restart();
 		powerUp.SetPreviousType(powerUp.GetUpgradeType());
 		powerUp.SetNone();
@@ -302,18 +305,18 @@ void GameManager::GiveSnakePower(PowerUp::UpgradeType upgradeType)
 		break;
 	case PowerUp::UpgradeType::Immunity:
 		{
-			snake.SetImmunization();
+			snake.SetImmunization(true);
 			background.SetFlickerStatus(true);
 		}
 		break;
 	case PowerUp::UpgradeType::Reversed:
 		{
-			SetReversion();
+			SetReversion(true);
 		}
 		break;
 	case PowerUp::UpgradeType::Eatable:
 		{
-			snake.SetEatablility();
+			snake.SetEatablility(true);
 		}
 		break;
 	default:
@@ -346,7 +349,6 @@ void GameManager::ResetGame()
 
 	isPowerUpCollected = true;
 	GeneratePowerUp();
-	
 
 	isGameOver = false;
 	isInSnakeSelect = true;
@@ -408,17 +410,19 @@ void GameManager::TurnOffPowerUp()
 	else if (powerUp.GetPreviousType() == PowerUp::UpgradeType::Immunity)
 	{
 		background.SetFlickerStatus(false);
-		snake.TurnOffImmunization();
+		snake.SetImmunization(false);
 	}
 	else if (powerUp.GetPreviousType() == PowerUp::UpgradeType::Reversed)
 	{
-		TurnOffReversion();
+		SetReversion(false);
 	}
 	else if (powerUp.GetPreviousType() == PowerUp::UpgradeType::Eatable)
 	{
-		snake.TurnOffEatability();
+		snake.SetEatablility(false);
 	}
+
 	powerUp.SetPreviousType(PowerUp::UpgradeType::None);
+	powerUpDisplayer.StopDrawing();
 }
 
 bool const GameManager::IsReversed() const
@@ -426,17 +430,13 @@ bool const GameManager::IsReversed() const
 	return isReversed;
 }
 
-void GameManager::SetReversion()
+void GameManager::SetReversion(bool val)
 {
-	isReversed = true;
+	isReversed = val;
 }
 
-void GameManager::TurnOffReversion()
-{
-	isReversed = false;
-}
-
-void GameManager::FlickerBorder()
+void GameManager::FlickerObjects()
 {
 	background.Flicker();
+	powerUpDisplayer.Flicker();
 }

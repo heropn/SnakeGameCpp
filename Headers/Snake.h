@@ -47,16 +47,10 @@ public:
 	void SetPosition(float x, float y);
 
 	// Ustawia niewra¿liwoœæ
-	void SetImmunization();
+	void SetImmunization(bool val);
 
 	// Ustawia mo¿liwoœæ zjadania siebie
-	void SetEatablility();
-
-	// Wy³¹cza mo¿liwoœæ zjadania siebie
-	void TurnOffEatability();
-
-	// Wy³¹cza niewra¿liwoœæ
-	void TurnOffImmunization();
+	void SetEatablility(bool val);
 
 	// Zwraca true, jeœli snake jest niewra¿liwy
 	bool const IsImmunited() const;

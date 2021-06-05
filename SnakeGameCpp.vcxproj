@@ -168,6 +168,7 @@
     <ClCompile Include="Sources\Snake.cpp" />
     <ClCompile Include="Sources\SnakeSelectMenu.cpp" />
     <ClCompile Include="Sources\SoundBufferManager.cpp" />
+    <ClCompile Include="Sources\PowerUpDisplayer.cpp" />
     <ClCompile Include="Sources\TexturesManager.cpp" />
     <ClCompile Include="Sources\Title.cpp" />
     <ClCompile Include="Sources\TypeInArea.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="Headers\Snake.h" />
     <ClInclude Include="Headers\SnakeSelectMenu.h" />
     <ClInclude Include="Headers\SoundBufferManager.h" />
+    <ClInclude Include="Headers\PowerUpDisplayer.h" />
     <ClInclude Include="Headers\TexturesManager.h" />
     <ClInclude Include="Headers\Title.h" />
     <ClInclude Include="Headers\TypeInArea.h" />

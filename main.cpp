@@ -106,7 +106,7 @@ int main()
 				gameManager.CheckWhereIsSnake();
 				gameManager.MoveSnake();
 				gameManager.DrawInGameObjects(&window);
-				gameManager.FlickerBorder();
+				gameManager.FlickerObjects();
 			}
 		}
 		else

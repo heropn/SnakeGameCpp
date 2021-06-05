@@ -12,6 +12,7 @@
 #include "AudioManager.h"
 #include "SnakeSelectMenu.h"
 #include "PowerUp.h"
+#include "PowerUpDisplayer.h"
 
 class GameManager
 {
@@ -35,6 +36,7 @@ private:
 
 	Background background;
 	Title title;
+	PowerUpDisplayer powerUpDisplayer;
 
 	LoseScreen loseScreen;
 	TypeInArea typeInArea;
@@ -86,11 +88,9 @@ public:
 
 	void TurnOffPowerUp();
 
-	void SetReversion();
+	void SetReversion(bool val);
 
-	void TurnOffReversion();
-
-	void FlickerBorder();
+	void FlickerObjects();
 
 	// Daje Snake'owi okreœlony PowerUp
 	void GiveSnakePower(PowerUp::UpgradeType upgradeType);
