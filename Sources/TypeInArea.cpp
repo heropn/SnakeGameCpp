@@ -1,10 +1,10 @@
 #include "..\Headers\TypeInArea.h"
 #include <iostream>
 
-TypeInArea::TypeInArea() {}
+TypeInArea::TypeInArea() : maxLetters(8) {}
 
 TypeInArea::TypeInArea(std::shared_ptr<MyFont> fontDisplayText, std::shared_ptr<MyFont> fontTopText)
-	: fontDisplayText(fontDisplayText), fontTopText(fontTopText)
+	: fontDisplayText(fontDisplayText), fontTopText(fontTopText), maxLetters(8)
 {
 	SetUpTextes();
 	SetUpRectangle();
@@ -12,7 +12,7 @@ TypeInArea::TypeInArea(std::shared_ptr<MyFont> fontDisplayText, std::shared_ptr<
 
 void TypeInArea::UpdateText(sf::String str)
 {
-	if (playerInput.getSize() < 6)
+	if (playerInput.getSize() < maxLetters)
 	{
 		playerInput += str;
 		displayText.setString(playerInput);

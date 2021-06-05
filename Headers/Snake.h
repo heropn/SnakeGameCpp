@@ -28,6 +28,7 @@ public:
 	// Konstruktor domyœlny
 	Snake();
 
+	// Ustawia tekstury snake'a
 	void SetTextures(std::shared_ptr<MyTexture> headTexture, std::shared_ptr<MyTexture> bodyTexture);
 	
 	// Rysuje snake'a na ekranie
@@ -45,16 +46,22 @@ public:
 	// Ustawia pozycje snake'a
 	void SetPosition(float x, float y);
 
+	// Ustawia niewra¿liwoœæ
 	void SetImmunization();
 
+	// Ustawia mo¿liwoœæ zjadania siebie
 	void SetEatablility();
 
+	// Wy³¹cza mo¿liwoœæ zjadania siebie
 	void TurnOffEatability();
 
+	// Wy³¹cza niewra¿liwoœæ
 	void TurnOffImmunization();
 
+	// Zwraca true, jeœli snake jest niewra¿liwy
 	bool const IsImmunited() const;
 	
+	// Zwraca true, jeœli snake mo¿e siebie jeœæ
 	bool const IsEatable() const;
 
 	// Zmienia pozycje snake'a 
@@ -63,6 +70,7 @@ public:
 	// Zwiêksza wielkoœæ snake'a i jego prêdkoœæ
 	void Grow();
 
+	// Resetuje wszystkie ustawienia snake'a
 	void Reset();
 
 	// Zwraca pozycje g³owy snake'a
@@ -71,6 +79,7 @@ public:
 	// Zwraca rozmiar spritu snake'a
 	const sf::Vector2u GetSize() const;
 	
+	// Zwraca liczbê zjedzon¹ przez siebie
 	const int GetNumberOfDecreasedParts() const;
 
 	// Zwraca kierunek snake'a
@@ -79,6 +88,7 @@ public:
 	// Zwraca sprite'a snake'a
 	const sf::Sprite& GetSprite() const;
 
+	// Zwraca prêdkoœæ snake'a
 	const float GetSpeed() const;
 
 	// Funkcja sprawdza, czy Snake znajduje siê w polu gry

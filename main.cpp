@@ -99,12 +99,12 @@ int main()
 			}
 			else
 			{
-				
 				gameManager.CheckIfPickupOrPowerUpIsCollected();
 				gameManager.CheckPowerUpDuration();
 				gameManager.CheckWhereIsSnake();
 				gameManager.MoveSnake();
 				gameManager.DrawInGameObjects(&window);
+				gameManager.FlickerBorder();
 			}
 		}
 		else

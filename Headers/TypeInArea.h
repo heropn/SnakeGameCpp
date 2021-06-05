@@ -12,6 +12,7 @@ private:
 	std::shared_ptr<MyFont> fontDisplayText;
 	std::shared_ptr<MyFont> fontTopText;
 	sf::RectangleShape rectangle;
+	int maxLetters;
 
 public:
 	// Konstruktor domyœlny

@@ -22,8 +22,10 @@ private:
 	bool isPowerUpCollected;
 	bool isReversed;
 
+	float snakeSpeedMultiplier;
 	float timeBetweenPowerUps;
 	float powerUpDuration;
+
 	sf::Clock clock;
 	sf::Clock durationTime;
 
@@ -83,8 +85,13 @@ public:
 
 	bool const IsReversed() const;
 
+	void TurnOffPowerUp();
+
 	void SetReversion();
+
 	void TurnOffReversion();
+
+	void FlickerBorder();
 
 	// Daje Snake'owi okreœlony PowerUp
 	void GiveSnakePower(PowerUp::UpgradeType upgradeType);

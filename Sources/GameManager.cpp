@@ -2,7 +2,9 @@
 #include <random>
 #include <algorithm>
 
-GameManager::GameManager()
+GameManager::GameManager() : isGameOver(false), isInSnakeSelect(true), 
+	isPickUpCollected(true), isPowerUpCollected(true), isReversed(false),
+	timeBetweenPowerUps(-1.0f), powerUpDuration(5.0f), snakeSpeedMultiplier(1.5f)
 {
 	loseScreen = LoseScreen(fontsManager.GetFont(MyFont::Type::LostIsland),
 		fontsManager.GetFont(MyFont::Type::LostIsland));
@@ -29,13 +31,6 @@ GameManager::GameManager()
 	drawableEndGameObjects.push_back(&loseScreen);
 	drawableEndGameObjects.push_back(&typeInArea);
 
-	isGameOver = false;
-	isInSnakeSelect = true;
-	isPickUpCollected = true;
-	isPowerUpCollected = true;
-	isReversed = false;
-	timeBetweenPowerUps = -1.0f;
-	powerUpDuration = 5.0f;
 	GenerateSnakePosition();
 	GeneratePickUp();
 	GeneratePowerUp();
@@ -76,9 +71,16 @@ void GameManager::GeneratePickUp()
 
 void GameManager::GeneratePowerUp()
 {
-	if (isPowerUpCollected &&
-		(clock.getElapsedTime().asSeconds() > timeBetweenPowerUps || timeBetweenPowerUps < 0))
+	if (clock.getElapsedTime().asSeconds() > timeBetweenPowerUps
+		|| timeBetweenPowerUps < 0)
 	{
+		if (!isPowerUpCollected)
+		{
+			clock.restart();
+			drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(), drawableInGameObjects.end(), &powerUp), drawableInGameObjects.end());
+			durationTime.restart();
+		}
+
 		std::random_device device;
 		std::mt19937 generator(device());
 		std::uniform_real_distribution<float> posX(150.0f, 850.0f); //x e [100,900] y e [250,750]
@@ -106,7 +108,7 @@ void GameManager::GeneratePowerUp()
 
 		std::uniform_int_distribution<int> powerUpIndex(1, 5);
 
-		int upgradeTypeIndex = 2;//powerUpIndex(generator);
+		int upgradeTypeIndex = powerUpIndex(generator);
 
 		std::shared_ptr<MyTexture> powerUpTexture;
 
@@ -195,7 +197,11 @@ void GameManager::SetSnakeDirection(Snake::Direction direction)
 
 void GameManager::CheckWhereIsSnake()
 {
-	if (!snake.IsInArena(&background) || snake.IsCollision())
+	if (snake.IsCollision() && snake.IsEatable())
+	{
+		scoreManager.SubtractScore(snake.GetNumberOfDecreasedParts());
+	}
+	else if (!snake.IsInArena(&background) || snake.IsCollision())
 	{
 		if (!snake.IsImmunited())
 		{
@@ -204,11 +210,6 @@ void GameManager::CheckWhereIsSnake()
 			sf::sleep(sf::seconds(1.0f));
 			isGameOver = true;
 		}
-	}
-
-	if (snake.IsEatable())
-	{
-		scoreManager.SubtractScore(snake.GetNumberOfDecreasedParts());
 	}
 }
 
@@ -224,7 +225,6 @@ bool GameManager::IsInSnakeSelectMenu()
 
 void GameManager::CheckIfPickupOrPowerUpIsCollected()
 {
-	
 	if (pickUp.IsCollected(&snake))
 	{
 		audioManager.PlaySound(MySoundBuffer::Type::Coin);
@@ -293,17 +293,18 @@ void GameManager::GiveSnakePower(PowerUp::UpgradeType upgradeType)
 	{
 	case PowerUp::UpgradeType::Speed:
 		{
-			snake.SetSpeed(snake.GetSpeed() * 2.0f);
+			snake.SetSpeed(snake.GetSpeed() * snakeSpeedMultiplier);
 		}
 		break;
 	case PowerUp::UpgradeType::Slow:
 		{
-			snake.SetSpeed(snake.GetSpeed() / 2.0f);
+			snake.SetSpeed(snake.GetSpeed() / snakeSpeedMultiplier);
 		}
 		break;
 	case PowerUp::UpgradeType::Immunity:
 		{
 			snake.SetImmunization();
+			background.SetFlickerStatus(true);
 		}
 		break;
 	case PowerUp::UpgradeType::Reversed:
@@ -315,7 +316,7 @@ void GameManager::GiveSnakePower(PowerUp::UpgradeType upgradeType)
 		{
 			snake.SetEatablility();
 		}
-		break;	
+		break;
 	default:
 		break;
 	}
@@ -325,14 +326,28 @@ void GameManager::ResetGame()
 {
 	scoreManager.ResetScore();
 	typeInArea.Reset();
+	TurnOffPowerUp();
 
-	drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(), drawableInGameObjects.end(), &pickUp), drawableInGameObjects.end());
+	timeBetweenPowerUps = -1.0f;
+
+	drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(), 
+		drawableInGameObjects.end(), &pickUp), 
+		drawableInGameObjects.end());
+
+	drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(),
+		drawableInGameObjects.end(), &powerUp),
+		drawableInGameObjects.end());
 
 	snake.Reset();
 
-	isPickUpCollected = true;
 	GenerateSnakePosition();
+
+	isPickUpCollected = true;
 	GeneratePickUp();
+
+	isPowerUpCollected = true;
+	GeneratePowerUp();
+	
 
 	isGameOver = false;
 	isInSnakeSelect = true;
@@ -377,28 +392,34 @@ void GameManager::CheckPowerUpDuration()
 {
 	if (durationTime.getElapsedTime().asSeconds() > powerUpDuration)
 	{
-		if (powerUp.GetPreviousType() == PowerUp::UpgradeType::Speed)
-		{
-			snake.SetSpeed(snake.GetSpeed() / 2.0f);
-		}
-		else if (powerUp.GetPreviousType() == PowerUp::UpgradeType::Slow)
-		{
-			snake.SetSpeed(snake.GetSpeed() * 2.0f);
-		}
-		else if (powerUp.GetPreviousType() == PowerUp::UpgradeType::Immunity)
-		{
-			snake.TurnOffImmunization();
-		}
-		else if (powerUp.GetPreviousType() == PowerUp::UpgradeType::Reversed)
-		{
-			TurnOffReversion();
-		}
-		else if (powerUp.GetPreviousType() == PowerUp::UpgradeType::Eatable)
-		{
-			snake.TurnOffEatability();
-		}
-		powerUp.SetPreviousType(PowerUp::UpgradeType::None);
+		TurnOffPowerUp();
 	}
+}
+
+void GameManager::TurnOffPowerUp()
+{
+	if (powerUp.GetPreviousType() == PowerUp::UpgradeType::Speed)
+	{
+		snake.SetSpeed(snake.GetSpeed() / snakeSpeedMultiplier);
+	}
+	else if (powerUp.GetPreviousType() == PowerUp::UpgradeType::Slow)
+	{
+		snake.SetSpeed(snake.GetSpeed() * snakeSpeedMultiplier);
+	}
+	else if (powerUp.GetPreviousType() == PowerUp::UpgradeType::Immunity)
+	{
+		background.SetFlickerStatus(false);
+		snake.TurnOffImmunization();
+	}
+	else if (powerUp.GetPreviousType() == PowerUp::UpgradeType::Reversed)
+	{
+		TurnOffReversion();
+	}
+	else if (powerUp.GetPreviousType() == PowerUp::UpgradeType::Eatable)
+	{
+		snake.TurnOffEatability();
+	}
+	powerUp.SetPreviousType(PowerUp::UpgradeType::None);
 }
 
 bool const GameManager::IsReversed() const
@@ -414,4 +435,9 @@ void GameManager::SetReversion()
 void GameManager::TurnOffReversion()
 {
 	isReversed = false;
+}
+
+void GameManager::FlickerBorder()
+{
+	background.Flicker();
 }

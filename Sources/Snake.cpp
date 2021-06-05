@@ -104,24 +104,24 @@ bool Snake::IsInArena(Background* background)
 	{
 		if (immunited)
 		{
-			if (snakesrightBorder >= rightBorder)
+			if (snakesrightBorder > rightBorder)
 			{
-				SetPosition(snakesPosition.x - size.x + 10 ,snakesPosition.y);
+				SetPosition(snakesPosition.x - size.x + 15 ,snakesPosition.y);
 			}
 
-			if (snakesleftBorder <= leftBorder)
+			if (snakesleftBorder < leftBorder)
 			{
-				SetPosition(snakesPosition.x + size.x - 10, snakesPosition.y);
+				SetPosition(snakesPosition.x + size.x - 15, snakesPosition.y);
 			}
 
-			if (snakesTopBorder <= topBorder)
+			if (snakesTopBorder < topBorder)
 			{
-				SetPosition(snakesPosition.x , snakesPosition.y + size.y - 10);
+				SetPosition(snakesPosition.x , snakesPosition.y + size.y - 15);
 			}
 
-			if (snakesbottomBorder >= bottomBorder)
+			if (snakesbottomBorder > bottomBorder)
 			{
-				SetPosition(snakesPosition.x, snakesPosition.y - size.y + 10);
+				SetPosition(snakesPosition.x, snakesPosition.y - size.y + 15);
 			}
 		}
 		return false;
@@ -171,15 +171,14 @@ bool Snake::IsCollision()
 		if (positions.size() - 1 - i < 0 || positions.size() - 1 - i > positions.size())
 			continue;
 
-		if (abs(positions[positions.size() - 1].x - positions[positions.size() - 1 - i].x) < 10 &&
-			abs(positions[positions.size() - 1].y - positions[positions.size() - 1 - i].y) < 10)
+		if (abs(positions[positions.size() - 1].x - positions[positions.size() - 1 - i].x) < 5.0f &&
+			abs(positions[positions.size() - 1].y - positions[positions.size() - 1 - i].y) < 5.0f)
 		{
 			if (isEatable)
 			{
-				//positions.erase(positions.begin() + i, positions.end());
+				numberOfDecresedParts = size - i;
 				size -= size - i ;
-				numberOfDecresedParts = positions.size() - i;
-				break;
+				return true;
 			}
 			else
 			{
