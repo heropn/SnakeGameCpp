@@ -412,6 +412,10 @@ void GameManager::ResetGame()
 		drawableInGameObjects.end(), &powerUp),
 		drawableInGameObjects.end());
 
+	drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(),
+		drawableInGameObjects.end(), &block),
+		drawableInGameObjects.end());
+
 	snake.Reset();
 
 	GenerateSnakePosition();
@@ -421,7 +425,7 @@ void GameManager::ResetGame()
 
 	isPowerUpCollected = true;
 	GeneratePowerUp();
-
+	GenerateBlock();
 	isGameOver = false;
 	isInSnakeSelect = true;
 }
