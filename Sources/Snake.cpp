@@ -83,7 +83,7 @@ bool Snake::IsInArena(Background* background)
 	sf::Vector2f size = background->GetShape().getSize();
 
 	sf::Vector2f snakesPosition = GetPosition();
-	sf::Vector2u snakesSize = headTexture->getSize();
+	sf::Vector2u snakesSize = GetSize();
 
 	float topBorder = position.y - size.y / 2;
 	float rightBorder = position.x + size.x / 2;

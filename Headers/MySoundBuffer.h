@@ -10,7 +10,8 @@ public:
 		Coin,
 		PowerUp,
 		Defeat,
-		Music
+		MenuMusic,
+		GameMusic
 	};
 
 private:

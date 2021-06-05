@@ -32,7 +32,6 @@ private:
 	Snake snake;
 	PickUp pickUp;
 	PowerUp powerUp;
-	
 
 	Background background;
 	Title title;

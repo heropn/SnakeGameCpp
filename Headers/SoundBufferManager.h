@@ -19,7 +19,8 @@ private:
 		{".\\Sounds\\Coin.wav", MySoundBuffer::Type::Coin},
 		{".\\Sounds\\Defeat.wav", MySoundBuffer::Type::Defeat},
 		{".\\Sounds\\PowerUp.wav", MySoundBuffer::Type::PowerUp},
-		{".\\Sounds\\Music.wav", MySoundBuffer::Type::Music}
+		{".\\Sounds\\MusicMenu.wav", MySoundBuffer::Type::MenuMusic},
+		{".\\Sounds\\MusicGame.wav", MySoundBuffer::Type::GameMusic}
 	};
 
 public:

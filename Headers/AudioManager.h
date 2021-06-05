@@ -31,7 +31,9 @@ public:
 	// Gra podany typ düwieku
 	const void PlaySound(MySoundBuffer::Type type);
 
+	const void StopSound(MySoundBuffer::Type type);
+
 private:
 	// Ustawia odpowiednie g≥oúnoúci wszystkim düwiÍkom
-	void SetVolumes();
+	void SetSoundDetails();
 };

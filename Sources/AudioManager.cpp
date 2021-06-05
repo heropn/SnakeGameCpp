@@ -22,7 +22,7 @@ AudioManager::AudioManager()
 		sounds.push_back(sb);
 	}
 
-	SetVolumes();
+	SetSoundDetails();
 }
 
 const void AudioManager::PlaySound(MySoundBuffer::Type type)
@@ -37,7 +37,19 @@ const void AudioManager::PlaySound(MySoundBuffer::Type type)
 	}
 }
 
-void AudioManager::SetVolumes()
+const void AudioManager::StopSound(MySoundBuffer::Type type)
+{
+	for (auto& mySound : sounds)
+	{
+		if (mySound.GetType() == type)
+		{
+			mySound.sound.stop();
+			break;
+		}
+	}
+}
+
+void AudioManager::SetSoundDetails()
 {
 	for (auto& mySound : sounds)
 	{
@@ -58,9 +70,15 @@ void AudioManager::SetVolumes()
 				mySound.sound.setVolume(100.0f);
 			}
 			break;
-			case MySoundBuffer::Type::Music:
+			case MySoundBuffer::Type::MenuMusic:
 			{
-				mySound.sound.setVolume(30.0f);
+				mySound.sound.setVolume(10.0f);
+				mySound.sound.setLoop(true);
+			}
+			break;
+			case MySoundBuffer::Type::GameMusic:
+			{
+				mySound.sound.setVolume(10.0f);
 				mySound.sound.setLoop(true);
 			}
 			break;
