@@ -1,13 +1,16 @@
-#include "..\headers\Credits.h"
+#include "..\Headers\Credits.h"
 
-Credits::Credits() {
-	PauliTexture.loadFromFile(".\\Textures\\credits.png");
-	Pauli.setTexture(PauliTexture);
-	Pauli.setPosition(100.0, 300.0);
+Credits::Credits() {};
+
+void Credits::SetTexture(std::shared_ptr<MyTexture> texture)
+{
+	this->texture = texture;
+	sprite.setTexture(*this->texture);
 }
 
-void Credits::Draw(sf::RenderWindow* window) {
-	window->draw(Pauli);
+void Credits::Draw(sf::RenderWindow* window)
+{
+	window->draw(sprite);
 	back.Draw(window);
 }
 
@@ -16,11 +19,10 @@ bool Credits::CheckIfButtonWasClicked(sf::Vector2i vec)
 	sf::Vector2f vecF = { (float)vec.x, (float)vec.y };
 
 	return (back.rectangle.getGlobalBounds().contains(vecF.x, vecF.y));
-
 };
 
-void Credits::setFont(std::shared_ptr<MyFont> fontTitleText)
+void Credits::SetFont(std::shared_ptr<MyFont> font)
 {
-	this->fontTitleText = fontTitleText;
-	back = Button("RETURN", 600.0, 700.0, fontTitleText);
+	this->fontTitleText = font;
+	back = Button("RETURN", 325.0f, 700.0f, font);
 }

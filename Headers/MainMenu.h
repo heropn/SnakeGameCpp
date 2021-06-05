@@ -37,7 +37,9 @@ public:
 		Help
 	};
 	Mode currentMode;
-	MainMenu(sf::RenderWindow& win, std::shared_ptr<MyFont> fontPtrTitle, std::shared_ptr<MyFont> fontPtrButtons, std::shared_ptr<MyTexture> menuTexture);
+	MainMenu(sf::RenderWindow& win, std::shared_ptr<MyFont> fontPtrTitle,
+		std::shared_ptr<MyFont> fontPtrButtons, std::shared_ptr<MyTexture> menuTexture,
+		std::shared_ptr<MyTexture> creditsTexture, std::shared_ptr<MyTexture> helpTexture);
 	void DrawButtonsAndTitle();
 	void CheckIfButtonWasClicked(sf::Vector2i vec);
 	bool IsInMainMenu();

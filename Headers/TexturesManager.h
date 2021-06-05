@@ -32,6 +32,8 @@ private:
 		{".\\Textures\\Apple.png", MyTexture::Type::Apple},
 		{".\\Textures\\Arena.png", MyTexture::Type::Arena},
 		{".\\Textures\\Menu.png", MyTexture::Type::Menu},
+		{".\\Textures\\Credits.png", MyTexture::Type::CreditsScreen},
+		{".\\Textures\\HelpScreen.png", MyTexture::Type::HelpScreen},
 		{".\\Textures\\SpeedPowerUp.png", MyTexture::Type::PowerUpSpeed},
 		{".\\Textures\\ReversePowerUp.png", MyTexture::Type::PowerUpReverseSides},
 		{".\\Textures\\EatablePowerUp.png", MyTexture::Type::PowerUpEatableSnake},

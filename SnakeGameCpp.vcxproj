@@ -152,8 +152,10 @@
     <ClCompile Include="Sources\AudioManager.cpp" />
     <ClCompile Include="Sources\Background.cpp" />
     <ClCompile Include="Sources\Button.cpp" />
+    <ClCompile Include="Sources\Credits.cpp" />
     <ClCompile Include="Sources\FontsManager.cpp" />
     <ClCompile Include="Sources\GameManager.cpp" />
+    <ClCompile Include="Sources\Help.cpp" />
     <ClCompile Include="Sources\HighScoreEntity.cpp" />
     <ClCompile Include="Sources\HighScoreManager.cpp" />
     <ClCompile Include="Sources\LoseScreen.cpp" />
@@ -177,8 +179,10 @@
     <ClInclude Include="Headers\AudioManager.h" />
     <ClInclude Include="Headers\Background.h" />
     <ClInclude Include="Headers\Button.h" />
+    <ClInclude Include="Headers\Credits.h" />
     <ClInclude Include="Headers\FontsManager.h" />
     <ClInclude Include="Headers\GameManager.h" />
+    <ClInclude Include="Headers\Help.h" />
     <ClInclude Include="Headers\HighScoreEntity.h" />
     <ClInclude Include="Headers\HighScoreManager.h" />
     <ClInclude Include="Headers\IDrawable.h" />

@@ -20,7 +20,7 @@ void HighScoreManager::SetFonts(std::shared_ptr<MyFont> fontTitleText, std::shar
 	LoadScoresFromFile();
 	SortHighScores();
 	SetUpText();
-	back = Button("RETURN", 600.0, 700.0, fontTitleText);
+	back = Button("RETURN", 325.0f, 700.0f, fontHighScores);
 }
 
 void HighScoreManager::LoadScoresFromFile()

@@ -22,6 +22,8 @@ public:
 		Apple,
 		Arena,
 		Menu,
+		HelpScreen,
+		CreditsScreen,
 		PowerUpSpeed,
 		PowerUpImmunity,
 		PowerUpEatableSnake,

@@ -12,10 +12,12 @@ int main()
 	window.setFramerateLimit(60);
 
 	GameManager gameManager;
-	MainMenu mainMenu(window, 
+	MainMenu mainMenu(window,
 		gameManager.GetFontsManager().GetFont(MyFont::Type::Snake),
 		gameManager.GetFontsManager().GetFont(MyFont::Type::LostIsland),
-		gameManager.GetTextureManager().GetTexture(MyTexture::Type::Menu));
+		gameManager.GetTextureManager().GetTexture(MyTexture::Type::Menu),
+		gameManager.GetTextureManager().GetTexture(MyTexture::Type::CreditsScreen),
+		gameManager.GetTextureManager().GetTexture(MyTexture::Type::HelpScreen));
 
 	gameManager.GetAudioManager().PlaySound(MySoundBuffer::Type::GameMusic);
 
@@ -49,10 +51,11 @@ int main()
 			}
 		}
 
-		window.clear(sf::Color::Color(216,253,176));
+		window.clear(sf::Color(216,253,176));
 
 		if (mainMenu.IsInMainMenu() || mainMenu.currentMode != MainMenu::Mode::Default)
 		{
+			window.clear(sf::Color::Black);
 			mainMenu.DrawButtonsAndTitle();
 		}
 		else if (!gameManager.IsGameOver())

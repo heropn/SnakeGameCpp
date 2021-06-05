@@ -1,8 +1,11 @@
 #include "../Headers/MainMenu.h"
 #include <iostream>
 
-MainMenu::MainMenu(sf::RenderWindow& win, std::shared_ptr<MyFont> fontPtrTitle, std::shared_ptr<MyFont> fontPtrButtons, std::shared_ptr<MyTexture> menuTexture)
-	: window(&win), fontPtrTitle(fontPtrTitle), fontPtrButtons(fontPtrButtons), isInMainMenu(true), currentMode(Mode::Default), texture(menuTexture)
+MainMenu::MainMenu(sf::RenderWindow& win, std::shared_ptr<MyFont> fontPtrTitle,
+	std::shared_ptr<MyFont> fontPtrButtons, std::shared_ptr<MyTexture> menuTexture,
+	std::shared_ptr<MyTexture> creditsTexture, std::shared_ptr<MyTexture> helpTexture)
+	: window(&win), fontPtrTitle(fontPtrTitle), fontPtrButtons(fontPtrButtons),
+	isInMainMenu(true), currentMode(Mode::Default), texture(menuTexture)
 {
 	float x_offset = 550, y_offset_start = 250, y_offset = 100; //y_offset_start - startowe odsuniêcie od góry, y_offset - odstêp pomiêdzy kolejnymi przyciskami
 	start = Button("PLAY", x_offset, y_offset_start, fontPtrButtons);
@@ -11,10 +14,13 @@ MainMenu::MainMenu(sf::RenderWindow& win, std::shared_ptr<MyFont> fontPtrTitle, 
 	credits = Button("CREDITS", x_offset, 3 * y_offset + y_offset_start, fontPtrButtons);
 	quit = Button("EXIT", x_offset, 4 * y_offset + y_offset_start, fontPtrButtons);
 
+	creditsScreen.SetTexture(creditsTexture);
+	helpScreen.SetTexture(helpTexture);
+
 	snake.SetFont(fontPtrTitle);
 	highScoreManager.SetFonts(fontPtrTitle, fontPtrButtons);
-	helpScreen.setFont(fontPtrTitle);
-	creditsScreen.setFont(fontPtrTitle);
+	helpScreen.SetFont(fontPtrButtons);
+	creditsScreen.SetFont(fontPtrButtons);
 	SetSprite();
 }
 
