@@ -65,6 +65,7 @@ public:
 	// Podczas tworzenia obiektu ustawia wszystkie parametry swoich atrybutów
 	GameManager();
 
+	// Destruktror, usuwa wszystkie obiekty zalokowane dynamicznie
 	~GameManager();
 
 	// Rysuje wszystkie rysowalne obiekty, które znajduj¹ siê w oknie podczas trwania gry

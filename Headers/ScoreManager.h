@@ -24,7 +24,7 @@ public:
 	void Draw(sf::RenderWindow* window);
 
 	// Dodaje punkty do aktualnego wyniku
-	void AddScore();
+	void AddScore(int score);
 
 	void SubtractScore(int howMuchSubtractScore);
 

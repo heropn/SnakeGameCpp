@@ -210,7 +210,7 @@ void GameManager::GenerateBlock()
 			x = posX(generator);
 			y = posY(generator);
 
-			if (!snake.IsObjectOnSnake(x, y, texture->getSize(), 100.0f) &&
+			if (!snake.IsObjectOnSnake(x, y, texture->getSize(), 50.0f) &&
 				!powerUp.IsColliding({ x, y }, texture->getSize(), 20.0f) &&
 				!pickUp.IsColliding({ x, y }, texture->getSize(), 20.0f) &&
 				!IsObjectOnBlock(x, y, texture->getSize()))
@@ -334,7 +334,16 @@ void GameManager::CheckIfPickupOrPowerUpIsCollected()
 	if (pickUp.IsColliding(snake.GetPosition(), snake.GetSize()))
 	{
 		audioManager.PlaySound(MySoundBuffer::Type::Coin);
-		scoreManager.AddScore();
+
+		if (isPlayingClassicMode)
+		{
+			scoreManager.AddScore(10);
+		}
+		else
+		{
+			scoreManager.AddScore(20);
+		}
+		
 		isPickUpCollected = true;
 		snake.Grow();
 		drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(),
@@ -358,6 +367,7 @@ void GameManager::CheckIfPickupOrPowerUpIsCollected()
 		powerUp.SetPreviousType(powerUp.GetUpgradeType());
 		powerUp.SetNone();
 	}
+
 	GeneratePowerUp();
 }
 

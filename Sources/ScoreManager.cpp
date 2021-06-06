@@ -13,9 +13,9 @@ void ScoreManager::Draw(sf::RenderWindow* window)
 	window->draw(text);
 }
 
-void ScoreManager::AddScore()
+void ScoreManager::AddScore(int score)
 {
-	currentScore += 10;
+	currentScore += score;
 	text.setString(scoreStr + std::to_string(currentScore));
 	auto rect = text.getLocalBounds();
 	text.setOrigin(rect.width / 2, rect.height / 2);

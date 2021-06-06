@@ -245,15 +245,31 @@ bool Snake::IsObjectOnSnake(float posX, float posY, sf::Vector2u objSize, float 
 	float leftBorder = 0; 
 	float bottomBorder = 0; 
 
-	float objectTopBorder = posY - ((float)objSize.y + additionalDistance) / 2 + 100000.0f;
-	float objectRightBorder = posX + ((float)objSize.x + additionalDistance) / 2 + 100000.0f;
-	float objectLeftBorder = posX - ((float)objSize.x + additionalDistance) / 2 + 100000.0f;
-	float objectBottomBorder = posY + ((float)objSize.y + additionalDistance) / 2 + 100000.0f;
+	float objectTopBorder = posY - ((float)objSize.y + additionalDistance) / 2;
+	float objectRightBorder = posX + ((float)objSize.x + additionalDistance) / 2;
+	float objectLeftBorder = posX - ((float)objSize.x + additionalDistance) / 2;
+	float objectBottomBorder = posY + ((float)objSize.y + additionalDistance) / 2;
 
 	for (unsigned int i = 0; i < size; i++)
 	{
 		if (positions.size() <= i)
 		{
+			if (i == 0)
+			{
+				topBorder = GetPosition().y - (float)snakesSize.y;
+				rightBorder = GetPosition().x + (float)snakesSize.x;
+				leftBorder = GetPosition().x - (float)snakesSize.x;
+				bottomBorder = GetPosition().y + (float)snakesSize.y;
+
+				if (objectTopBorder < bottomBorder &&
+					objectBottomBorder > topBorder &&
+					objectLeftBorder < rightBorder &&
+					objectRightBorder > leftBorder)
+				{
+					return true;
+				}
+			}
+
 			break;
 		}
 
