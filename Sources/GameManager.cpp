@@ -3,9 +3,9 @@
 #include <algorithm>
 
 GameManager::GameManager() : isGameOver(false), isInSnakeSelect(true), isInModeSelect(true),
-	isPickUpCollected(true), isPowerUpCollected(true), isReversed(false),
+	isPickUpCollected(true), isPowerUpCollected(true), isReversed(false), isPlayingClassicMode(true),
 	timeBetweenPowerUps(-1.0f), powerUpDuration(5.0f), snakeSpeedMultiplier(1.5f),
-	howManyBlocks(5)
+	howManyBlocks(10)
 {
 	loseScreen = LoseScreen(fontsManager.GetFont(MyFont::Type::LostIsland),
 		fontsManager.GetFont(MyFont::Type::LostIsland));
@@ -28,60 +28,31 @@ GameManager::GameManager() : isGameOver(false), isInSnakeSelect(true), isInModeS
 	modeSelectMenu = ModeSelectMenu(GetFontsManager().GetFont(MyFont::Type::Snake),
 		GetFontsManager().GetFont(MyFont::Type::LostIsland));
 	modeSelectMenu.AddTexture(GetTextureManager().GetTexture(MyTexture::Type::ClassicArena));
-	modeSelectMenu.AddTexture(GetTextureManager().GetTexture(MyTexture::Type::ClassicArena));
+	modeSelectMenu.AddTexture(GetTextureManager().GetTexture(MyTexture::Type::UltraArena));
 
 	drawableInGameObjects.push_back(&background);
 	drawableInGameObjects.push_back(&snake);
 	drawableInGameObjects.push_back(&scoreManager);
 	drawableInGameObjects.push_back(&title);
-	drawableInGameObjects.push_back(&powerUpDisplayer);
 
 	drawableEndGameObjects.push_back(&loseScreen);
 	drawableEndGameObjects.push_back(&typeInArea);
 
 	GenerateSnakePosition();
-
-	for (int i = 0; i < howManyBlocks; i++)
-	{
-		GenerateBlock();
-	}
-	
 	GeneratePickUp();
 	GeneratePowerUp();
 }
 
-bool GameManager::IsObjectOnBlock(float posX, float posY, sf::Vector2u pickUpSize)
+bool GameManager::IsObjectOnBlock(float posX, float posY, sf::Vector2u objSize, float additionalValue)
 {
-	if (blocks.size() == 0)
-		return false;
-
-	sf::Vector2u blockSize = blocks[0]->GetSize();
-
-	float topBorder = 0;
-	float rightBorder = 0;
-	float leftBorder = 0;
-	float bottomBorder = 0;
-
-	float pickUpTopBorder = posY - pickUpSize.y / 2;
-	float pickUpRightBorder = posX + pickUpSize.x / 2;
-	float pickUpLeftBorder = posX - pickUpSize.x / 2;
-	float pickUpBottomBorder = posY + pickUpSize.y / 2;
-
 	for (const auto& block : blocks)
 	{
-		topBorder = block->GetPosition().y - (float)blockSize.y;
-		rightBorder = block->GetPosition().x + (float)blockSize.x;
-		leftBorder = block->GetPosition().x - (float)blockSize.x;
-		bottomBorder = block->GetPosition().y + (float)blockSize.y;
-
-		if (pickUpTopBorder < bottomBorder &&
-			pickUpBottomBorder > topBorder &&
-			pickUpLeftBorder < rightBorder &&
-			pickUpRightBorder > leftBorder)
+		if (block->IsColliding({ posX, posY }, objSize, additionalValue))
 		{
 			return true;
 		}
 	}
+	
 	return false;
 }
 
@@ -121,6 +92,9 @@ void GameManager::GeneratePickUp()
 
 void GameManager::GeneratePowerUp()
 {
+	if (isPlayingClassicMode)
+		return;
+
 	if (clock.getElapsedTime().asSeconds() > timeBetweenPowerUps
 		|| timeBetweenPowerUps < 0)
 	{
@@ -203,14 +177,31 @@ void GameManager::GeneratePowerUp()
 
 void GameManager::GenerateBlock()
 {
+	if (isPlayingClassicMode)
+		return;
+
 	std::random_device device;
 	std::mt19937 generator(device());
 	std::uniform_real_distribution<float> posX(150.0f, 850.0f); //x e [100,900] y e [250,750]
 	std::uniform_real_distribution<float> posY(300.0f, 700.0f);
+	std::uniform_int_distribution<int> textureNum(0, 1);
 
 	bool isAvailable = false;
 	float x = posX(generator);
 	float y = posY(generator);
+
+	int random = textureNum(generator);
+
+	std::shared_ptr<MyTexture> texture;
+
+	if (random == 0)
+	{
+		texture = texturesManager.GetTexture(MyTexture::Type::BlockH);
+	}
+	else
+	{
+		texture = texturesManager.GetTexture(MyTexture::Type::BlockV);
+	}
 
 	if (blocks.size() != 0)
 	{
@@ -219,14 +210,17 @@ void GameManager::GenerateBlock()
 			x = posX(generator);
 			y = posY(generator);
 
-			if (!snake.IsObjectOnSnake(x, y, blocks[0]->GetSize()))
+			if (!snake.IsObjectOnSnake(x, y, texture->getSize(), 100.0f) &&
+				!powerUp.IsColliding({ x, y }, texture->getSize(), 20.0f) &&
+				!pickUp.IsColliding({ x, y }, texture->getSize(), 20.0f) &&
+				!IsObjectOnBlock(x, y, texture->getSize()))
 			{
 				isAvailable = true;
 			}
 		}
 	}
 
-	blocks.push_back(new Block(x, y, texturesManager.GetTexture(MyTexture::Type::Block)));
+	blocks.push_back(new Block(x, y, texture));
 	drawableInGameObjects.push_back(blocks[blocks.size() - 1]);
 
 	// Powodowanie, ¿e snejk zawsze jest na górze wszystkich tekstur bloków widocznych w grze
@@ -269,7 +263,7 @@ void GameManager::GenerateSnakePosition()
 	std::mt19937 generator(device());
 	std::uniform_real_distribution<float> posX(300.0f, 700.0f); //x e [300, 700] y e [400,600]
 	std::uniform_real_distribution<float> posY(400.0f, 600.0f);
-	std::uniform_int_distribution<int>direction(0, 3); // kierunek
+	std::uniform_int_distribution<int> direction(0, 3); // kierunek
 
 	float x = posX(generator);
 	float y = posY(generator);
@@ -309,7 +303,7 @@ void GameManager::CheckWhereIsSnake()
 	{
 		for (const auto& block : blocks)
 		{
-			if (block->IsColliding(&snake))
+			if (block->IsColliding(snake.GetPosition(), snake.GetSize(), -20.0f))
 			{
 				loseScreen.SetScore(scoreManager.GetScore());
 				audioManager.PlaySound(MySoundBuffer::Type::Defeat);
@@ -337,7 +331,7 @@ bool GameManager::IsInModeSelectMenu()
 
 void GameManager::CheckIfPickupOrPowerUpIsCollected()
 {
-	if (pickUp.IsColliding(&snake))
+	if (pickUp.IsColliding(snake.GetPosition(), snake.GetSize()))
 	{
 		audioManager.PlaySound(MySoundBuffer::Type::Coin);
 		scoreManager.AddScore();
@@ -349,7 +343,7 @@ void GameManager::CheckIfPickupOrPowerUpIsCollected()
 		GeneratePickUp();
 	}
 
-	if (powerUp.IsColliding(&snake)
+	if (powerUp.IsColliding(snake.GetPosition(), snake.GetSize())
 		&& powerUp.GetUpgradeType() != PowerUp::UpgradeType::None)
 	{
 		audioManager.PlaySound(MySoundBuffer::Type::PowerUp);
@@ -412,16 +406,26 @@ void GameManager::CheckIfModeWasSelected(sf::Vector2i position)
 {
 	switch (modeSelectMenu.GetClickedMode(position))
 	{
-	case MyTexture::Type::ClassicArena:
-	{
-		//snake.SetTextures(texturesManager.GetTexture(MyTexture::Type::SnakeHeadGreen),
-			//texturesManager.GetTexture(MyTexture::Type::SnakeBodyGreen));
-
-		isInModeSelect = false;
-	}
-	break;
-	default:
+		case MyTexture::Type::ClassicArena:
+		{
+			isPlayingClassicMode = true;
+			isInModeSelect = false;
+		}
 		break;
+		case MyTexture::Type::UltraArena:
+		{
+			drawableInGameObjects.push_back(&powerUpDisplayer);
+			isPlayingClassicMode = false;
+			isInModeSelect = false;
+
+			for (int i = 0; i < howManyBlocks; i++)
+			{
+				GenerateBlock();
+			}
+		}
+		break;
+		default:
+			break;
 	}
 }
 
@@ -443,6 +447,11 @@ void GameManager::GiveSnakePower(PowerUp::UpgradeType upgradeType)
 		{
 			snake.SetImmunization(true);
 			background.SetFlickerStatus(true);
+
+			for (const auto& block : blocks)
+			{
+				block->SetFlickerStatus(true);
+			}
 		}
 		break;
 	case PowerUp::UpgradeType::Reversed:
@@ -476,6 +485,10 @@ void GameManager::ResetGame()
 		drawableInGameObjects.end(), &powerUp),
 		drawableInGameObjects.end());
 
+	drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(),
+		drawableInGameObjects.end(), &powerUpDisplayer),
+		drawableInGameObjects.end());
+
 	for (size_t i = 0; i < blocks.size(); i++)
 	{
 		drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(),
@@ -484,7 +497,7 @@ void GameManager::ResetGame()
 
 		delete blocks[i];
 	}
-	
+
 	blocks.clear();
 
 	snake.Reset();
@@ -494,11 +507,7 @@ void GameManager::ResetGame()
 	isPickUpCollected = true;
 	GeneratePickUp();
 
-	for (int i = 0; i < howManyBlocks; i++)
-	{
-		GenerateBlock();
-	}
-
+	isPlayingClassicMode = true;
 	isPowerUpCollected = true;
 	GeneratePowerUp();
 	isGameOver = false;
@@ -562,6 +571,12 @@ void GameManager::TurnOffPowerUp()
 	else if (powerUp.GetPreviousType() == PowerUp::UpgradeType::Immunity)
 	{
 		background.SetFlickerStatus(false);
+
+		for (const auto& block : blocks)
+		{
+			block->SetFlickerStatus(false);
+		}
+
 		snake.SetImmunization(false);
 	}
 	else if (powerUp.GetPreviousType() == PowerUp::UpgradeType::Reversed)
@@ -591,6 +606,11 @@ void GameManager::FlickerObjects()
 {
 	background.Flicker();
 	powerUpDisplayer.Flicker();
+
+	for (const auto& block : blocks)
+	{
+		block->Flicker();
+	}
 }
 
 GameManager::~GameManager()

@@ -29,8 +29,10 @@ public:
 		PowerUpEatableSnake,
 		PowerUpReverseSides,
 		PowerUpSlow,
-		Block,
+		BlockV,
+		BlockH,
 		ClassicArena,
+		UltraArena,
 		None
 	};
 

@@ -39,8 +39,10 @@ private:
 		{".\\Textures\\EatablePowerUp.png", MyTexture::Type::PowerUpEatableSnake},
 		{".\\Textures\\ImmunityPowerUp.png", MyTexture::Type::PowerUpImmunity},
 		{".\\Textures\\SlowPowerUp.png", MyTexture::Type::PowerUpSlow},
-		{".\\Textures\\Block.png", MyTexture::Type::Block},
-		{".\\Textures\\ClassicArena.png", MyTexture::Type::ClassicArena}
+		{".\\Textures\\BlockHorizontal.png", MyTexture::Type::BlockH},
+		{".\\Textures\\BlockVertical.png", MyTexture::Type::BlockV},
+		{".\\Textures\\ClassicArena.png", MyTexture::Type::ClassicArena},
+		{".\\Textures\\UltraArena.png", MyTexture::Type::UltraArena}
 	};
 
 public:

@@ -24,7 +24,7 @@ public:
 	void Draw(sf::RenderWindow* window);
 
 	// Zwraca wartoœæ, czy snake znajduje siê na przedmiocie, czy nie
-	bool IsColliding(Snake* snake);
+	bool IsColliding(const sf::Vector2f& posVec, const sf::Vector2u& sizeVec, float additionalValue = 0.0f);
 
 	// Zwraca rozmiar sprite'a
 	const sf::Vector2u GetSize() const;

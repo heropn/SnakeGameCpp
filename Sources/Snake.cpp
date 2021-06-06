@@ -236,7 +236,7 @@ void Snake::SetSpriteRotation()
 	}
 }
 
-bool Snake::IsObjectOnSnake(float posX, float posY, sf::Vector2u pickUpSize)
+bool Snake::IsObjectOnSnake(float posX, float posY, sf::Vector2u objSize, float additionalDistance)
 {
 	sf::Vector2u snakesSize = GetSize();
 	
@@ -245,10 +245,10 @@ bool Snake::IsObjectOnSnake(float posX, float posY, sf::Vector2u pickUpSize)
 	float leftBorder = 0; 
 	float bottomBorder = 0; 
 
-	float pickUpTopBorder = posY - pickUpSize.y / 2;
-	float  pickUpRightBorder = posX + pickUpSize.x / 2;
-	float  pickUpLeftBorder = posX - pickUpSize.x / 2;
-	float  pickUpBottomBorder = posY + pickUpSize.y / 2;
+	float objectTopBorder = posY - ((float)objSize.y + additionalDistance) / 2 + 100000.0f;
+	float objectRightBorder = posX + ((float)objSize.x + additionalDistance) / 2 + 100000.0f;
+	float objectLeftBorder = posX - ((float)objSize.x + additionalDistance) / 2 + 100000.0f;
+	float objectBottomBorder = posY + ((float)objSize.y + additionalDistance) / 2 + 100000.0f;
 
 	for (unsigned int i = 0; i < size; i++)
 	{
@@ -256,15 +256,16 @@ bool Snake::IsObjectOnSnake(float posX, float posY, sf::Vector2u pickUpSize)
 		{
 			break;
 		}
+
 		topBorder = positions[i].y - (float)snakesSize.y;
 		rightBorder = positions[i].x + (float)snakesSize.x;
 		leftBorder = positions[i].x - (float)snakesSize.x;
 		bottomBorder = positions[i].y + (float)snakesSize.y;
 
-		if (pickUpTopBorder < bottomBorder &&
-			pickUpBottomBorder > topBorder &&
-			pickUpLeftBorder < rightBorder &&
-			pickUpRightBorder > leftBorder)
+		if (objectTopBorder < bottomBorder &&
+			objectBottomBorder > topBorder &&
+			objectLeftBorder < rightBorder &&
+			objectRightBorder > leftBorder)
 		{
 			return true;
 		}

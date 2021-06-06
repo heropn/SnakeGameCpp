@@ -25,6 +25,7 @@ private:
 	bool isInModeSelect;
 	bool isPowerUpCollected;
 	bool isReversed;
+	bool isPlayingClassicMode;
 
 	int howManyBlocks;
 
@@ -157,7 +158,7 @@ private:
 	// Generowanie pocz¹tkowej pozycji snake'a
 	void GenerateSnakePosition();
 
-	bool IsObjectOnBlock(float posX, float posY, sf::Vector2u pickUpSize);
+	bool IsObjectOnBlock(float posX, float posY, sf::Vector2u pickUpSize, float additionalValue = 0.0f);
 
 	void TurnOffPowerUp();
 
