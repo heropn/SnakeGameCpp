@@ -224,6 +224,7 @@ void GameManager::GenerateBlock()
 	blocks.push_back(new Block(x, y, texturesManager.GetTexture(MyTexture::Type::Block)));
 	drawableInGameObjects.push_back(blocks[blocks.size() - 1]);
 
+	// Powodowanie, ¿e snejk zawsze jest na górze wszystkich tekstur bloków widocznych w grze
 	drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(),
 		drawableInGameObjects.end(), &snake),
 		drawableInGameObjects.end());

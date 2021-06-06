@@ -17,11 +17,11 @@ void Background::Flicker()
 	else if (isBorderFlickering &&
 		flickerClock.getElapsedTime().asSeconds() > timeBetweenFlickers)
 	{
-		border.setOutlineColor(sf::Color::Color(101, 67, 33, 200));
+		border.setOutlineColor(sf::Color(101, 67, 33, 200));
 	}
 	else
 	{
-		border.setOutlineColor(sf::Color::Color(101, 67, 33));
+		border.setOutlineColor(sf::Color(101, 67, 33));
 	}
 }
 
@@ -39,7 +39,7 @@ void Background::SetArenasProperties()
 	border.setOrigin(sf::Vector2f(400.0f, 250.0f));
 	border.setFillColor(sf::Color::Transparent);
 	border.setOutlineThickness(10.0f);
-	border.setOutlineColor(sf::Color::Color(101, 67, 33));
+	border.setOutlineColor(sf::Color(101, 67, 33));
 	border.setPosition(sf::Vector2f(500.0f, 500.0f));
 }
 
