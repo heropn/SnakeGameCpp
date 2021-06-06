@@ -2,7 +2,7 @@
 #include <random>
 #include <algorithm>
 
-GameManager::GameManager() : isGameOver(false), isInSnakeSelect(true), 
+GameManager::GameManager() : isGameOver(false), isInSnakeSelect(true), isInModeSelect(true),
 	isPickUpCollected(true), isPowerUpCollected(true), isReversed(false),
 	timeBetweenPowerUps(-1.0f), powerUpDuration(5.0f), snakeSpeedMultiplier(1.5f),
 	howManyBlocks(5)
@@ -24,6 +24,11 @@ GameManager::GameManager() : isGameOver(false), isInSnakeSelect(true),
 	snakeSelectMenu.AddTexture(GetTextureManager().GetTexture(MyTexture::Type::SnakeBigPink));
 	snakeSelectMenu.AddTexture(GetTextureManager().GetTexture(MyTexture::Type::SnakeBigYellow));
 	snakeSelectMenu.AddTexture(GetTextureManager().GetTexture(MyTexture::Type::SnakeBigBlue));
+
+	modeSelectMenu = ModeSelectMenu(GetFontsManager().GetFont(MyFont::Type::Snake),
+		GetFontsManager().GetFont(MyFont::Type::LostIsland));
+	modeSelectMenu.AddTexture(GetTextureManager().GetTexture(MyTexture::Type::ClassicArena));
+	modeSelectMenu.AddTexture(GetTextureManager().GetTexture(MyTexture::Type::ClassicArena));
 
 	drawableInGameObjects.push_back(&background);
 	drawableInGameObjects.push_back(&snake);
@@ -253,6 +258,11 @@ void GameManager::DrawSnakeSelectMenu(sf::RenderWindow* window)
 	snakeSelectMenu.Draw(window);
 }
 
+void GameManager::DrawModeSelectMenu(sf::RenderWindow* window)
+{
+	modeSelectMenu.Draw(window);
+}
+
 void GameManager::GenerateSnakePosition()
 {
 	std::random_device device;
@@ -320,6 +330,11 @@ bool GameManager::IsInSnakeSelectMenu()
 	return isInSnakeSelect;
 }
 
+bool GameManager::IsInModeSelectMenu()
+{
+	return isInModeSelect;
+}
+
 void GameManager::CheckIfPickupOrPowerUpIsCollected()
 {
 	if (pickUp.IsColliding(&snake))
@@ -360,31 +375,54 @@ void GameManager::CheckIfSnakeWasSelected(sf::Vector2i position)
 		{
 			snake.SetTextures(texturesManager.GetTexture(MyTexture::Type::SnakeHeadGreen),
 				texturesManager.GetTexture(MyTexture::Type::SnakeBodyGreen));
+
+			isInSnakeSelect = false;
 		}
 		break;
 		case MyTexture::Type::SnakeBigBlue:
 		{
 			snake.SetTextures(texturesManager.GetTexture(MyTexture::Type::SnakeHeadBlue),
-				texturesManager.GetTexture(MyTexture::Type::SnakeBodyBlue));
+				texturesManager.GetTexture(MyTexture::Type::SnakeBodyBlue));\
+
+			isInSnakeSelect = false;
 		}
 		break;
 		case MyTexture::Type::SnakeBigYellow:
 		{
 			snake.SetTextures(texturesManager.GetTexture(MyTexture::Type::SnakeHeadYellow),
 				texturesManager.GetTexture(MyTexture::Type::SnakeBodyYellow));
+
+			isInSnakeSelect = false;
 		}
 		break;
 		case MyTexture::Type::SnakeBigPink:
 		{
 			snake.SetTextures(texturesManager.GetTexture(MyTexture::Type::SnakeHeadPink),
 				texturesManager.GetTexture(MyTexture::Type::SnakeBodyPink));
+
+			isInSnakeSelect = false;
 		}
 		break;
 		default:
 			break;
 	}
+}
 
-	isInSnakeSelect = false;
+void GameManager::CheckIfModeWasSelected(sf::Vector2i position)
+{
+	switch (modeSelectMenu.GetClickedMode(position))
+	{
+	case MyTexture::Type::ClassicArena:
+	{
+		//snake.SetTextures(texturesManager.GetTexture(MyTexture::Type::SnakeHeadGreen),
+			//texturesManager.GetTexture(MyTexture::Type::SnakeBodyGreen));
+
+		isInModeSelect = false;
+	}
+	break;
+	default:
+		break;
+	}
 }
 
 void GameManager::GiveSnakePower(PowerUp::UpgradeType upgradeType)
@@ -465,6 +503,7 @@ void GameManager::ResetGame()
 	GeneratePowerUp();
 	isGameOver = false;
 	isInSnakeSelect = true;
+	isInModeSelect = true;
 }
 
 void GameManager::UpdateHighScores()

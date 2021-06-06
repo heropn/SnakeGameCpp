@@ -14,6 +14,7 @@
 #include "PowerUp.h"
 #include "PowerUpDisplayer.h"
 #include "Block.h"
+#include "ModeSelectMenu.h"
 
 class GameManager
 {
@@ -21,6 +22,7 @@ private:
 	bool isPickUpCollected;
 	bool isGameOver;
 	bool isInSnakeSelect;
+	bool isInModeSelect;
 	bool isPowerUpCollected;
 	bool isReversed;
 
@@ -47,6 +49,7 @@ private:
 	TypeInArea typeInArea;
 
 	SnakeSelectMenu snakeSelectMenu;
+	ModeSelectMenu modeSelectMenu;
 
 	HighScoreManager highScoreManager;
 	TexturesManager texturesManager;
@@ -73,6 +76,9 @@ public:
 
 	// Rysuje menu wyboru snake'a
 	void DrawSnakeSelectMenu(sf::RenderWindow* window);
+
+	// Rysuje menu wyboru trybu gry
+	void DrawModeSelectMenu(sf::RenderWindow* window);
 
 	// Porusza Snake'iem
 	void MoveSnake();
@@ -107,12 +113,19 @@ public:
 	// Sprawdza czy gra siê skoñczy³a
 	bool IsGameOver();
 
+	// Zwraca wartoœæ logiczn¹, czy gracz dalej znajduje siê w menu wyboru trybu
+	bool IsInModeSelectMenu();
+
 	// Zwraca wartoœæ logiczn¹, czy gracz dalej znajduje siê w menu wyboru snejka
 	bool IsInSnakeSelectMenu();
 
 	// Sprawdza czy snejk zosta³ wybrany przez gracza, jeœli tak
 	// to ustawia go na domyœlnego w aktualnej grze
 	void CheckIfSnakeWasSelected(sf::Vector2i position);
+
+	// Sprawdza czy mode zosta³ wybrany przez gracza, jeœli tak
+	// to ustawia go na domyœlnego w aktualnej grze
+	void CheckIfModeWasSelected(sf::Vector2i position);
 
 	// Zwraca obiekt klasy TextureManager
 	const TexturesManager& GetTextureManager() const;

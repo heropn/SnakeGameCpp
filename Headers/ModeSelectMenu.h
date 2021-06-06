@@ -11,10 +11,12 @@ private:
 	struct GameMode : public IDrawable
 	{
 		sf::Sprite sprite;
+		sf::Text text;
 		std::shared_ptr<MyTexture> texturePtr;
+		std::shared_ptr<MyFont> fontPtr;
 
 		// Konstruktor parametryczny
-		GameMode(std::shared_ptr<MyTexture> texturePtr);
+		GameMode(std::shared_ptr<MyTexture> texturePtr, std::shared_ptr<MyFont> fontPtr);
 
 		// Ustawia pozycje sprite'a
 		void SetPosition(sf::Vector2f position);
@@ -24,18 +26,21 @@ private:
 
 		// Rysuje sprite'a
 		void Draw(sf::RenderWindow* window);
+
+		void SetUpText(const std::string& str);
 	};
 
 	std::vector<GameMode> modes;
 	sf::Text text;
-	std::shared_ptr<MyFont> fontPtr;
+	std::shared_ptr<MyFont> fontTitle;
+	std::shared_ptr<MyFont> fontDescription;
 
 public:
 	// Konstruktor domyœlny
 	ModeSelectMenu();
 
 	// Konstruktor parametryczny
-	ModeSelectMenu(std::shared_ptr<MyFont> fontPtr);
+	ModeSelectMenu(std::shared_ptr<MyFont> fontPtr, std::shared_ptr<MyFont> descFontPtr);
 
 	// Dodaje teksture oraz tworzy nowy obiekt GameMode'a
 	// i dodaje go do wektora

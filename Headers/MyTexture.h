@@ -30,6 +30,7 @@ public:
 		PowerUpReverseSides,
 		PowerUpSlow,
 		Block,
+		ClassicArena,
 		None
 	};
 

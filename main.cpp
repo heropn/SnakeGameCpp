@@ -48,6 +48,8 @@ int main()
 				}
 				else if (gameManager.IsInSnakeSelectMenu())
 					gameManager.CheckIfSnakeWasSelected(sf::Mouse::getPosition(window));
+				else if (gameManager.IsInModeSelectMenu())
+					gameManager.CheckIfModeWasSelected(sf::Mouse::getPosition(window));
 			}
 		}
 
@@ -103,12 +105,15 @@ int main()
 				{
 					gameManager.SetSnakeDirection(Snake::Direction::Right);
 				}
-				
 			}
 
 			if (gameManager.IsInSnakeSelectMenu())
 			{
 				gameManager.DrawSnakeSelectMenu(&window);
+			}
+			else if (gameManager.IsInModeSelectMenu())
+			{
+				gameManager.DrawModeSelectMenu(&window);
 			}
 			else
 			{

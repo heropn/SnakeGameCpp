@@ -161,6 +161,7 @@
     <ClCompile Include="Sources\HighScoreManager.cpp" />
     <ClCompile Include="Sources\LoseScreen.cpp" />
     <ClCompile Include="Sources\MainMenu.cpp" />
+    <ClCompile Include="Sources\ModeSelectMenu.cpp" />
     <ClCompile Include="Sources\MyFont.cpp" />
     <ClCompile Include="Sources\MySoundBuffer.cpp" />
     <ClCompile Include="Sources\MyTexture.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="Headers\IDrawable.h" />
     <ClInclude Include="Headers\LoseScreen.h" />
     <ClInclude Include="Headers\MainMenu.h" />
+    <ClInclude Include="Headers\ModeSelectMenu.h" />
     <ClInclude Include="Headers\MyFont.h" />
     <ClInclude Include="Headers\MySoundBuffer.h" />
     <ClInclude Include="Headers\MyTexture.h" />
