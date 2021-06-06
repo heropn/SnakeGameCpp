@@ -4,7 +4,8 @@
 
 GameManager::GameManager() : isGameOver(false), isInSnakeSelect(true), 
 	isPickUpCollected(true), isPowerUpCollected(true), isReversed(false),
-	timeBetweenPowerUps(-1.0f), powerUpDuration(5.0f), snakeSpeedMultiplier(1.5f)
+	timeBetweenPowerUps(-1.0f), powerUpDuration(5.0f), snakeSpeedMultiplier(1.5f),
+	howManyBlocks(5)
 {
 	loseScreen = LoseScreen(fontsManager.GetFont(MyFont::Type::LostIsland),
 		fontsManager.GetFont(MyFont::Type::LostIsland));
@@ -34,14 +35,22 @@ GameManager::GameManager() : isGameOver(false), isInSnakeSelect(true),
 	drawableEndGameObjects.push_back(&typeInArea);
 
 	GenerateSnakePosition();
+
+	for (int i = 0; i < howManyBlocks; i++)
+	{
+		GenerateBlock();
+	}
+	
 	GeneratePickUp();
 	GeneratePowerUp();
-	GenerateBlock();
 }
 
 bool GameManager::IsObjectOnBlock(float posX, float posY, sf::Vector2u pickUpSize)
 {
-	sf::Vector2u blockSize = block.GetSize();
+	if (blocks.size() == 0)
+		return false;
+
+	sf::Vector2u blockSize = blocks[0]->GetSize();
 
 	float topBorder = 0;
 	float rightBorder = 0;
@@ -49,22 +58,24 @@ bool GameManager::IsObjectOnBlock(float posX, float posY, sf::Vector2u pickUpSiz
 	float bottomBorder = 0;
 
 	float pickUpTopBorder = posY - pickUpSize.y / 2;
-	float  pickUpRightBorder = posX + pickUpSize.x / 2;
-	float  pickUpLeftBorder = posX - pickUpSize.x / 2;
-	float  pickUpBottomBorder = posY + pickUpSize.y / 2;
+	float pickUpRightBorder = posX + pickUpSize.x / 2;
+	float pickUpLeftBorder = posX - pickUpSize.x / 2;
+	float pickUpBottomBorder = posY + pickUpSize.y / 2;
 
-	topBorder = block.GetPosition().y - (float)blockSize.y;
-	rightBorder = block.GetPosition().x + (float)blockSize.x;
-	leftBorder = block.GetPosition().x - (float)blockSize.x;
-	bottomBorder = block.GetPosition().y + (float)blockSize.y;
-
-	if (pickUpTopBorder < bottomBorder &&
-		pickUpBottomBorder > topBorder &&
-		pickUpLeftBorder < rightBorder &&
-		pickUpRightBorder > leftBorder)
+	for (const auto& block : blocks)
 	{
+		topBorder = block->GetPosition().y - (float)blockSize.y;
+		rightBorder = block->GetPosition().x + (float)blockSize.x;
+		leftBorder = block->GetPosition().x - (float)blockSize.x;
+		bottomBorder = block->GetPosition().y + (float)blockSize.y;
 
-		return true;
+		if (pickUpTopBorder < bottomBorder &&
+			pickUpBottomBorder > topBorder &&
+			pickUpLeftBorder < rightBorder &&
+			pickUpRightBorder > leftBorder)
+		{
+			return true;
+		}
 	}
 	return false;
 }
@@ -90,7 +101,8 @@ void GameManager::GeneratePickUp()
 				x = posX(generator);
 				y = posY(generator);
 
-				if (!snake.IsObjectOnSnake(x, y, pickUp.GetSize()) && !IsObjectOnBlock(x, y, pickUp.GetSize()))
+				if (!snake.IsObjectOnSnake(x, y, pickUp.GetSize()) &&
+					!IsObjectOnBlock(x, y, pickUp.GetSize()))
 				{
 					isAvailable = true;
 				}
@@ -178,7 +190,7 @@ void GameManager::GeneratePowerUp()
 		break;
 		}
 
-		powerUp = PowerUp(x, y, powerUpTexture, static_cast<PowerUp::UpgradeType>(upgradeTypeIndex));
+		powerUp = PowerUp(x, y, powerUpTexture, PowerUp::UpgradeType(upgradeTypeIndex));
 
 		drawableInGameObjects.push_back(&powerUp);
 	}
@@ -191,27 +203,32 @@ void GameManager::GenerateBlock()
 	std::uniform_real_distribution<float> posX(150.0f, 850.0f); //x e [100,900] y e [250,750]
 	std::uniform_real_distribution<float> posY(300.0f, 700.0f);
 
-	isPickUpCollected = false;
 	bool isAvailable = false;
 	float x = posX(generator);
 	float y = posY(generator);
 
-	if (block.GetTexture())
+	if (blocks.size() != 0)
 	{
 		while (!isAvailable)
 		{
 			x = posX(generator);
 			y = posY(generator);
 
-			if (!snake.IsObjectOnSnake(x, y, block.GetSize()))
+			if (!snake.IsObjectOnSnake(x, y, blocks[0]->GetSize()))
 			{
 				isAvailable = true;
 			}
 		}
 	}
 
-	block = Block(x, y, texturesManager.GetTexture(MyTexture::Type::Block));
-	drawableInGameObjects.push_back(&block);
+	blocks.push_back(new Block(x, y, texturesManager.GetTexture(MyTexture::Type::Block)));
+	drawableInGameObjects.push_back(blocks[blocks.size() - 1]);
+
+	drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(),
+		drawableInGameObjects.end(), &snake),
+		drawableInGameObjects.end());
+
+	drawableInGameObjects.push_back(&snake);
 }
 
 void GameManager::DrawInGameObjects(sf::RenderWindow* window)
@@ -277,6 +294,19 @@ void GameManager::CheckWhereIsSnake()
 			isGameOver = true;
 		}
 	}
+	else if (!snake.IsImmunited())
+	{
+		for (const auto& block : blocks)
+		{
+			if (block->IsColliding(&snake))
+			{
+				loseScreen.SetScore(scoreManager.GetScore());
+				audioManager.PlaySound(MySoundBuffer::Type::Defeat);
+				sf::sleep(sf::seconds(1.0f));
+				isGameOver = true;
+			}
+		}
+	}
 }
 
 bool GameManager::IsGameOver()
@@ -319,14 +349,6 @@ void GameManager::CheckIfPickupOrPowerUpIsCollected()
 		powerUp.SetNone();
 	}
 	GeneratePowerUp();
-
-	if (block.IsColliding(&snake))
-	{
-		loseScreen.SetScore(scoreManager.GetScore());
-		audioManager.PlaySound(MySoundBuffer::Type::Defeat);
-		sf::sleep(sf::seconds(1.0f));
-		isGameOver = true;
-	}
 }
 
 void GameManager::CheckIfSnakeWasSelected(sf::Vector2i position)
@@ -415,9 +437,16 @@ void GameManager::ResetGame()
 		drawableInGameObjects.end(), &powerUp),
 		drawableInGameObjects.end());
 
-	drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(),
-		drawableInGameObjects.end(), &block),
-		drawableInGameObjects.end());
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(),
+			drawableInGameObjects.end(), blocks[i]),
+			drawableInGameObjects.end());
+
+		delete blocks[i];
+	}
+	
+	blocks.clear();
 
 	snake.Reset();
 
@@ -426,9 +455,13 @@ void GameManager::ResetGame()
 	isPickUpCollected = true;
 	GeneratePickUp();
 
+	for (int i = 0; i < howManyBlocks; i++)
+	{
+		GenerateBlock();
+	}
+
 	isPowerUpCollected = true;
 	GeneratePowerUp();
-	GenerateBlock();
 	isGameOver = false;
 	isInSnakeSelect = true;
 }
@@ -518,4 +551,12 @@ void GameManager::FlickerObjects()
 {
 	background.Flicker();
 	powerUpDisplayer.Flicker();
+}
+
+GameManager::~GameManager()
+{
+	for (size_t i = 0; i < blocks.size(); i++)
+	{
+		delete blocks[i];
+	}
 }

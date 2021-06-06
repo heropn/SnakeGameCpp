@@ -25,7 +25,7 @@ void MapItem::Draw(sf::RenderWindow* window)
 bool MapItem::IsColliding(Snake* snake)
 {
 	sf::Vector2f position = sprite.getPosition();
-	sf::Vector2u size = texturePtr->getSize();
+	sf::Vector2u size = GetSize();
 	sf::Vector2f snakesPosition = snake->GetPosition();
 	sf::Vector2u snakesSize = snake->GetSize();
 
@@ -53,7 +53,11 @@ bool MapItem::IsColliding(Snake* snake)
 
 const sf::Vector2u MapItem::GetSize() const
 {
-	return texturePtr->getSize();
+	if (texturePtr)
+	{
+		return texturePtr->getSize();
+	}
+	return { 0, 0 };
 }
 
 const std::shared_ptr<MyTexture> MapItem::GetTexture() const

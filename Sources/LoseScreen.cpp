@@ -44,7 +44,7 @@ void LoseScreen::SetUpTextes()
 	infoText.setFont(*fontScore);
 	infoText.setString("Click Enter to continue...");
 	infoText.setCharacterSize(30);
-	infoText.setFillColor(sf::Color::Color(78, 230, 18));
+	infoText.setFillColor(sf::Color::Color(62, 179, 39));
 	rect = infoText.getLocalBounds();
 	infoText.setOrigin(rect.width / 2, rect.height / 2);
 	infoText.setPosition(500, 500);

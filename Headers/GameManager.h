@@ -24,6 +24,8 @@ private:
 	bool isPowerUpCollected;
 	bool isReversed;
 
+	int howManyBlocks;
+
 	float snakeSpeedMultiplier;
 	float timeBetweenPowerUps;
 	float powerUpDuration;
@@ -34,7 +36,8 @@ private:
 	Snake snake;
 	PickUp pickUp;
 	PowerUp powerUp;
-	Block block;
+
+	std::vector<Block*> blocks;
 
 	Background background;
 	Title title;
@@ -57,6 +60,8 @@ private:
 public:
 	// Podczas tworzenia obiektu ustawia wszystkie parametry swoich atrybutów
 	GameManager();
+
+	~GameManager();
 
 	// Rysuje wszystkie rysowalne obiekty, które znajduj¹ siê w oknie podczas trwania gry
 	// ¯eby narysowaæ obiekt, musi byæ zawarty w wektorze "drawableInGameObjects"
