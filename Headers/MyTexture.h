@@ -23,6 +23,7 @@ public:
 		Arena,
 		Menu,
 		HelpScreen,
+		HelpScreen2,
 		CreditsScreen,
 		PowerUpSpeed,
 		PowerUpImmunity,

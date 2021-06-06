@@ -42,7 +42,8 @@ private:
 		{".\\Textures\\BlockHorizontal.png", MyTexture::Type::BlockH},
 		{".\\Textures\\BlockVertical.png", MyTexture::Type::BlockV},
 		{".\\Textures\\ClassicArena.png", MyTexture::Type::ClassicArena},
-		{".\\Textures\\UltraArena.png", MyTexture::Type::UltraArena}
+		{".\\Textures\\UltraArena.png", MyTexture::Type::UltraArena},
+		{".\\Textures\\HelpScreen2.png", MyTexture::Type::HelpScreen2},
 	};
 
 public:
