@@ -41,6 +41,8 @@ GameManager::GameManager() : isGameOver(false), isInSnakeSelect(true), isInModeS
 	GenerateSnakePosition();
 	GeneratePickUp();
 	GeneratePowerUp();
+
+	audioManager.PlaySound(MySoundBuffer::Type::MenuMusic);
 }
 
 bool GameManager::IsObjectOnBlock(float posX, float posY, sf::Vector2u objSize, float additionalValue)
@@ -297,6 +299,9 @@ void GameManager::CheckWhereIsSnake()
 			audioManager.PlaySound(MySoundBuffer::Type::Defeat);
 			sf::sleep(sf::seconds(1.0f));
 			isGameOver = true;
+
+			audioManager.StopSound(MySoundBuffer::Type::GameMusic);
+			audioManager.PlaySound(MySoundBuffer::Type::MenuMusic);
 		}
 	}
 	else if (!snake.IsImmunited())
@@ -309,6 +314,9 @@ void GameManager::CheckWhereIsSnake()
 				audioManager.PlaySound(MySoundBuffer::Type::Defeat);
 				sf::sleep(sf::seconds(1.0f));
 				isGameOver = true;
+
+				audioManager.StopSound(MySoundBuffer::Type::GameMusic);
+				audioManager.PlaySound(MySoundBuffer::Type::MenuMusic);
 			}
 		}
 	}
@@ -341,7 +349,7 @@ void GameManager::CheckIfPickupOrPowerUpIsCollected()
 		}
 		else
 		{
-			scoreManager.AddScore(20);
+			scoreManager.AddScore(15);
 		}
 		
 		isPickUpCollected = true;
@@ -420,6 +428,9 @@ void GameManager::CheckIfModeWasSelected(sf::Vector2i position)
 		{
 			isPlayingClassicMode = true;
 			isInModeSelect = false;
+
+			audioManager.StopSound(MySoundBuffer::Type::MenuMusic);
+			audioManager.PlaySound(MySoundBuffer::Type::GameMusic);
 		}
 		break;
 		case MyTexture::Type::UltraArena:
@@ -432,6 +443,9 @@ void GameManager::CheckIfModeWasSelected(sf::Vector2i position)
 			{
 				GenerateBlock();
 			}
+
+			audioManager.StopSound(MySoundBuffer::Type::MenuMusic);
+			audioManager.PlaySound(MySoundBuffer::Type::GameMusic);
 		}
 		break;
 		default:
@@ -443,17 +457,17 @@ void GameManager::GiveSnakePower(PowerUp::UpgradeType upgradeType)
 {
 	switch (upgradeType)
 	{
-	case PowerUp::UpgradeType::Speed:
+		case PowerUp::UpgradeType::Speed:
 		{
 			snake.SetSpeed(snake.GetSpeed() * snakeSpeedMultiplier);
 		}
 		break;
-	case PowerUp::UpgradeType::Slow:
+		case PowerUp::UpgradeType::Slow:
 		{
 			snake.SetSpeed(snake.GetSpeed() / snakeSpeedMultiplier);
 		}
 		break;
-	case PowerUp::UpgradeType::Immunity:
+		case PowerUp::UpgradeType::Immunity:
 		{
 			snake.SetImmunization(true);
 			background.SetFlickerStatus(true);
@@ -464,17 +478,17 @@ void GameManager::GiveSnakePower(PowerUp::UpgradeType upgradeType)
 			}
 		}
 		break;
-	case PowerUp::UpgradeType::Reversed:
+		case PowerUp::UpgradeType::Reversed:
 		{
 			SetReversion(true);
 		}
 		break;
-	case PowerUp::UpgradeType::Eatable:
+		case PowerUp::UpgradeType::Eatable:
 		{
 			snake.SetEatablility(true);
 		}
 		break;
-	default:
+		default:
 		break;
 	}
 }
