@@ -1,12 +1,13 @@
 #pragma once
-#include "PickableItem.h"
+#include "MapItem.h"
 
-class Block : public PickableItem
+class Block : public MapItem
 {
 public:
 	// Konstruktor domyœlny
 	Block();
-	float x, y;
-	// Konstruktor parametryczny PickUp'a
+	// Konstruktor parametryczny Block'a
 	Block(float x, float y, std::shared_ptr<MyTexture> texturePtr);
+
+	const sf::Vector2f& GetPosition() const;
 };

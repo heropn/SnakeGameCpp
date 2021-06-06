@@ -81,7 +81,7 @@
     <ClCompile Include="Sources\PowerUp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\PickableItem.cpp">
+    <ClCompile Include="Sources\MapItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Sources\PowerUpDisplayer.cpp">
@@ -164,7 +164,7 @@
     <ClInclude Include="Headers\PowerUp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\PickableItem.h">
+    <ClInclude Include="Headers\MapItem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Headers\PowerUpDisplayer.h">

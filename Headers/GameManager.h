@@ -15,7 +15,6 @@
 #include "PowerUpDisplayer.h"
 #include "Block.h"
 
-
 class GameManager
 {
 private:
@@ -87,13 +86,9 @@ public:
 
 	void CheckPowerUpDuration();
 
-	bool const IsReversed() const;
-
-	void TurnOffPowerUp();
-
-	void SetReversion(bool val);
-
 	void FlickerObjects();
+
+	bool const IsReversed() const;
 
 	// Daje Snake'owi okreœlony PowerUp
 	void GiveSnakePower(PowerUp::UpgradeType upgradeType);
@@ -132,8 +127,6 @@ public:
 	// Zwraca obiekt kalsy TypeInAreaManager
 	TypeInArea& GetTypeInAreaManager();
 
-	bool IsPickUpOnBlock(float posX, float posY, sf::Vector2u pickUpSize);
-
 private:
 	// Generuje PickUp'a 
 	void GeneratePickUp();
@@ -145,4 +138,10 @@ private:
 
 	// Generowanie pocz¹tkowej pozycji snake'a
 	void GenerateSnakePosition();
+
+	bool IsObjectOnBlock(float posX, float posY, sf::Vector2u pickUpSize);
+
+	void TurnOffPowerUp();
+
+	void SetReversion(bool val);
 };

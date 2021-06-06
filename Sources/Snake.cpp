@@ -236,7 +236,7 @@ void Snake::SetSpriteRotation()
 	}
 }
 
-bool Snake::IsPickUpOnSnake(float posX, float posY, sf::Vector2u pickUpSize)
+bool Snake::IsObjectOnSnake(float posX, float posY, sf::Vector2u pickUpSize)
 {
 	sf::Vector2u snakesSize = GetSize();
 	

@@ -1,7 +1,7 @@
 #pragma once
-#include "PickableItem.h"
+#include "MapItem.h"
 
-class PowerUp : public PickableItem
+class PowerUp : public MapItem
 {
 public:
 	enum class UpgradeType

@@ -1,6 +1,6 @@
 #include "..\Headers\PickUp.h"
 
-PickUp::PickUp() : PickableItem() {}
+PickUp::PickUp() : MapItem() {}
 
 PickUp::PickUp(float x, float y, std::shared_ptr<MyTexture> texturePtr)
-	: PickableItem(x, y, texturePtr) {}
+	: MapItem(x, y, texturePtr) {}

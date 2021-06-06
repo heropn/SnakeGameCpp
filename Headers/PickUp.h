@@ -1,7 +1,7 @@
 #pragma once
-#include "PickableItem.h"
+#include "MapItem.h"
 
-class PickUp : public PickableItem
+class PickUp : public MapItem
 {
 public:
 	// Konstruktor domyœlny

@@ -39,7 +39,7 @@ GameManager::GameManager() : isGameOver(false), isInSnakeSelect(true),
 	GenerateBlock();
 }
 
-bool GameManager::IsPickUpOnBlock(float posX, float posY, sf::Vector2u pickUpSize)
+bool GameManager::IsObjectOnBlock(float posX, float posY, sf::Vector2u pickUpSize)
 {
 	sf::Vector2u blockSize = block.GetSize();
 
@@ -53,11 +53,10 @@ bool GameManager::IsPickUpOnBlock(float posX, float posY, sf::Vector2u pickUpSiz
 	float  pickUpLeftBorder = posX - pickUpSize.x / 2;
 	float  pickUpBottomBorder = posY + pickUpSize.y / 2;
 
-
-	topBorder = block.y - (float)blockSize.y;
-	rightBorder = block.x + (float)blockSize.x;
-	leftBorder = block.x - (float)blockSize.x;
-	bottomBorder = block.y + (float)blockSize.y;
+	topBorder = block.GetPosition().y - (float)blockSize.y;
+	rightBorder = block.GetPosition().x + (float)blockSize.x;
+	leftBorder = block.GetPosition().x - (float)blockSize.x;
+	bottomBorder = block.GetPosition().y + (float)blockSize.y;
 
 	if (pickUpTopBorder < bottomBorder &&
 		pickUpBottomBorder > topBorder &&
@@ -69,7 +68,6 @@ bool GameManager::IsPickUpOnBlock(float posX, float posY, sf::Vector2u pickUpSiz
 	}
 	return false;
 }
-
 
 void GameManager::GeneratePickUp()
 {
@@ -92,7 +90,7 @@ void GameManager::GeneratePickUp()
 				x = posX(generator);
 				y = posY(generator);
 
-				if (!snake.IsPickUpOnSnake(x, y, pickUp.GetSize()) && !IsPickUpOnBlock(x, y, pickUp.GetSize()))
+				if (!snake.IsObjectOnSnake(x, y, pickUp.GetSize()) && !IsObjectOnBlock(x, y, pickUp.GetSize()))
 				{
 					isAvailable = true;
 				}
@@ -112,7 +110,9 @@ void GameManager::GeneratePowerUp()
 		if (!isPowerUpCollected)
 		{
 			clock.restart();
-			drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(), drawableInGameObjects.end(), &powerUp), drawableInGameObjects.end());
+			drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(),
+				drawableInGameObjects.end(), &powerUp), drawableInGameObjects.end());
+
 			durationTime.restart();
 		}
 
@@ -134,7 +134,8 @@ void GameManager::GeneratePowerUp()
 				x = posX(generator);
 				y = posY(generator);
 
-				if (!snake.IsPickUpOnSnake(x, y, powerUp.GetSize()) && !IsPickUpOnBlock(x, y, powerUp.GetSize()))
+				if (!snake.IsObjectOnSnake(x, y, powerUp.GetSize()) &&
+					!IsObjectOnBlock(x, y, powerUp.GetSize()))
 				{
 					isAvailable = true;
 				}
@@ -185,39 +186,37 @@ void GameManager::GeneratePowerUp()
 
 void GameManager::GenerateBlock()
 {
-	
-		std::random_device device;
-		std::mt19937 generator(device());
-		std::uniform_real_distribution<float> posX(150.0f, 850.0f); //x e [100,900] y e [250,750]
-		std::uniform_real_distribution<float> posY(300.0f, 700.0f);
+	std::random_device device;
+	std::mt19937 generator(device());
+	std::uniform_real_distribution<float> posX(150.0f, 850.0f); //x e [100,900] y e [250,750]
+	std::uniform_real_distribution<float> posY(300.0f, 700.0f);
 
-		isPickUpCollected = false;
-		bool isAvailable = false;
-		float x = posX(generator);
-		float y = posY(generator);
+	isPickUpCollected = false;
+	bool isAvailable = false;
+	float x = posX(generator);
+	float y = posY(generator);
 
-		if (block.GetTexture())
+	if (block.GetTexture())
+	{
+		while (!isAvailable)
 		{
-			while (!isAvailable)
-			{
-				x = posX(generator);
-				y = posY(generator);
+			x = posX(generator);
+			y = posY(generator);
 
-				if (!snake.IsPickUpOnSnake(x, y, block.GetSize()))
-				{
-					isAvailable = true;
-				}
+			if (!snake.IsObjectOnSnake(x, y, block.GetSize()))
+			{
+				isAvailable = true;
 			}
 		}
+	}
 
-		block = Block(x, y, texturesManager.GetTexture(MyTexture::Type::Block));
-		drawableInGameObjects.push_back(&block);
-	
+	block = Block(x, y, texturesManager.GetTexture(MyTexture::Type::Block));
+	drawableInGameObjects.push_back(&block);
 }
 
 void GameManager::DrawInGameObjects(sf::RenderWindow* window)
 {
-	for (const auto obj : drawableInGameObjects)
+	for (const auto& obj : drawableInGameObjects)
 	{
 		obj->Draw(window);
 	}
@@ -225,7 +224,7 @@ void GameManager::DrawInGameObjects(sf::RenderWindow* window)
 
 void GameManager::DrawEndGameObjects(sf::RenderWindow* window)
 {
-	for (const auto obj : drawableEndGameObjects)
+	for (const auto& obj : drawableEndGameObjects)
 	{
 		obj->Draw(window);
 	}
@@ -292,23 +291,27 @@ bool GameManager::IsInSnakeSelectMenu()
 
 void GameManager::CheckIfPickupOrPowerUpIsCollected()
 {
-	if (pickUp.IsCollected(&snake))
+	if (pickUp.IsColliding(&snake))
 	{
 		audioManager.PlaySound(MySoundBuffer::Type::Coin);
 		scoreManager.AddScore();
 		isPickUpCollected = true;
 		snake.Grow();
-		drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(), drawableInGameObjects.end(), &pickUp), drawableInGameObjects.end());
+		drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(),
+			drawableInGameObjects.end(), &pickUp), drawableInGameObjects.end());
+
 		GeneratePickUp();
 	}
 
-	if (powerUp.IsCollected(&snake)
+	if (powerUp.IsColliding(&snake)
 		&& powerUp.GetUpgradeType() != PowerUp::UpgradeType::None)
 	{
 		audioManager.PlaySound(MySoundBuffer::Type::PowerUp);
 		clock.restart();
 		isPowerUpCollected = true;
-		drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(), drawableInGameObjects.end(), &powerUp), drawableInGameObjects.end());
+		drawableInGameObjects.erase(std::remove(drawableInGameObjects.begin(),
+			drawableInGameObjects.end(), &powerUp), drawableInGameObjects.end());
+
 		GiveSnakePower(powerUp.GetUpgradeType());
 		powerUpDisplayer.SetTextureAndStartDrawing(powerUp.GetTexture());
 		durationTime.restart();
@@ -317,7 +320,7 @@ void GameManager::CheckIfPickupOrPowerUpIsCollected()
 	}
 	GeneratePowerUp();
 
-	if (block.IsCollected(&snake))
+	if (block.IsColliding(&snake))
 	{
 		loseScreen.SetScore(scoreManager.GetScore());
 		audioManager.PlaySound(MySoundBuffer::Type::Defeat);

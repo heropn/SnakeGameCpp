@@ -5,7 +5,7 @@
 #include "MyTexture.h"
 
 // G³ówna klasa przedmiotów, które w¹¿ mo¿e podnosiæ
-class PickableItem : public IDrawable
+class MapItem : public IDrawable
 {
 protected:
 	float posX;
@@ -15,16 +15,16 @@ protected:
 
 public:
 	// Konstruktor domyœlny
-	PickableItem();
+	MapItem();
 
 	// Konstuktor parametryczny
-	PickableItem(float x, float y, std::shared_ptr<MyTexture> texturePtr);
+	MapItem(float x, float y, std::shared_ptr<MyTexture> texturePtr);
 
 	// Rysuje sprite'a
 	void Draw(sf::RenderWindow* window);
 
 	// Zwraca wartoœæ, czy snake znajduje siê na przedmiocie, czy nie
-	bool IsCollected(Snake* snake);
+	bool IsColliding(Snake* snake);
 
 	// Zwraca rozmiar sprite'a
 	const sf::Vector2u GetSize() const;

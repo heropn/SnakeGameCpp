@@ -92,7 +92,7 @@ public:
 	bool IsCollision();
 
 	// Sprawdza, czy potencjalny PickUp jest na snake'u
-	bool IsPickUpOnSnake(float posX, float posY, sf::Vector2u pickUpSize);
+	bool IsObjectOnSnake(float posX, float posY, sf::Vector2u pickUpSize);
 private:
 	// Ustawia w³aœciwoœci snake'a
 	void SetSpriteProperties();

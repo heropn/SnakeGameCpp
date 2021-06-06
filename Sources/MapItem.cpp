@@ -1,15 +1,15 @@
-#include "..\Headers\PickableItem.h"
+#include "..\Headers\MapItem.h"
 
-PickableItem::PickableItem() : posX(500.0f), posY(500.0f) {}
+MapItem::MapItem() : posX(500.0f), posY(500.0f) {}
 
-void PickableItem::SetSpriteProperties()
+void MapItem::SetSpriteProperties()
 {
 	sprite.setTexture(*texturePtr);
 	sprite.setOrigin({ (float)texturePtr->getSize().x / 2, (float)texturePtr->getSize().y / 2 });
 	sprite.setPosition(sf::Vector2f(posX, posY));
 }
 
-PickableItem::PickableItem(float x, float y, std::shared_ptr<MyTexture> texturePtr)
+MapItem::MapItem(float x, float y, std::shared_ptr<MyTexture> texturePtr)
 {
 	this->texturePtr = texturePtr;
 	posX = x;
@@ -17,12 +17,12 @@ PickableItem::PickableItem(float x, float y, std::shared_ptr<MyTexture> textureP
 	SetSpriteProperties();
 }
 
-void PickableItem::Draw(sf::RenderWindow* window)
+void MapItem::Draw(sf::RenderWindow* window)
 {
 	window->draw(sprite);
 }
 
-bool PickableItem::IsCollected(Snake* snake)
+bool MapItem::IsColliding(Snake* snake)
 {
 	sf::Vector2f position = sprite.getPosition();
 	sf::Vector2u size = texturePtr->getSize();
@@ -51,12 +51,12 @@ bool PickableItem::IsCollected(Snake* snake)
 		return false;
 }
 
-const sf::Vector2u PickableItem::GetSize() const
+const sf::Vector2u MapItem::GetSize() const
 {
 	return texturePtr->getSize();
 }
 
-const std::shared_ptr<MyTexture> PickableItem::GetTexture() const
+const std::shared_ptr<MyTexture> MapItem::GetTexture() const
 {
 	return texturePtr;
 }

@@ -12,6 +12,7 @@ void LoseScreen::Draw(sf::RenderWindow* window)
 {
 	window->draw(titleText);
 	window->draw(scoreText);
+	window->draw(infoText);
 }
 
 void LoseScreen::SetScore(int score)
@@ -39,4 +40,12 @@ void LoseScreen::SetUpTextes()
 	rect = scoreText.getLocalBounds();
 	scoreText.setOrigin(rect.width / 2, rect.height / 2);
 	scoreText.setPosition(500, 210);
+
+	infoText.setFont(*fontScore);
+	infoText.setString("Click Enter to continue...");
+	infoText.setCharacterSize(30);
+	infoText.setFillColor(sf::Color::Color(78, 230, 18));
+	rect = infoText.getLocalBounds();
+	infoText.setOrigin(rect.width / 2, rect.height / 2);
+	infoText.setPosition(500, 500);
 }

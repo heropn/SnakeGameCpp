@@ -11,6 +11,8 @@ private:
 	std::shared_ptr<MyFont> fontTitle;
 	sf::Text scoreText;
 	std::shared_ptr<MyFont> fontScore;
+	sf::Text infoText;
+	std::shared_ptr<MyFont> fontInfo;
 
 public:
 	// Konstruktor domyœlny

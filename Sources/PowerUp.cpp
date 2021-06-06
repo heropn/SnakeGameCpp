@@ -1,9 +1,9 @@
 #include "..\Headers\PowerUp.h"
 
-PowerUp::PowerUp() : PickableItem(), type(UpgradeType::None), previousType(UpgradeType::None) {}
+PowerUp::PowerUp() : MapItem(), type(UpgradeType::None), previousType(UpgradeType::None) {}
 
 PowerUp::PowerUp(float x, float y, std::shared_ptr<MyTexture> texturePtr, UpgradeType type)
-	: PickableItem(x, y, texturePtr), type(type), previousType(UpgradeType::None) {}
+	: MapItem(x, y, texturePtr), type(type), previousType(UpgradeType::None) {}
 
 const PowerUp::UpgradeType PowerUp::GetUpgradeType() const
 {
