@@ -60,10 +60,15 @@ int main()
 			window.clear(sf::Color::Black);
 			mainMenu.DrawButtonsAndTitle();
 		}
+		// Dopóki nie ma koñca gry, wykonuj...
 		else if (!gameManager.IsGameOver())
 		{
+			// Sprawdza,czy nie zosta³ wciœniêty jakiœ przycisk, jeœli jest to W,A,S lub D 
+			// to zmieñ kierunek snake'a w zale¿noœci od przycisku
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 			{
+				// Jeœli gra jest ustawiona w trybie odwróconym to zmieñ kierunek snake'a 
+				// np. z góry na dó³
 				if (gameManager.IsReversed())
 				{
 					gameManager.SetSnakeDirection(Snake::Direction::Bottom);

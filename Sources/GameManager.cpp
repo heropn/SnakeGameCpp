@@ -79,6 +79,7 @@ void GameManager::GeneratePickUp()
 				x = posX(generator);
 				y = posY(generator);
 
+				//pêtla wykonuje siê dopóki wygenerowany pick up nie znajduje siê na snake'u lub przeszkodzie
 				if (!snake.IsObjectOnSnake(x, y, pickUp.GetSize()) &&
 					!IsObjectOnBlock(x, y, pickUp.GetSize()))
 				{
@@ -127,6 +128,7 @@ void GameManager::GeneratePowerUp()
 				x = posX(generator);
 				y = posY(generator);
 
+				//Pêtla wykonuje siê dopóki wygenerowany pick up nie znajduje siê na snake'u lub przeszkodzie
 				if (!snake.IsObjectOnSnake(x, y, powerUp.GetSize()) &&
 					!IsObjectOnBlock(x, y, powerUp.GetSize()))
 				{
@@ -141,6 +143,7 @@ void GameManager::GeneratePowerUp()
 
 		std::shared_ptr<MyTexture> powerUpTexture;
 
+		// W zale¿noœci od wygenerowanego power up'a zostaje nadana tekstura
 		switch (PowerUp::UpgradeType(upgradeTypeIndex))
 		{
 		case PowerUp::UpgradeType::Slow:
@@ -287,6 +290,7 @@ void GameManager::SetSnakeDirection(Snake::Direction direction)
 
 void GameManager::CheckWhereIsSnake()
 {
+	// Sprawdza,czy snake zjad³ siebie, jeœli tak to zostaj¹ odjête punkty
 	if (snake.IsCollision() && snake.IsEatable())
 	{
 		scoreManager.SubtractScore(snake.GetNumberOfDecreasedParts());
@@ -470,8 +474,11 @@ void GameManager::GiveSnakePower(PowerUp::UpgradeType upgradeType)
 		case PowerUp::UpgradeType::Immunity:
 		{
 			snake.SetImmunization(true);
+
+			// W³¹cza migotanie granicy areny
 			background.SetFlickerStatus(true);
 
+			// W³¹cza migotanie przeszkód na arenie
 			for (const auto& block : blocks)
 			{
 				block->SetFlickerStatus(true);
@@ -594,8 +601,10 @@ void GameManager::TurnOffPowerUp()
 	}
 	else if (powerUp.GetPreviousType() == PowerUp::UpgradeType::Immunity)
 	{
+		// Wy³¹cza migotanie granicy areny
 		background.SetFlickerStatus(false);
 
+		// Wy³¹cza migotanie przeszkód na arenie
 		for (const auto& block : blocks)
 		{
 			block->SetFlickerStatus(false);

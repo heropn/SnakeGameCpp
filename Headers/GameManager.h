@@ -94,13 +94,15 @@ public:
 
 	// Sprawdza, czy PickUp lub PowerUp zosta³ zebrany, jeœli tak (PickUp): dodaje punkt
 	// do score'a, zwiêksza wê¿a, generuje kolejny PickUp
-	// Je¿eli PowerUp jest zebrany i min¹³ okreœlony czas to generuje kolejny PowerUp
+	// Je¿eli PowerUp jest zebrany lub min¹³ okreœlony czas to generuje kolejny PowerUp
 	void CheckIfPickupOrPowerUpIsCollected();
 
+	//Sprawdza, czy czas Power Up'a siê skoñczy³, jeœli tak to wy³¹cza Power Up'a
 	void CheckPowerUpDuration();
 
 	void FlickerObjects();
 
+	// Sprawdza, czy gra jest w trybie odwróconym (Góra->Dó³ , Lewo->Prawo)
 	bool const IsReversed() const;
 
 	// Daje Snake'owi okreœlony PowerUp
@@ -161,7 +163,9 @@ private:
 
 	bool IsObjectOnBlock(float posX, float posY, sf::Vector2u pickUpSize, float additionalValue = 0.0f);
 
+	// Wy³¹cza odpowiedniego Power Up'a
 	void TurnOffPowerUp();
 
+	// Ustawia grê w tryb odwrócony, gdy skrêcasz w prawo, jedziesz w lewo
 	void SetReversion(bool val);
 };
