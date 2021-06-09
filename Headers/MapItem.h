@@ -17,7 +17,8 @@ public:
 	// Konstruktor domyœlny
 	MapItem();
 
-	// Konstuktor parametryczny
+	// Konstuktor parametryczny, ustawia pozycje sprite'a
+	// Oraz teksture
 	MapItem(float x, float y, std::shared_ptr<MyTexture> texturePtr);
 
 	// Rysuje sprite'a

@@ -15,7 +15,8 @@ private:
 		std::shared_ptr<MyTexture> texturePtr;
 		std::shared_ptr<MyFont> fontPtr;
 
-		// Konstruktor parametryczny
+		// Konstruktor parametryczny, ustawia odpowiedni¹ teksturê oraz
+		// Czcionkê tekstu pod sprite'm
 		GameMode(std::shared_ptr<MyTexture> texturePtr, std::shared_ptr<MyFont> fontPtr);
 
 		// Ustawia pozycje sprite'a
@@ -40,6 +41,7 @@ public:
 	ModeSelectMenu();
 
 	// Konstruktor parametryczny
+	// Ustawia czcionkê tytu³u oraz czcionkê pod teksturami trybów
 	ModeSelectMenu(std::shared_ptr<MyFont> fontPtr, std::shared_ptr<MyFont> descFontPtr);
 
 	// Dodaje teksture oraz tworzy nowy obiekt GameMode'a

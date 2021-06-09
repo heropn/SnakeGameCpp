@@ -60,7 +60,7 @@ HighScoreManager::~HighScoreManager()
 
 	for (size_t i = 0; i < highScoreEntities.size(); i++)
 	{
-		file << highScoreEntities[i]->name + ' ' + std::to_string(highScoreEntities[i]->score) + '\n';
+		file << highScoreEntities[i]->GetName() + ' ' + std::to_string(highScoreEntities[i]->GetScore()) + '\n';
 	}
 }
 
@@ -93,7 +93,7 @@ void HighScoreManager::SortHighScores()
 
 bool HighScoreManager::HighScoreComparator(const std::unique_ptr<HighScoreEntity>& a, const std::unique_ptr<HighScoreEntity>& b)
 {
-	return a->score > b->score;
+	return a->GetScore() > b->GetScore();
 }
 
 void HighScoreManager::SetToMaxFiveHighScores()

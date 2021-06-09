@@ -26,7 +26,7 @@ private:
 	bool isInMainMenu;
 
 public:
-	HighScoreManager highScoreManager;
+	HighScoreManager* highScoreManagerPtr;
 	Help helpScreen;
 	Credits creditsScreen;
 	enum class Mode
@@ -39,7 +39,8 @@ public:
 	Mode currentMode;
 	MainMenu(sf::RenderWindow& win, std::shared_ptr<MyFont> fontPtrTitle,
 		std::shared_ptr<MyFont> fontPtrButtons, std::shared_ptr<MyTexture> menuTexture,
-		std::shared_ptr<MyTexture> creditsTexture, std::shared_ptr<MyTexture> helpTexture);
+		std::shared_ptr<MyTexture> creditsTexture, std::shared_ptr<MyTexture> helpTexture,
+		HighScoreManager* highScoreManagerPtr);
 	void DrawButtonsAndTitle();
 	void CheckIfButtonWasClicked(sf::Vector2i vec);
 	bool IsInMainMenu();

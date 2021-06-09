@@ -100,6 +100,7 @@ public:
 	//Sprawdza, czy czas Power Up'a siê skoñczy³, jeœli tak to wy³¹cza Power Up'a
 	void CheckPowerUpDuration();
 
+	// Wywo³uje u obiektów przeszkód metodê Flicker()
 	void FlickerObjects();
 
 	// Sprawdza, czy gra jest w trybie odwróconym (Góra->Dó³ , Lewo->Prawo)
@@ -141,7 +142,7 @@ public:
 	const ScoreManager& GetScoreManager() const;
 
 	// Zwraca obiekt klasy HighScoreManager
-	const HighScoreManager& GetHighScoreManager() const;
+	HighScoreManager& GetHighScoreManager();
 	
 	// Zwraca obiekt klasy AudiManager
 	AudioManager& GetAudioManager();

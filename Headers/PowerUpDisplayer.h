@@ -18,18 +18,25 @@ private:
 	bool shouldBeDrawn;
 
 public:
+	// Konstrutkor domyœlny
 	PowerUpDisplayer();
 
+	// Konstruktor parametryczny, ustawia czionkê tekstu
 	PowerUpDisplayer(std::shared_ptr<MyFont> fontPtr);
 
+	// Ustawia teksturê, która ma siê wyœwietlaæ
 	void SetTextureAndStartDrawing(std::shared_ptr<MyTexture> texturePtr);
 
+	// Przestaje rysowaæ
 	void StopDrawing();
 
+	// Rysuje obiekt w oknie
 	void Draw(sf::RenderWindow* window);
 
+	// Sprawia, ¿e gdy zostanie ma³o czasu, alfa koloru siê zmienia na ni¿sz¹
 	void Flicker();
 
 private:
+	// Ustawia wszystkie parametry tekstu
 	void SetUpText();
 };

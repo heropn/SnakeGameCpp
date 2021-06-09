@@ -23,6 +23,7 @@ public:
 	PowerUp();
 
 	// Konstruktor parametryczny PowerUp'a
+	// Wywo³uje konstruktor parametryczny dla MapItem
 	PowerUp(float x, float y, std::shared_ptr<MyTexture> texturePtr, UpgradeType type);
 
 	// Zwraca typ Power Up'a

@@ -16,7 +16,8 @@ private:
 	Type type;
 
 public:
-	// Konstruktor domyœlny
+	// Konstruktor parametryczny
+	// Ustawia typ czcionki
 	MyFont(Type type);
 
 	// Zwraca typ czcionki

@@ -17,6 +17,16 @@ const sf::Text& HighScoreEntity::GetText() const
 	return text;
 }
 
+const std::string& HighScoreEntity::GetName() const
+{
+	return name;
+}
+
+const int HighScoreEntity::GetScore() const
+{
+	return score;
+}
+
 void HighScoreEntity::SetUpText()
 {
 	text.setFont(*fontPtr);

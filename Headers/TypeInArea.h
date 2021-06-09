@@ -19,6 +19,7 @@ public:
 	TypeInArea();
 
 	// Konstruktor parametryczny
+	// Ustawia czcionki
 	TypeInArea(std::shared_ptr<MyFont> fontDisplayText, std::shared_ptr<MyFont> fontTopText);
 
 	// Aktualizuje aktualn¹ nazwê gracza

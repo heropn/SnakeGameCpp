@@ -5,13 +5,15 @@
 
 class HighScoreEntity : public IDrawable
 {
-public:
+private:
 	int score;
 	sf::Text text;
 	std::shared_ptr<MyFont> fontPtr;
 	std::string name;
 
+public:
 	// Konstruktor parametryczny
+	// Ustawia score, nazwe gracza oraz nazwe czcionki
 	HighScoreEntity(int score, std::string name, std::shared_ptr<MyFont> fontPtr);
 
 	// Ustawia pozycje tekstu
@@ -19,6 +21,10 @@ public:
 
 	// Zwraca tekst
 	const sf::Text& GetText() const;
+
+	const std::string& GetName() const;
+
+	const int GetScore() const;
 
 	// Ustawia aktualn¹ pozycje w rankingu
 	void SetPositionInRanking(int position);

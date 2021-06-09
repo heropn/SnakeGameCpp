@@ -41,7 +41,8 @@ private:
 	Type type;
 
 public:
-	// Konstruktor domyœlny
+	// Konstruktor parametryczny
+	// Ustawa typ Tekstury
 	MyTexture(Type type);
 
 	// Zwraca typ tekstury

@@ -16,8 +16,8 @@ GameManager::GameManager() : isGameOver(false), isInSnakeSelect(true), isInModeS
 	scoreManager.SetFont(fontsManager.GetFont(MyFont::Type::Snake));
 	title.SetFont(fontsManager.GetFont(MyFont::Type::Snake));
 	background.SetTextureAndSprite(texturesManager.GetTexture(MyTexture::Type::Arena));
-	highScoreManager.SetFonts(fontsManager.GetFont(MyFont::Type::Arial),
-		fontsManager.GetFont(MyFont::Type::Arial));
+	highScoreManager.SetFonts(fontsManager.GetFont(MyFont::Type::Snake),
+		fontsManager.GetFont(MyFont::Type::LostIsland));
 
 	snakeSelectMenu = SnakeSelectMenu(GetFontsManager().GetFont(MyFont::Type::Snake));
 	snakeSelectMenu.AddTexture(GetTextureManager().GetTexture(MyTexture::Type::SnakeBigGreen));
@@ -571,7 +571,7 @@ TypeInArea& GameManager::GetTypeInAreaManager()
 	return typeInArea;
 }
 
-const HighScoreManager& GameManager::GetHighScoreManager() const
+HighScoreManager& GameManager::GetHighScoreManager()
 {
 	return highScoreManager;
 }

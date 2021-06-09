@@ -18,7 +18,8 @@ private:
 	Type type;
 
 public:
-	// Konstruktor domyœlny
+	// Konstruktor parametryczny
+	// Ustawa typ SoundBuffera
 	MySoundBuffer(Type type);
 
 	// Zwraca typ SoundBuffera

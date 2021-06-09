@@ -19,7 +19,7 @@ public:
 	// Konstruktor domyœlny
 	HighScoreManager();
 
-	// Konstruktor parametryczny
+	// Konstruktor parametryczny, ustawia czcionki
 	HighScoreManager(std::shared_ptr<MyFont> fontTitleText, std::shared_ptr<MyFont> fontHighScores);
 
 	void SetFonts(std::shared_ptr<MyFont> fontTitleText, std::shared_ptr<MyFont> fontHighScores);
@@ -33,6 +33,7 @@ public:
 	// Destruktor klay, zapisuje do pliku 5 najlepszych wyników
 	virtual ~HighScoreManager();
 
+	// Zwraca true, je¿eli przycisk zosta³ klikniêty
 	bool CheckIfButtonWasClicked(sf::Vector2i vec);
 private:
 	// £aduje czionkê i ustawia wszystkie parametry tekstu

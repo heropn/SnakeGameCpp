@@ -23,6 +23,7 @@ private:
 
 public:
 	// Konstruktor domyœlny
+	// £aduje czcionki
 	FontsManager();
 
 	// Zwraca dan¹ czcionkê

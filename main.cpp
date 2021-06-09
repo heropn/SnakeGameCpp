@@ -17,7 +17,8 @@ int main()
 		gameManager.GetFontsManager().GetFont(MyFont::Type::LostIsland),
 		gameManager.GetTextureManager().GetTexture(MyTexture::Type::Menu),
 		gameManager.GetTextureManager().GetTexture(MyTexture::Type::CreditsScreen),
-		gameManager.GetTextureManager().GetTexture(MyTexture::Type::HelpScreen));
+		gameManager.GetTextureManager().GetTexture(MyTexture::Type::HelpScreen),
+		&gameManager.GetHighScoreManager());
 
 	gameManager.GetAudioManager().PlaySound(MySoundBuffer::Type::GameMusic);
 
@@ -39,7 +40,7 @@ int main()
 				if (mainMenu.IsInMainMenu())
 					mainMenu.CheckIfButtonWasClicked(sf::Mouse::getPosition(window));
 				else if (mainMenu.currentMode != MainMenu::Mode::Default) {
-					if (mainMenu.highScoreManager.CheckIfButtonWasClicked(sf::Mouse::getPosition(window)) ||
+					if (mainMenu.highScoreManagerPtr->CheckIfButtonWasClicked(sf::Mouse::getPosition(window)) ||
 						mainMenu.helpScreen.CheckIfButtonWasClicked(sf::Mouse::getPosition(window)) ||
 						mainMenu.creditsScreen.CheckIfButtonWasClicked(sf::Mouse::getPosition(window))) {
 						mainMenu.SetIsInMainMenu(true);
@@ -136,7 +137,7 @@ int main()
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 			{
-				//gameManager.UpdateHighScores();
+				gameManager.UpdateHighScores();
 				gameManager.ResetGame();
 				mainMenu.SetIsInMainMenu(true);
 			}

@@ -35,6 +35,7 @@ public:
 	SnakeSelectMenu();
 
 	// Konstruktor parametryczny
+	// Ustawia czcionkê
 	SnakeSelectMenu(std::shared_ptr<MyFont> fontPtr);
 
 	// Dodaje teksture oraz tworzy nowy obiekt SnakeHead
