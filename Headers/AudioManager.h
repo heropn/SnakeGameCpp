@@ -26,11 +26,14 @@ private:
 
 public:
 	// Konstruktor domyœlny
+	// Tworzy obiekt MySound dla ka¿dego sound buffera
+	// Zawartego w SoundBufferManager'ze
 	AudioManager();
 
 	// Gra podany typ dŸwieku
 	const void PlaySound(MySoundBuffer::Type type);
 
+	// Przestaje graæ podany typ dŸwiêku
 	const void StopSound(MySoundBuffer::Type type);
 
 private:

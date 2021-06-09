@@ -54,7 +54,7 @@ bool GameManager::IsObjectOnBlock(float posX, float posY, sf::Vector2u objSize, 
 			return true;
 		}
 	}
-	
+
 	return false;
 }
 
