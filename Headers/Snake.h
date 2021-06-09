@@ -40,7 +40,7 @@ public:
 	// Zmiana kierunku poruszania siê snake'a
 	void SetDirection(Direction direction);
 
-	// Ustawia rotacje sprite'a
+	// Ustawia rotacje sprite'a znale¿nego od kierunku snake'a
 	void SetSpriteRotation();
 
 	// Ustawia pozycje snake'a

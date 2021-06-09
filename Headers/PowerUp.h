@@ -25,13 +25,15 @@ public:
 	// Konstruktor parametryczny PowerUp'a
 	PowerUp(float x, float y, std::shared_ptr<MyTexture> texturePtr, UpgradeType type);
 
-	// Zwraca typ Pickupa
+	// Zwraca typ Power Up'a
 	const UpgradeType GetUpgradeType() const;
 
+	// Zwraca poprzedni typ Power Up'a
 	const UpgradeType GetPreviousType() const;
 
 	// Ustawia typ pickupa na UpgradeType::None
 	void SetNone();
 
+	// Ustawia poprzedni typ w jakim by³ Power Up (potrzebne do wy³¹czania Power Up'a)
 	void SetPreviousType(UpgradeType type);
 };

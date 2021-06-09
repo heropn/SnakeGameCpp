@@ -23,6 +23,9 @@ void Snake::SetTextures(std::shared_ptr<MyTexture> headTexture, std::shared_ptr<
 void Snake::Draw(sf::RenderWindow* window)
 {
 	sprite.setTexture(*bodyTexture);
+
+	// Pêtla przechodzi przez vector positions i w zale¿noœci od d³ugoœci snake'a ( ile pickupów zebra³)
+	// ustawia a nastêpnie wyœwietla sprite'a cia³a wê¿a
 	for (unsigned int i = 1; i < size; i++)
 	{
 		if (positions.size() - 1 - i < 0 || positions.size() - 1 - i > positions.size())
@@ -32,8 +35,9 @@ void Snake::Draw(sf::RenderWindow* window)
 		window->draw(sprite);
 	}
 
+	// Zostaje ustawiona pozycja sprite na aktualn¹ pozycje snake'a, czyli jego g³owe
+	// a nastêpnie ustawiona zostaje tekstura g³owy snake'a
 	sprite.setPosition(posX, posY);
-
 	sprite.setTexture(*headTexture);
 	window->draw(sprite);
 }
@@ -57,6 +61,7 @@ void Snake::Move()
 		posX -= speed;
 	}
 
+	// Dodawana jest do vectora positions kolejna pozycja snake'a
 	positions.push_back({ posX,posY });
 }
 
@@ -67,6 +72,7 @@ void Snake::SetSpeed(float speed)
 
 void Snake::SetDirection(Direction direction)
 {
+	// Sprawdzone zostaje, czy nastêpny kierunek snake'a nie jest przeciwny do poprzedniego kierunku
 	if (!((this->direction == Direction::Bottom && direction == Direction::Top) ||
 		(this->direction == Direction::Top && direction == Direction::Bottom) ||
 		(this->direction == Direction::Left && direction == Direction::Right) ||
@@ -102,6 +108,8 @@ bool Snake::IsInArena(Background* background)
 	}
 	else
 	{
+		// Jeœli snake wyjdzie poza arene, a ma w³¹czony Power Up pozwalajacy na przechodzenie przez obiekty
+		// to przenieœ snake'a na dok³adnie to samo miejsce, lecz z innej strony
 		if (immunited)
 		{
 			if (snakesrightBorder > rightBorder)
@@ -174,6 +182,8 @@ bool Snake::IsCollision()
 		if (abs(positions[positions.size() - 1].x - positions[positions.size() - 1 - i].x) < 5.0f &&
 			abs(positions[positions.size() - 1].y - positions[positions.size() - 1 - i].y) < 5.0f)
 		{
+			// Jeœli powsta³a kolizja, a snake ma w³¹czony Power Up pozwalaj¹cy na jedzenie siebie
+			// to zmniejsz jego rozmiar zale¿ny od którego elementu zosta³ zjedzony
 			if (isEatable)
 			{
 				numberOfDecresedParts = size - i;

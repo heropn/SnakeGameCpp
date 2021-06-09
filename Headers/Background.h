@@ -29,10 +29,14 @@ public:
 	// Funkcja rysuje w oknie gry arenê
 	void Draw(sf::RenderWindow* window);
 
+	// Sprawia,¿e alfa koloru sprite siê zmienia, 
+	// gdy zmienna isBorderFlickering jest ustawiona na true
 	void Flicker();
 
+	// Zwraca true, gdy granica areny ma migaæ
 	const bool GetFlickerStatus() const;
 
+	// Ustawia wartoœæ zmiennej isBorderFlickering
 	void SetFlickerStatus(bool val);
 
 	// Zwraca kszta³t areny
