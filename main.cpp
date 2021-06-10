@@ -38,19 +38,26 @@ int main()
 			else if (windowEvent.type == sf::Event::MouseButtonReleased)
 			{
 				if (mainMenu.IsInMainMenu())
+				{
 					mainMenu.CheckIfButtonWasClicked(sf::Mouse::getPosition(window));
+				}
 				else if (mainMenu.currentMode != MainMenu::Mode::Default) {
 					if (mainMenu.highScoreManagerPtr->CheckIfButtonWasClicked(sf::Mouse::getPosition(window)) ||
 						mainMenu.helpScreen.CheckIfButtonWasClicked(sf::Mouse::getPosition(window)) ||
-						mainMenu.creditsScreen.CheckIfButtonWasClicked(sf::Mouse::getPosition(window))) {
+						mainMenu.creditsScreen.CheckIfButtonWasClicked(sf::Mouse::getPosition(window)))
+					{
 						mainMenu.SetIsInMainMenu(true);
 						mainMenu.currentMode = MainMenu::Mode::Default;
 					}
 				}
 				else if (gameManager.IsInSnakeSelectMenu())
+				{
 					gameManager.CheckIfSnakeWasSelected(sf::Mouse::getPosition(window));
+				}
 				else if (gameManager.IsInModeSelectMenu())
+				{
 					gameManager.CheckIfModeWasSelected(sf::Mouse::getPosition(window));
+				}
 			}
 		}
 
