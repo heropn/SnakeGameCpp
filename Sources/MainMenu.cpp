@@ -62,30 +62,25 @@ void MainMenu::CheckIfButtonWasClicked(sf::Vector2i vec)
 
 	if (start.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
 	{
-		std::cout << "Graj" << std::endl;
 		isInMainMenu = false;
 	}
 	else if (highscore.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
 	{
-		std::cout << "Najlepsze wyniki" << std::endl;
 		currentMode = Mode::HighScores;
 		isInMainMenu = false;
 	}
 	else if (help.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
 	{
-		std::cout << "Pomoc" << std::endl;
 		currentMode = Mode::Help;
 		isInMainMenu = false;
 	}
 	else if (credits.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
 	{
-		std::cout << "Creditsy" << std::endl;
 		currentMode = Mode::Credits;
 		isInMainMenu = false;
 	}
 	else if (quit.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
 	{
-		std::cout << "Exit" << std::endl;
 		window->close();
 	}
 };
