@@ -20,7 +20,7 @@ private:
 		void SetPosition(sf::Vector2f position);
 
 		// Sprawdza czy sprite zosta³ klikniêty
-		const bool IsClicked(sf::Vector2i& position) const;
+		const bool IsMouseOnSprite(sf::Vector2i& position) const;
 
 		// Rysuje sprite'a
 		void Draw(sf::RenderWindow* window);
@@ -45,6 +45,9 @@ public:
 	// Sprawdza, czy któryœ z SnakeHead'ów zawartych w wektorze
 	// zosta³ klikniêty
 	const MyTexture::Type GetClickedSnake(sf::Vector2i position) const;
+
+	// Zmienia kolor snejka, jeœli jest nad nim myszka
+	void HighlightHoveredSnake(sf::Vector2i position);
 
 	// Rysuje tekst oraz wszystkie elementy w wektorze SnakeHead'ów
 	void Draw(sf::RenderWindow* window);

@@ -571,6 +571,11 @@ TypeInArea& GameManager::GetTypeInAreaManager()
 	return typeInArea;
 }
 
+SnakeSelectMenu& GameManager::GetSnakeSelectMenu()
+{
+	return snakeSelectMenu;
+}
+
 HighScoreManager& GameManager::GetHighScoreManager()
 {
 	return highScoreManager;

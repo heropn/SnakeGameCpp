@@ -147,8 +147,11 @@ public:
 	// Zwraca obiekt klasy AudiManager
 	AudioManager& GetAudioManager();
 
-	// Zwraca obiekt kalsy TypeInAreaManager
+	// Zwraca obiekt klasy TypeInAreaManager
 	TypeInArea& GetTypeInAreaManager();
+
+	// Zwraca obiekt klasy SnakeSelectMenu
+	SnakeSelectMenu& GetSnakeSelectMenu();
 
 private:
 	// Generuje PickUp'a 

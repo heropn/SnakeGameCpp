@@ -15,7 +15,7 @@ void SnakeSelectMenu::SnakeHead::SetPosition(sf::Vector2f position)
 	sprite.setPosition(position);
 }
 
-const bool SnakeSelectMenu::SnakeHead::IsClicked(sf::Vector2i& position) const
+const bool SnakeSelectMenu::SnakeHead::IsMouseOnSprite(sf::Vector2i& position) const
 {
 	sf::Vector2f spritePosition = sprite.getPosition();
 	sf::Vector2u size = texturePtr->getSize();
@@ -75,13 +75,28 @@ const MyTexture::Type SnakeSelectMenu::GetClickedSnake(sf::Vector2i position) co
 {
 	for (const auto& snake : snakes)
 	{
-		if (snake.IsClicked(position))
+		if (snake.IsMouseOnSprite(position))
 		{
 			return snake.texturePtr->GetType();
 		}
 	}
 
 	return MyTexture::Type::None;
+}
+
+void SnakeSelectMenu::HighlightHoveredSnake(sf::Vector2i position)
+{
+	for (auto& snake : snakes)
+	{
+		if (snake.IsMouseOnSprite(position))
+		{
+			snake.sprite.setColor(sf::Color(255, 255, 255, 150));
+		}
+		else
+		{
+			snake.sprite.setColor(sf::Color(255, 255, 255, 255));
+		}
+	}
 }
 
 void SnakeSelectMenu::Draw(sf::RenderWindow* window)
