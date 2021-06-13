@@ -215,7 +215,7 @@ void GameManager::GenerateBlock()
 			x = posX(generator);
 			y = posY(generator);
 
-			if (!snake.IsObjectOnSnake(x, y, texture->getSize(), 50.0f) &&
+			if (!snake.IsObjectOnSnake(x, y, texture->getSize(), 100.0f) &&
 				!powerUp.IsColliding({ x, y }, texture->getSize(), 20.0f) &&
 				!pickUp.IsColliding({ x, y }, texture->getSize(), 20.0f) &&
 				!IsObjectOnBlock(x, y, texture->getSize()))

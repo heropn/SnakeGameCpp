@@ -77,7 +77,6 @@ const MyTexture::Type SnakeSelectMenu::GetClickedSnake(sf::Vector2i position) co
 	{
 		if (snake.IsClicked(position))
 		{
-			printf("Clicked\n");
 			return snake.texturePtr->GetType();
 		}
 	}

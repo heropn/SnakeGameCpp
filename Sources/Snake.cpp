@@ -250,15 +250,15 @@ bool Snake::IsObjectOnSnake(float posX, float posY, sf::Vector2u objSize, float 
 {
 	sf::Vector2u snakesSize = GetSize();
 	
-	float topBorder = 0; 
-	float rightBorder = 0; 
-	float leftBorder = 0; 
-	float bottomBorder = 0; 
+	float topBorder = 0;
+	float rightBorder = 0;
+	float leftBorder = 0;
+	float bottomBorder = 0;
 
-	float objectTopBorder = posY - ((float)objSize.y + additionalDistance) / 2;
-	float objectRightBorder = posX + ((float)objSize.x + additionalDistance) / 2;
-	float objectLeftBorder = posX - ((float)objSize.x + additionalDistance) / 2;
-	float objectBottomBorder = posY + ((float)objSize.y + additionalDistance) / 2;
+	float objectTopBorder = posY - ((float)objSize.y / 2) - additionalDistance;
+	float objectRightBorder = posX + ((float)objSize.y / 2) + additionalDistance;
+	float objectLeftBorder = posX - ((float)objSize.y / 2) - additionalDistance;
+	float objectBottomBorder = posY + ((float)objSize.y / 2) + additionalDistance;
 
 	for (unsigned int i = 0; i < size; i++)
 	{

@@ -91,7 +91,6 @@ const MyTexture::Type ModeSelectMenu::GetClickedMode(sf::Vector2i position) cons
 	{
 		if (mode.IsClicked(position))
 		{
-			printf("Clicked\n");
 			return mode.texturePtr->GetType();
 		}
 	}
