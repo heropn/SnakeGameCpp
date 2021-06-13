@@ -45,22 +45,22 @@ int main()
 				{
 					mainMenu.CheckIfButtonWasClicked(mousePosition);
 				}
-				else if (mainMenu.currentMode != MainMenu::Mode::Default)
+				else if (mainMenu.GetCurrentMode() != MainMenu::Mode::Default)
 				{
-					if (mainMenu.currentMode == MainMenu::Mode::Help)
+					if (mainMenu.GetCurrentMode() == MainMenu::Mode::Help)
 					{
-						mainMenu.helpScreen.CheckIfAnotherPageButtonWasClicked(mousePosition);
+						mainMenu.GetHelpScreen().CheckIfAnotherPageButtonWasClicked(mousePosition);
 					}
 
-					if ((mainMenu.highScoreManagerPtr->IsReturnButtonClicked(mousePosition) &&
-						mainMenu.currentMode == MainMenu::Mode::HighScores) ||
-						(mainMenu.helpScreen.IsReturnButtonClicked(mousePosition) &&
-						(mainMenu.currentMode == MainMenu::Mode::Help)) ||
-						(mainMenu.creditsScreen.IsReturnButtonClicked(mousePosition) &&
-						mainMenu.currentMode == MainMenu::Mode::Credits))
+					if ((mainMenu.GetHighScoreManagerPtr()->IsReturnButtonClicked(mousePosition) &&
+						mainMenu.GetCurrentMode() == MainMenu::Mode::HighScores) ||
+						(mainMenu.GetHelpScreen().IsReturnButtonClicked(mousePosition) &&
+						(mainMenu.GetCurrentMode() == MainMenu::Mode::Help)) ||
+						(mainMenu.GetCreditsScreen().IsReturnButtonClicked(mousePosition) &&
+						mainMenu.GetCurrentMode() == MainMenu::Mode::Credits))
 					{
 						mainMenu.SetIsInMainMenu(true);
-						mainMenu.currentMode = MainMenu::Mode::Default;
+						mainMenu.SetCurrentMode(MainMenu::Mode::Default);
 					}
 				}
 				else if (gameManager.IsInSnakeSelectMenu())
@@ -76,7 +76,7 @@ int main()
 
 		window.clear(sf::Color(216,253,176));
 
-		if (mainMenu.IsInMainMenu() || mainMenu.currentMode != MainMenu::Mode::Default)
+		if (mainMenu.IsInMainMenu() || mainMenu.GetCurrentMode() != MainMenu::Mode::Default)
 		{
 			window.clear(sf::Color::Black);
 			mainMenu.HighlightHoveredButton(sf::Mouse::getPosition(window));

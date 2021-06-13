@@ -7,7 +7,6 @@
 class Help 
 {
 private:
-
 	enum class ScreenType
 	{
 		First,

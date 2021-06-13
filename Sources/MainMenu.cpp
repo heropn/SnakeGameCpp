@@ -131,3 +131,29 @@ void MainMenu::SetIsInMainMenu(bool value)
 {
 	isInMainMenu = value;
 }
+
+
+MainMenu::Mode MainMenu::GetCurrentMode()
+{
+	return currentMode;
+}
+
+Credits& MainMenu::GetCreditsScreen()
+{
+	return creditsScreen;
+}
+
+Help& MainMenu::GetHelpScreen()
+{
+	return helpScreen;
+}
+
+HighScoreManager* MainMenu::GetHighScoreManagerPtr()
+{
+	return highScoreManagerPtr;
+}
+
+void MainMenu::SetCurrentMode(MainMenu::Mode mode)
+{
+	currentMode = mode;
+}
