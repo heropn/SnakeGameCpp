@@ -12,11 +12,11 @@ class Help
 	std::shared_ptr<MyFont> fontTitleText;
 
 public:
-	Help();
-	void Draw(sf::RenderWindow* window, std::string which_page);
-	bool CheckIfReturnButtonWasClicked(sf::Vector2i vec);
-	bool CheckIfNextPageButtonWasClicked(sf::Vector2i vec);
-	bool CheckIfPrevPageButtonWasClicked(sf::Vector2i vec);
-	void SetFont(std::shared_ptr<MyFont> font);
-	void SetTexture(std::shared_ptr<MyTexture> texture);
+	Help(); //konstruktor domyœlny
+	void Draw(sf::RenderWindow* window, std::string which_page); //rysuje ekran pomocy
+	bool CheckIfReturnButtonWasClicked(sf::Vector2i vec); //sprawdza, czy zosta³ klikniêty przycisk powrotu do menu 
+	bool CheckIfNextPageButtonWasClicked(sf::Vector2i vec); //sprawdza, czy zosta³ klikniêty przycisk nastêpnej strony
+	bool CheckIfPrevPageButtonWasClicked(sf::Vector2i vec); //sprawdza, czy zosta³ klikniêty przycisk pierwszej strony
+	void SetFont(std::shared_ptr<MyFont> font); //ustawia czcionkê
+	void SetTexture(std::shared_ptr<MyTexture> texture); //ustawia teksturê z ekranem pomocy
 };

@@ -12,9 +12,9 @@ class Credits : public IDrawable
 	std::shared_ptr<MyFont> fontTitleText;
 
 public:
-	Credits();
-	void Draw(sf::RenderWindow* window);
-	bool CheckIfButtonWasClicked(sf::Vector2i vec);
-	void SetFont(std::shared_ptr<MyFont> font);
-	void SetTexture(std::shared_ptr<MyTexture> texture);
+	Credits(); //konstruktor domyœlny
+	void Draw(sf::RenderWindow* window); //rysuje ekran z autorami
+	bool CheckIfButtonWasClicked(sf::Vector2i vec); //sprawdza, czy zosta³ klikniêty przycisk powrotu
+	void SetFont(std::shared_ptr<MyFont> font); //ustawia czcionkê przycisku
+	void SetTexture(std::shared_ptr<MyTexture> texture); //Ustawia teksturê z autorami
 };
