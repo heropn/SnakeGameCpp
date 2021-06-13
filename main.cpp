@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Headers/GameManager.h"
 #include "Headers/MainMenu.h"
+#include <iostream>
 
 int main()
 {
@@ -18,6 +19,7 @@ int main()
 		gameManager.GetTextureManager().GetTexture(MyTexture::Type::Menu),
 		gameManager.GetTextureManager().GetTexture(MyTexture::Type::CreditsScreen),
 		gameManager.GetTextureManager().GetTexture(MyTexture::Type::HelpScreen),
+		gameManager.GetTextureManager().GetTexture(MyTexture::Type::HelpScreen2),
 		&gameManager.GetHighScoreManager());
 
 	gameManager.GetAudioManager().PlaySound(MySoundBuffer::Type::GameMusic);
@@ -42,12 +44,18 @@ int main()
 					mainMenu.CheckIfButtonWasClicked(sf::Mouse::getPosition(window));
 				}
 				else if (mainMenu.currentMode != MainMenu::Mode::Default) {
-					if (mainMenu.highScoreManagerPtr->CheckIfButtonWasClicked(sf::Mouse::getPosition(window)) ||
-						mainMenu.helpScreen.CheckIfButtonWasClicked(sf::Mouse::getPosition(window)) ||
-						mainMenu.creditsScreen.CheckIfButtonWasClicked(sf::Mouse::getPosition(window)))
+					if (mainMenu.highScoreManagerPtr->CheckIfButtonWasClicked(sf::Mouse::getPosition(window)) && mainMenu.currentMode == MainMenu::Mode::HighScores ||
+						mainMenu.helpScreen.CheckIfReturnButtonWasClicked(sf::Mouse::getPosition(window)) && (mainMenu.currentMode == MainMenu::Mode::Help || mainMenu.currentMode == MainMenu::Mode::Help2) ||
+						mainMenu.creditsScreen.CheckIfButtonWasClicked(sf::Mouse::getPosition(window)) && mainMenu.currentMode == MainMenu::Mode::Credits)
 					{
 						mainMenu.SetIsInMainMenu(true);
 						mainMenu.currentMode = MainMenu::Mode::Default;
+					}
+					else if (mainMenu.helpScreen.CheckIfNextPageButtonWasClicked(sf::Mouse::getPosition(window)) && mainMenu.currentMode == MainMenu::Mode::Help){
+						mainMenu.currentMode = MainMenu::Mode::Help2;
+					}
+					else if (mainMenu.helpScreen.CheckIfPrevPageButtonWasClicked(sf::Mouse::getPosition(window)) && mainMenu.currentMode == MainMenu::Mode::Help2) {
+						mainMenu.currentMode = MainMenu::Mode::Help;
 					}
 				}
 				else if (gameManager.IsInSnakeSelectMenu())

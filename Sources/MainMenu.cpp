@@ -4,7 +4,7 @@
 MainMenu::MainMenu(sf::RenderWindow& win, std::shared_ptr<MyFont> fontPtrTitle,
 	std::shared_ptr<MyFont> fontPtrButtons, std::shared_ptr<MyTexture> menuTexture,
 	std::shared_ptr<MyTexture> creditsTexture, std::shared_ptr<MyTexture> helpTexture,
-	HighScoreManager* highScoreManagerPtr)
+	std::shared_ptr<MyTexture> help2Texture, HighScoreManager* highScoreManagerPtr)
 	: window(&win), fontPtrTitle(fontPtrTitle), fontPtrButtons(fontPtrButtons),
 	isInMainMenu(true), currentMode(Mode::Default), texture(menuTexture),
 	highScoreManagerPtr(highScoreManagerPtr)
@@ -18,9 +18,10 @@ MainMenu::MainMenu(sf::RenderWindow& win, std::shared_ptr<MyFont> fontPtrTitle,
 
 	creditsScreen.SetTexture(creditsTexture);
 	helpScreen.SetTexture(helpTexture);
-
+	help2Screen.SetTexture(help2Texture);
 	snake.SetFont(fontPtrTitle);
 	helpScreen.SetFont(fontPtrButtons);
+	help2Screen.SetFont(fontPtrButtons);
 	creditsScreen.SetFont(fontPtrButtons);
 	SetSprite();
 }
@@ -52,7 +53,11 @@ void MainMenu::DrawButtonsAndTitle()
 	}
 	else if (currentMode == Mode::Help)
 	{
-		helpScreen.Draw(window);
+		helpScreen.Draw(window, "first");
+	}
+	else if (currentMode == Mode::Help2)
+	{
+		help2Screen.Draw(window, "second");
 	}
 }
 
