@@ -59,26 +59,26 @@ void MainMenu::CheckIfButtonWasClicked(sf::Vector2i vec)
 {
 	sf::Vector2f vecF = { (float)vec.x, (float)vec.y };
 
-	if (start.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	if (start.GetShape().getGlobalBounds().contains(vecF.x, vecF.y))
 	{
 		isInMainMenu = false;
 	}
-	else if (highscore.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	else if (highscore.GetShape().getGlobalBounds().contains(vecF.x, vecF.y))
 	{
 		currentMode = Mode::HighScores;
 		isInMainMenu = false;
 	}
-	else if (help.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	else if (help.GetShape().getGlobalBounds().contains(vecF.x, vecF.y))
 	{
 		currentMode = Mode::Help;
 		isInMainMenu = false;
 	}
-	else if (credits.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	else if (credits.GetShape().getGlobalBounds().contains(vecF.x, vecF.y))
 	{
 		currentMode = Mode::Credits;
 		isInMainMenu = false;
 	}
-	else if (quit.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	else if (quit.GetShape().getGlobalBounds().contains(vecF.x, vecF.y))
 	{
 		window->close();
 	}
@@ -88,23 +88,23 @@ void MainMenu::HighlightHoveredButton(sf::Vector2i vec)
 {
 	sf::Vector2f vecF = { (float)vec.x, (float)vec.y };
 
-	if (start.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	if (start.GetShape().getGlobalBounds().contains(vecF.x, vecF.y))
 	{
 		start.SetHighlightColor();
 	}
-	else if (highscore.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	else if (highscore.GetShape().getGlobalBounds().contains(vecF.x, vecF.y))
 	{
 		highscore.SetHighlightColor();
 	}
-	else if (help.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	else if (help.GetShape().getGlobalBounds().contains(vecF.x, vecF.y))
 	{
 		help.SetHighlightColor();
 	}
-	else if (credits.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	else if (credits.GetShape().getGlobalBounds().contains(vecF.x, vecF.y))
 	{
 		credits.SetHighlightColor();
 	}
-	else if (quit.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	else if (quit.GetShape().getGlobalBounds().contains(vecF.x, vecF.y))
 	{
 		quit.SetHighlightColor();
 	}

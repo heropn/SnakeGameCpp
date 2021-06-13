@@ -106,14 +106,14 @@ bool HighScoreManager::IsReturnButtonClicked(sf::Vector2i vec)
 {
 	sf::Vector2f vecF = { (float)vec.x, (float)vec.y };
 
-	return (back.rectangle.getGlobalBounds().contains(vecF.x, vecF.y));
-
+	return (back.GetShape().getGlobalBounds().contains(vecF.x, vecF.y));
 }
+
 void HighScoreManager::HiglightHoveredButton(sf::Vector2i vec)
 {
 	sf::Vector2f vecF = { (float)vec.x, (float)vec.y };
 
-	if (back.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	if (back.GetShape().getGlobalBounds().contains(vecF.x, vecF.y))
 	{
 		back.SetHighlightColor();
 	}

@@ -37,6 +37,11 @@ void Button::SetTextString(const sf::String& str)
 	text.setPosition(posX, posY);
 }
 
+const sf::RectangleShape& Button::GetShape() const
+{
+	return rectangle;
+}
+
 void Button::SetHighlightColor()
 {
 	rectangle.setFillColor(sf::Color(0, 255, 0, 200));

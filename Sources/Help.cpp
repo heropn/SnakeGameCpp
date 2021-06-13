@@ -15,11 +15,11 @@ void Help::HiglightHoveredButton(sf::Vector2i vec)
 {
 	sf::Vector2f vecF = { (float)vec.x, (float)vec.y };
 
-	if (backButton.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	if (backButton.GetShape().getGlobalBounds().contains(vecF.x, vecF.y))
 	{
 		backButton.SetHighlightColor();
 	}
-	else if (anotherPageButton.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	else if (anotherPageButton.GetShape().getGlobalBounds().contains(vecF.x, vecF.y))
 	{
 		anotherPageButton.SetHighlightColor();
 	}
@@ -41,14 +41,14 @@ bool Help::IsReturnButtonClicked(sf::Vector2i vec)
 {
 	sf::Vector2f vecF = { (float)vec.x, (float)vec.y };
 
-	return backButton.rectangle.getGlobalBounds().contains(vecF.x, vecF.y);
+	return backButton.GetShape().getGlobalBounds().contains(vecF.x, vecF.y);
 }
 
 void Help::CheckIfAnotherPageButtonWasClicked(sf::Vector2i vec)
 {
 	sf::Vector2f vecF = { (float)vec.x, (float)vec.y };
 
-	if (anotherPageButton.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	if (anotherPageButton.GetShape().getGlobalBounds().contains(vecF.x, vecF.y))
 	{
 		if (screenType == ScreenType::First)
 		{
