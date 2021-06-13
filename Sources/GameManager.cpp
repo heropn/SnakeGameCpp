@@ -576,6 +576,11 @@ SnakeSelectMenu& GameManager::GetSnakeSelectMenu()
 	return snakeSelectMenu;
 }
 
+ModeSelectMenu& GameManager::GetModeSelectMenu()
+{
+	return modeSelectMenu;
+}
+
 HighScoreManager& GameManager::GetHighScoreManager()
 {
 	return highScoreManager;

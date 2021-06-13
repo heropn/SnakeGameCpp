@@ -153,6 +153,9 @@ public:
 	// Zwraca obiekt klasy SnakeSelectMenu
 	SnakeSelectMenu& GetSnakeSelectMenu();
 
+	// Zwraca obiekt klasy ModeSelectMenu
+	ModeSelectMenu& GetModeSelectMenu();
+
 private:
 	// Generuje PickUp'a 
 	void GeneratePickUp();

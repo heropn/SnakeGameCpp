@@ -136,11 +136,12 @@ int main()
 
 			if (gameManager.IsInSnakeSelectMenu())
 			{
-				gameManager.DrawSnakeSelectMenu(&window);
 				gameManager.GetSnakeSelectMenu().HighlightHoveredSnake(sf::Mouse::getPosition(window));
+				gameManager.DrawSnakeSelectMenu(&window);
 			}
 			else if (gameManager.IsInModeSelectMenu())
 			{
+				gameManager.GetModeSelectMenu().HighlightHoveredMode(sf::Mouse::getPosition(window));
 				gameManager.DrawModeSelectMenu(&window);
 			}
 			else

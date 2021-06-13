@@ -23,7 +23,7 @@ private:
 		void SetPosition(sf::Vector2f position);
 
 		// Sprawdza czy sprite zosta³ klikniêty
-		const bool IsClicked(sf::Vector2i& position) const;
+		const bool IsMouseOnGameMode(sf::Vector2i& position) const;
 
 		// Rysuje sprite'a
 		void Draw(sf::RenderWindow* window);
@@ -51,6 +51,9 @@ public:
 	// Sprawdza, czy któryœ z GameModów zawartych w wektorze
 	// zosta³ klikniêty
 	const MyTexture::Type GetClickedMode(sf::Vector2i position) const;
+
+	// Zmienia kolor mode'u, jeœli jest nad nim myszka
+	void HighlightHoveredMode(sf::Vector2i position);
 
 	// Rysuje tekst oraz wszystkie elementy w wektorze GameMóde'ów
 	void Draw(sf::RenderWindow* window);

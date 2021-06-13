@@ -16,7 +16,7 @@ void ModeSelectMenu::GameMode::SetPosition(sf::Vector2f position)
 	sprite.setPosition(position);
 }
 
-const bool ModeSelectMenu::GameMode::IsClicked(sf::Vector2i& position) const
+const bool ModeSelectMenu::GameMode::IsMouseOnGameMode(sf::Vector2i& position) const
 {
 	sf::Vector2f spritePosition = sprite.getPosition();
 	sf::Vector2u size = texturePtr->getSize();
@@ -89,13 +89,28 @@ const MyTexture::Type ModeSelectMenu::GetClickedMode(sf::Vector2i position) cons
 {
 	for (const auto& mode : modes)
 	{
-		if (mode.IsClicked(position))
+		if (mode.IsMouseOnGameMode(position))
 		{
 			return mode.texturePtr->GetType();
 		}
 	}
 
 	return MyTexture::Type::None;
+}
+
+void ModeSelectMenu::HighlightHoveredMode(sf::Vector2i position)
+{
+	for (auto& mode : modes)
+	{
+		if (mode.IsMouseOnGameMode(position))
+		{
+			mode.sprite.setColor(sf::Color(255, 255, 255, 150));
+		}
+		else
+		{
+			mode.sprite.setColor(sf::Color(255, 255, 255, 255));
+		}
+	}
 }
 
 void ModeSelectMenu::Draw(sf::RenderWindow* window)
