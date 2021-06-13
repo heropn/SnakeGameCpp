@@ -10,7 +10,7 @@ TypeInArea::TypeInArea(std::shared_ptr<MyFont> fontDisplayText, std::shared_ptr<
 	SetUpRectangle();
 }
 
-void TypeInArea::UpdateText(sf::String str)
+void TypeInArea::UpdateText(const sf::String& str)
 {
 	if (playerInput.getSize() < maxLetters)
 	{

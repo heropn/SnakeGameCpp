@@ -11,7 +11,7 @@ void Help::SetTexture(std::shared_ptr<MyTexture> texture)
 	help.setPosition({ 50.0f, -20.0f });
 }
 
-void Help::Draw(sf::RenderWindow* window, std::string which_page)
+void Help::Draw(sf::RenderWindow* window, const std::string& which_page)
 {
 	window->draw(help);
 	back.Draw(window);

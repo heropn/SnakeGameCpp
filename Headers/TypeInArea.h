@@ -23,7 +23,7 @@ public:
 	TypeInArea(std::shared_ptr<MyFont> fontDisplayText, std::shared_ptr<MyFont> fontTopText);
 
 	// Aktualizuje aktualn¹ nazwê gracza
-	void UpdateText(sf::String str);
+	void UpdateText(const sf::String& str);
 
 	// Usuwa ostatni znak z nazwy gracza
 	void EreseLastCharacter();

@@ -13,7 +13,7 @@ class Help
 
 public:
 	Help();
-	void Draw(sf::RenderWindow* window, std::string which_page);
+	void Draw(sf::RenderWindow* window, const std::string& which_page);
 	bool CheckIfReturnButtonWasClicked(sf::Vector2i vec);
 	bool CheckIfNextPageButtonWasClicked(sf::Vector2i vec);
 	bool CheckIfPrevPageButtonWasClicked(sf::Vector2i vec);
