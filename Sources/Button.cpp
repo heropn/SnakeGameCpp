@@ -4,7 +4,7 @@ Button::Button() {}
 
 Button::Button(std::string content, float position_x, float position_y, std::shared_ptr<MyFont> fontPtr) : fontPtr(fontPtr)
 {
-	rectangle.setFillColor(sf::Color::Green);
+	SetDefaultColor();
 	rectangle.setSize(sf::Vector2f(350, 65));
 	rectangle.setPosition(position_x, position_y);
 
@@ -21,4 +21,14 @@ void Button::Draw(sf::RenderWindow* window)
 {
 	window->draw(rectangle);
 	window->draw(text);
+}
+
+void Button::SetHighlightColor()
+{
+	rectangle.setFillColor(sf::Color(0, 255, 0, 200));
+}
+
+void Button::SetDefaultColor()
+{
+	rectangle.setFillColor(sf::Color(0, 255, 0, 255));
 }

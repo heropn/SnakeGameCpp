@@ -47,6 +47,7 @@ public:
 	void CheckIfButtonWasClicked(sf::Vector2i vec);
 	bool IsInMainMenu();
 	void SetIsInMainMenu(bool value);
+	void HighlightHoveredButton(sf::Vector2i vec);
 
 private:
 	void SetSprite();

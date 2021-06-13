@@ -13,4 +13,8 @@ public:
 	Button(std::string content, float position_x, float position_y, std::shared_ptr<MyFont> fontPtr); //konstruktor parametryczny
 	void Draw(sf::RenderWindow* window); //rysuje przycisk
 	sf::RectangleShape rectangle;
+	void Draw(sf::RenderWindow* window);
+	void SetHighlightColor();
+	void SetDefaultColor();
+
 };

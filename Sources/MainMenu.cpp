@@ -88,7 +88,41 @@ void MainMenu::CheckIfButtonWasClicked(sf::Vector2i vec)
 	{
 		window->close();
 	}
-};
+}
+
+void MainMenu::HighlightHoveredButton(sf::Vector2i vec)
+{
+	sf::Vector2f vecF = { (float)vec.x, (float)vec.y };
+
+	if (start.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	{
+		start.SetHighlightColor();
+	}
+	else if (highscore.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	{
+		highscore.SetHighlightColor();
+	}
+	else if (help.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	{
+		help.SetHighlightColor();
+	}
+	else if (credits.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	{
+		credits.SetHighlightColor();
+	}
+	else if (quit.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	{
+		quit.SetHighlightColor();
+	}
+	else
+	{
+		start.SetDefaultColor();
+		highscore.SetDefaultColor();
+		help.SetDefaultColor();
+		credits.SetDefaultColor();
+		quit.SetDefaultColor();
+	}
+}
 
 bool MainMenu::IsInMainMenu()
 {
