@@ -1,6 +1,5 @@
 #include "..\Headers\Help.h"
 
-
 Help::Help() {}
 
 void Help::SetTexture(std::shared_ptr<MyTexture> texture)
@@ -26,22 +25,21 @@ bool Help::CheckIfReturnButtonWasClicked(sf::Vector2i vec)
 	sf::Vector2f vecF = { (float)vec.x, (float)vec.y };
 
 	return (back.rectangle.getGlobalBounds().contains(vecF.x, vecF.y));
-};
+}
 
 bool Help::CheckIfNextPageButtonWasClicked(sf::Vector2i vec)
 {
 	sf::Vector2f vecF = { (float)vec.x, (float)vec.y };
 
 	return (next_page.rectangle.getGlobalBounds().contains(vecF.x, vecF.y));
-};
+}
 
 bool Help::CheckIfPrevPageButtonWasClicked(sf::Vector2i vec)
 {
 	sf::Vector2f vecF = { (float)vec.x, (float)vec.y };
 
 	return (prev_page.rectangle.getGlobalBounds().contains(vecF.x, vecF.y));
-};
-
+}
 
 void Help::SetFont(std::shared_ptr<MyFont> font)
 {
