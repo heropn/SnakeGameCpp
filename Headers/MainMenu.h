@@ -28,18 +28,20 @@ private:
 public:
 	HighScoreManager* highScoreManagerPtr;
 	Help helpScreen;
+	Help help2Screen;
 	Credits creditsScreen;
 	enum class Mode
 	{
 		Default,
 		HighScores,
 		Credits,
-		Help
+		Help,
+		Help2
 	};
 	Mode currentMode;
 	MainMenu(sf::RenderWindow& win, std::shared_ptr<MyFont> fontPtrTitle,
 		std::shared_ptr<MyFont> fontPtrButtons, std::shared_ptr<MyTexture> menuTexture,
-		std::shared_ptr<MyTexture> creditsTexture, std::shared_ptr<MyTexture> helpTexture,
+		std::shared_ptr<MyTexture> creditsTexture, std::shared_ptr<MyTexture> helpTexture, std::shared_ptr<MyTexture> help2Texture,
 		HighScoreManager* highScoreManagerPtr);
 	void DrawButtonsAndTitle();
 	void CheckIfButtonWasClicked(sf::Vector2i vec);
