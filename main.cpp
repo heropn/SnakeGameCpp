@@ -66,6 +66,7 @@ int main()
 		if (mainMenu.IsInMainMenu() || mainMenu.currentMode != MainMenu::Mode::Default)
 		{
 			window.clear(sf::Color::Black);
+			mainMenu.HighlightHoveredButton(sf::Mouse::getPosition(window));
 			mainMenu.DrawButtonsAndTitle();
 		}
 		// Dopóki nie ma koñca gry, wykonuj...

@@ -13,4 +13,6 @@ public:
 	Button(std::string content, float position_x, float position_y, std::shared_ptr<MyFont> fontPtr);
 	sf::RectangleShape rectangle;
 	void Draw(sf::RenderWindow* window);
+	void SetHighlightColor();
+	void SetDefaultColor();
 };
