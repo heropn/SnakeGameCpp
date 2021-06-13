@@ -22,8 +22,10 @@ public:
 	// Zwraca tekst
 	const sf::Text& GetText() const;
 
+	// Zwraca nazwê gracza
 	const std::string& GetName() const;
 
+	// Zwraca score gracza
 	const int GetScore() const;
 
 	// Ustawia aktualn¹ pozycje w rankingu

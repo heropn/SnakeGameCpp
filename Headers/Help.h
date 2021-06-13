@@ -22,11 +22,24 @@ private:
 	ScreenType screenType;
 
 public:
-	Help(); //konstruktor domyœlny
-	void Draw(sf::RenderWindow* window); //rysuje ekran pomocy
-	bool IsReturnButtonClicked(sf::Vector2i vec); //sprawdza, czy zosta³ klikniêty przycisk powrotu do menu 
-	void CheckIfAnotherPageButtonWasClicked(sf::Vector2i vec); //sprawdza, czy zosta³ klikniêty przycisk nastêpnej strony
-	void SetFont(std::shared_ptr<MyFont> font); //ustawia czcionkê
-	void SetTextures(std::shared_ptr<MyTexture> textureFirst, std::shared_ptr<MyTexture> textureSecond); //ustawia teksturê z ekranem pomocy
-	void HiglightHoveredButton(sf::Vector2i vec); // Podœwietla przycisk jeœli jest nad nim myszka
+	// Konstruktor domyœlny
+	Help();
+
+	// Rysuje ekran pomocy
+	void Draw(sf::RenderWindow* window);
+
+	// Sprawdza, czy zosta³ klikniêty przycisk powrotu do menu 
+	bool IsReturnButtonClicked(sf::Vector2i vec);
+
+	// Sprawdza, czy zosta³ klikniêty przycisk nastêpnej strony
+	void CheckIfAnotherPageButtonWasClicked(sf::Vector2i vec);
+
+	// Ustawia czcionkê
+	void SetFont(std::shared_ptr<MyFont> font);
+
+	// Ustawia teksturê z ekranem pomocy
+	void SetTextures(std::shared_ptr<MyTexture> textureFirst, std::shared_ptr<MyTexture> textureSecond);
+
+	// Podœwietla przycisk jeœli jest nad nim myszka
+	void HiglightHoveredButton(sf::Vector2i vec);
 };

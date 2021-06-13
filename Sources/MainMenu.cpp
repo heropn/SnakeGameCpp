@@ -29,7 +29,7 @@ void MainMenu::SetSprite()
 	sprite.setTexture(*texture);
 }
 
-void MainMenu::DrawButtonsAndTitle() 
+void MainMenu::Draw() 
 {
 	if (currentMode == Mode::Default)
 	{

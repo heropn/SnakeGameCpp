@@ -41,28 +41,46 @@ private:
 	HighScoreManager* highScoreManagerPtr;
 
 public:
+	// Konstruktor domyœlny, ustawia wszystkie zmienne, tekstury oraz czcionki
+	// Tworzy odpowiednie Button'y
 	MainMenu(sf::RenderWindow& win, std::shared_ptr<MyFont> fontPtrTitle,
 		std::shared_ptr<MyFont> fontPtrButtons, std::shared_ptr<MyTexture> menuTexture,
 		std::shared_ptr<MyTexture> creditsTexture, std::shared_ptr<MyTexture> helpTexture, std::shared_ptr<MyTexture> help2Texture,
 		HighScoreManager* highScoreManagerPtr);
-	void DrawButtonsAndTitle();
+
+	// Rysuje odpowiednie obiekty na ekranie w zale¿noœci
+	// Od tego w którym oknie menu gracz siê znajduje
+	void Draw();
+
+	// Sprawdza czy przycisk zosta³ klikniêty
+	// Je¿eli tak wykonuje odpowiedni¹ akcjê
 	void CheckIfButtonWasClicked(sf::Vector2i vec);
+
+	// Zwraca true, jeœli gracz jest w menu g³ównym
 	bool IsInMainMenu();
+
+	// Ustawia zmienn¹ IsInMainMenu
 	void SetIsInMainMenu(bool value);
 
+	// Zwraca aktualny mode
 	Mode GetCurrentMode();
 
+	// Zwraca referencje do obiektu Credits
 	Credits& GetCreditsScreen();
 
+	// Zwraca referencje do obiektu Help
 	Help& GetHelpScreen();
 
+	// Zwraca pointer do obiektu HighScoreManager
 	HighScoreManager* GetHighScoreManagerPtr();
 
+	// Ustawia aktualny mode
 	void SetCurrentMode(Mode mode);
 
 	// Podœwietla przycisk jeœli jest nad nim myszka
 	void HighlightHoveredButton(sf::Vector2i vec);
 
 private:
+	// Ustawia wszystkie w³asnoœci sprite'a
 	void SetSprite();
 };

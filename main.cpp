@@ -80,7 +80,7 @@ int main()
 		{
 			window.clear(sf::Color::Black);
 			mainMenu.HighlightHoveredButton(sf::Mouse::getPosition(window));
-			mainMenu.DrawButtonsAndTitle();
+			mainMenu.Draw();
 		}
 		// Dopóki nie ma koñca gry, wykonuj...
 		else if (!gameManager.IsGameOver())

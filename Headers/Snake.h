@@ -25,7 +25,7 @@ private:
 	int numberOfDecresedParts;
 
 public:
-	// Konstruktor domyœlny
+	// Konstruktor domyœlny, ustawia odpowiednie wartoœci dla zmiennych
 	Snake();
 
 	// Ustawia tekstury snake'a

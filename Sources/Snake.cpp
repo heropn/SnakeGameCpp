@@ -1,8 +1,9 @@
 #include "..\Headers\Snake.h"
 #include <iostream>
 
-Snake::Snake() : 
-	posX(500.0f), posY(500.0f), size(1), speed(2.0f), increasingSize(10), direction(Direction::Left),immunited(false),isEatable(false),numberOfDecresedParts(0) {}
+Snake::Snake() : posX(500.0f), posY(500.0f), size(1), speed(2.0f),
+	increasingSize(10), direction(Direction::Left), immunited(false),
+	isEatable(false), numberOfDecresedParts(0) {}
 
 void Snake::SetSpriteProperties()
 {
