@@ -8,13 +8,27 @@ void Credits::SetTexture(std::shared_ptr<MyTexture> texture)
 	sprite.setTexture(*this->texture);
 }
 
+void Credits::HiglightHoveredButton(sf::Vector2i vec)
+{
+	sf::Vector2f vecF = { (float)vec.x, (float)vec.y };
+
+	if (back.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	{
+		back.SetHighlightColor();
+	}
+	else
+	{
+		back.SetDefaultColor();
+	}
+}
+
 void Credits::Draw(sf::RenderWindow* window)
 {
 	window->draw(sprite);
 	back.Draw(window);
 }
 
-bool Credits::CheckIfButtonWasClicked(sf::Vector2i vec)
+bool Credits::IsReturnButtonClicked(sf::Vector2i vec)
 {
 	sf::Vector2f vecF = { (float)vec.x, (float)vec.y };
 

@@ -17,11 +17,9 @@ MainMenu::MainMenu(sf::RenderWindow& win, std::shared_ptr<MyFont> fontPtrTitle,
 	quit = Button("EXIT", x_offset, 4 * y_offset + y_offset_start, fontPtrButtons);
 
 	creditsScreen.SetTexture(creditsTexture);
-	helpScreen.SetTexture(helpTexture);
-	help2Screen.SetTexture(help2Texture);
+	helpScreen.SetTextures(helpTexture, help2Texture);
 	snake.SetFont(fontPtrTitle);
 	helpScreen.SetFont(fontPtrButtons);
-	help2Screen.SetFont(fontPtrButtons);
 	creditsScreen.SetFont(fontPtrButtons);
 	SetSprite();
 }
@@ -53,11 +51,7 @@ void MainMenu::DrawButtonsAndTitle()
 	}
 	else if (currentMode == Mode::Help)
 	{
-		helpScreen.Draw(window, "first");
-	}
-	else if (currentMode == Mode::Help2)
-	{
-		help2Screen.Draw(window, "second");
+		helpScreen.Draw(window);
 	}
 }
 
@@ -122,6 +116,10 @@ void MainMenu::HighlightHoveredButton(sf::Vector2i vec)
 		credits.SetDefaultColor();
 		quit.SetDefaultColor();
 	}
+
+	highScoreManagerPtr->HiglightHoveredButton(vec);
+	helpScreen.HiglightHoveredButton(vec);
+	creditsScreen.HiglightHoveredButton(vec);
 }
 
 bool MainMenu::IsInMainMenu()

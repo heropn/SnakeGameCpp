@@ -39,32 +39,37 @@ int main()
 			}
 			else if (windowEvent.type == sf::Event::MouseButtonReleased)
 			{
+				sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+
 				if (mainMenu.IsInMainMenu())
 				{
-					mainMenu.CheckIfButtonWasClicked(sf::Mouse::getPosition(window));
+					mainMenu.CheckIfButtonWasClicked(mousePosition);
 				}
-				else if (mainMenu.currentMode != MainMenu::Mode::Default) {
-					if (mainMenu.highScoreManagerPtr->CheckIfButtonWasClicked(sf::Mouse::getPosition(window)) && mainMenu.currentMode == MainMenu::Mode::HighScores ||
-						mainMenu.helpScreen.CheckIfReturnButtonWasClicked(sf::Mouse::getPosition(window)) && (mainMenu.currentMode == MainMenu::Mode::Help || mainMenu.currentMode == MainMenu::Mode::Help2) ||
-						mainMenu.creditsScreen.CheckIfButtonWasClicked(sf::Mouse::getPosition(window)) && mainMenu.currentMode == MainMenu::Mode::Credits)
+				else if (mainMenu.currentMode != MainMenu::Mode::Default)
+				{
+					if (mainMenu.currentMode == MainMenu::Mode::Help)
+					{
+						mainMenu.helpScreen.CheckIfAnotherPageButtonWasClicked(mousePosition);
+					}
+
+					if ((mainMenu.highScoreManagerPtr->IsReturnButtonClicked(mousePosition) &&
+						mainMenu.currentMode == MainMenu::Mode::HighScores) ||
+						(mainMenu.helpScreen.IsReturnButtonClicked(mousePosition) &&
+						(mainMenu.currentMode == MainMenu::Mode::Help)) ||
+						(mainMenu.creditsScreen.IsReturnButtonClicked(mousePosition) &&
+						mainMenu.currentMode == MainMenu::Mode::Credits))
 					{
 						mainMenu.SetIsInMainMenu(true);
 						mainMenu.currentMode = MainMenu::Mode::Default;
 					}
-					else if (mainMenu.helpScreen.CheckIfNextPageButtonWasClicked(sf::Mouse::getPosition(window)) && mainMenu.currentMode == MainMenu::Mode::Help){
-						mainMenu.currentMode = MainMenu::Mode::Help2;
-					}
-					else if (mainMenu.helpScreen.CheckIfPrevPageButtonWasClicked(sf::Mouse::getPosition(window)) && mainMenu.currentMode == MainMenu::Mode::Help2) {
-						mainMenu.currentMode = MainMenu::Mode::Help;
-					}
 				}
 				else if (gameManager.IsInSnakeSelectMenu())
 				{
-					gameManager.CheckIfSnakeWasSelected(sf::Mouse::getPosition(window));
+					gameManager.CheckIfSnakeWasSelected(mousePosition);
 				}
 				else if (gameManager.IsInModeSelectMenu())
 				{
-					gameManager.CheckIfModeWasSelected(sf::Mouse::getPosition(window));
+					gameManager.CheckIfModeWasSelected(mousePosition);
 				}
 			}
 		}

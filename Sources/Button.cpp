@@ -12,15 +12,29 @@ Button::Button(std::string content, float position_x, float position_y, std::sha
 	text.setFont(*fontPtr);
 	text.setCharacterSize(50);
 
-	float xPos = (position_x + 350.0f / 2.0f) - (text.getLocalBounds().width / 2.0f); // wspó³rzêdne tekstu, ustawione ¿eby wyœrodkowaæ napis wzglêdem przycisku
-	float yPos = (position_y + 65.0f / 2.0f) - (text.getLocalBounds().height / 2.0f) - 7.0f; // -7.0 = 1/4 rozmiaru czcionki 
-	text.setPosition(xPos, yPos);
+	auto rect = text.getLocalBounds();
+	text.setOrigin(rect.width / 2, rect.height / 2);
+
+	text.setPosition(position_x + rectangle.getSize().x / 2.0f, position_y + rectangle.getSize().y / 2.0f - 5.0f);
 }
 
 void Button::Draw(sf::RenderWindow* window) 
 {
 	window->draw(rectangle);
 	window->draw(text);
+}
+
+void Button::SetTextString(const sf::String& str)
+{
+	text.setString(str);
+
+	auto rect = text.getLocalBounds();
+	text.setOrigin(rect.width / 2, rect.height / 2);
+
+	float posX = rectangle.getPosition().x + rectangle.getSize().x / 2.0f;
+	float posY = rectangle.getPosition().y + rectangle.getSize().y / 2.0f - 5.0f;
+
+	text.setPosition(posX, posY);
 }
 
 void Button::SetHighlightColor()

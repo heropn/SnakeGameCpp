@@ -34,7 +34,10 @@ public:
 	virtual ~HighScoreManager();
 
 	// Zwraca true, je¿eli przycisk zosta³ klikniêty
-	bool CheckIfButtonWasClicked(sf::Vector2i vec);
+	bool IsReturnButtonClicked(sf::Vector2i vec);
+
+	// Podœwietla przycisk jeœli jest nad nim myszka
+	void HiglightHoveredButton(sf::Vector2i vec);
 private:
 	// £aduje czionkê i ustawia wszystkie parametry tekstu
 	void SetUpText();

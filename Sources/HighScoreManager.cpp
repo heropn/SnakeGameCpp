@@ -102,10 +102,23 @@ void HighScoreManager::SetToMaxFiveHighScores()
 		highScoreEntities.erase(highScoreEntities.begin() + 5);
 }
 
-bool HighScoreManager::CheckIfButtonWasClicked(sf::Vector2i vec)
+bool HighScoreManager::IsReturnButtonClicked(sf::Vector2i vec)
 {
 	sf::Vector2f vecF = { (float)vec.x, (float)vec.y };
 
 	return (back.rectangle.getGlobalBounds().contains(vecF.x, vecF.y));
 
-};
+}
+void HighScoreManager::HiglightHoveredButton(sf::Vector2i vec)
+{
+	sf::Vector2f vecF = { (float)vec.x, (float)vec.y };
+
+	if (back.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	{
+		back.SetHighlightColor();
+	}
+	else
+	{
+		back.SetDefaultColor();
+	}
+}

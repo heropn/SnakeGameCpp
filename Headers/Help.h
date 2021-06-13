@@ -6,17 +6,28 @@
 
 class Help 
 {
+private:
+
+	enum class ScreenType
+	{
+		First,
+		Second
+	};
+
 	sf::Sprite help;
-	std::shared_ptr<MyTexture> helpTexture;
-	Button back, prev_page, next_page;
+	std::shared_ptr<MyTexture> helpFirstPageTexture;
+	std::shared_ptr<MyTexture> helpSecondPageTexture;
+	Button backButton;
+	Button anotherPageButton;
 	std::shared_ptr<MyFont> fontTitleText;
+	ScreenType screenType;
 
 public:
 	Help(); //konstruktor domyœlny
-	void Draw(sf::RenderWindow* window, const std::string& which_page); //rysuje ekran pomocy
-	bool CheckIfReturnButtonWasClicked(sf::Vector2i vec); //sprawdza, czy zosta³ klikniêty przycisk powrotu do menu 
-	bool CheckIfNextPageButtonWasClicked(sf::Vector2i vec); //sprawdza, czy zosta³ klikniêty przycisk nastêpnej strony
-	bool CheckIfPrevPageButtonWasClicked(sf::Vector2i vec); //sprawdza, czy zosta³ klikniêty przycisk pierwszej strony
+	void Draw(sf::RenderWindow* window); //rysuje ekran pomocy
+	bool IsReturnButtonClicked(sf::Vector2i vec); //sprawdza, czy zosta³ klikniêty przycisk powrotu do menu 
+	void CheckIfAnotherPageButtonWasClicked(sf::Vector2i vec); //sprawdza, czy zosta³ klikniêty przycisk nastêpnej strony
 	void SetFont(std::shared_ptr<MyFont> font); //ustawia czcionkê
-	void SetTexture(std::shared_ptr<MyTexture> texture); //ustawia teksturê z ekranem pomocy
+	void SetTextures(std::shared_ptr<MyTexture> textureFirst, std::shared_ptr<MyTexture> textureSecond); //ustawia teksturê z ekranem pomocy
+	void HiglightHoveredButton(sf::Vector2i vec); // Podœwietla przycisk jeœli jest nad nim myszka
 };

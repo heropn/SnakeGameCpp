@@ -28,7 +28,6 @@ private:
 public:
 	HighScoreManager* highScoreManagerPtr;
 	Help helpScreen;
-	Help help2Screen;
 	Credits creditsScreen;
 	enum class Mode
 	{
@@ -36,7 +35,6 @@ public:
 		HighScores,
 		Credits,
 		Help,
-		Help2
 	};
 	Mode currentMode;
 	MainMenu(sf::RenderWindow& win, std::shared_ptr<MyFont> fontPtrTitle,
@@ -47,6 +45,8 @@ public:
 	void CheckIfButtonWasClicked(sf::Vector2i vec);
 	bool IsInMainMenu();
 	void SetIsInMainMenu(bool value);
+
+	// Podœwietla przycisk jeœli jest nad nim myszka
 	void HighlightHoveredButton(sf::Vector2i vec);
 
 private:

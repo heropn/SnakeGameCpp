@@ -1,50 +1,73 @@
 #include "..\Headers\Help.h"
 
-Help::Help() {}
+Help::Help() : screenType(ScreenType::First) {}
 
-void Help::SetTexture(std::shared_ptr<MyTexture> texture)
+void Help::SetTextures(std::shared_ptr<MyTexture> textureFirst, std::shared_ptr<MyTexture> textureSecond)
 {
-	helpTexture = texture;
-	help.setTexture(*helpTexture);
+	helpFirstPageTexture = textureFirst;
+	helpSecondPageTexture = textureSecond;
+	help.setTexture(*helpFirstPageTexture);
 	help.setScale({ 0.9f, 0.9f });
 	help.setPosition({ 50.0f, -20.0f });
 }
 
-void Help::Draw(sf::RenderWindow* window, const std::string& which_page)
+void Help::HiglightHoveredButton(sf::Vector2i vec)
+{
+	sf::Vector2f vecF = { (float)vec.x, (float)vec.y };
+
+	if (backButton.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	{
+		backButton.SetHighlightColor();
+	}
+	else if (anotherPageButton.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	{
+		anotherPageButton.SetHighlightColor();
+	}
+	else
+	{
+		backButton.SetDefaultColor();
+		anotherPageButton.SetDefaultColor();
+	}
+}
+
+void Help::Draw(sf::RenderWindow* window)
 {
 	window->draw(help);
-	back.Draw(window);
-	if (which_page == "first")
-		next_page.Draw(window);
-	else
-		prev_page.Draw(window);
+	backButton.Draw(window);
+	anotherPageButton.Draw(window);
 }
 
-bool Help::CheckIfReturnButtonWasClicked(sf::Vector2i vec)
+bool Help::IsReturnButtonClicked(sf::Vector2i vec)
 {
 	sf::Vector2f vecF = { (float)vec.x, (float)vec.y };
 
-	return (back.rectangle.getGlobalBounds().contains(vecF.x, vecF.y));
+	return backButton.rectangle.getGlobalBounds().contains(vecF.x, vecF.y);
 }
 
-bool Help::CheckIfNextPageButtonWasClicked(sf::Vector2i vec)
+void Help::CheckIfAnotherPageButtonWasClicked(sf::Vector2i vec)
 {
 	sf::Vector2f vecF = { (float)vec.x, (float)vec.y };
 
-	return (next_page.rectangle.getGlobalBounds().contains(vecF.x, vecF.y));
-}
-
-bool Help::CheckIfPrevPageButtonWasClicked(sf::Vector2i vec)
-{
-	sf::Vector2f vecF = { (float)vec.x, (float)vec.y };
-
-	return (prev_page.rectangle.getGlobalBounds().contains(vecF.x, vecF.y));
+	if (anotherPageButton.rectangle.getGlobalBounds().contains(vecF.x, vecF.y))
+	{
+		if (screenType == ScreenType::First)
+		{
+			anotherPageButton.SetTextString("FIRST PAGE");
+			screenType = ScreenType::Second;
+			help.setTexture(*helpSecondPageTexture);
+		}
+		else
+		{
+			anotherPageButton.SetTextString("SECOND PAGE");
+			screenType = ScreenType::First;
+			help.setTexture(*helpFirstPageTexture);
+		}
+	}
 }
 
 void Help::SetFont(std::shared_ptr<MyFont> font)
 {
 	this->fontTitleText = font;
-	back = Button("RETURN", 50.0f, 700.0f, font);
-	next_page = Button("NEXT PAGE", 600.0f, 700.0f, font);
-	prev_page = Button("FIRST PAGE", 600.0f, 700.0f, font);
+	backButton = Button("RETURN", 50.0f, 700.0f, font);
+	anotherPageButton = Button("SECOND PAGE", 600.0f, 700.0f, font);
 }
