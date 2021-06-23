@@ -1,7 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Headers/GameManager.h"
 #include "Headers/MainMenu.h"
-#include <iostream>
 
 int main()
 {

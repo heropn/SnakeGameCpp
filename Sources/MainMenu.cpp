@@ -1,5 +1,4 @@
 #include "../Headers/MainMenu.h"
-#include <iostream>
 
 MainMenu::MainMenu(sf::RenderWindow& win, std::shared_ptr<MyFont> fontPtrTitle,
 	std::shared_ptr<MyFont> fontPtrButtons, std::shared_ptr<MyTexture> menuTexture,
