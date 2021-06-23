@@ -160,7 +160,7 @@ int main()
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 			{
-				//gameManager.UpdateHighScores();
+				gameManager.UpdateHighScores();
 				gameManager.ResetGame();
 				mainMenu.SetIsInMainMenu(true);
 			}
