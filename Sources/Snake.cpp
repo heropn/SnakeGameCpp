@@ -250,7 +250,7 @@ void Snake::SetSpriteRotation()
 bool Snake::IsObjectOnSnake(float posX, float posY, sf::Vector2u objSize, float additionalDistance)
 {
 	sf::Vector2u snakesSize = GetSize();
-	
+
 	float topBorder = 0;
 	float rightBorder = 0;
 	float leftBorder = 0;
